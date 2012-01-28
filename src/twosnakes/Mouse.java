@@ -89,7 +89,6 @@ public class Mouse implements Item {
 
 	@Override
 	public void eaten() {
-		// TODO Auto-generated method stub
 		Event eating = new Eating();
 		eating.playSound();
 		eating.animation();
