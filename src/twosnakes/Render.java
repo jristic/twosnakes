@@ -4,9 +4,8 @@
  */
 package twosnakes;
 
-import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.Toolkit;
+import java.awt.*;
+import javax.swing.JPanel;
 
 /**
  *
@@ -14,7 +13,14 @@ import java.awt.Toolkit;
  */
 public class Render
 {
-
+	public Render(JPanel panel)
+	{
+		this.panel = panel;
+		// set up message font
+		font = new Font("SansSerif", Font.BOLD, 24);
+		metrics = panel.getFontMetrics(font);
+	}
+	
 	void paintScreen(Graphics g, Image dbImage)
 	{
 		try
@@ -46,4 +52,7 @@ public class Render
 		throw new UnsupportedOperationException("Not yet implemented");
 	}
 	
+	private Font font;
+	private FontMetrics metrics;
+	private JPanel panel;
 }

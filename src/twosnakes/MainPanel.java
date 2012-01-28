@@ -6,7 +6,10 @@ package twosnakes;
 
 // BrawlerPanel.java
 // Jovan Ristic, November 2008
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.JPanel;
@@ -39,8 +42,7 @@ public class MainPanel extends JPanel implements Runnable
 	// used at game termination
 	private volatile boolean gameOver = false;
 	private volatile boolean gameStarted = false;
-	private Font font;
-	private FontMetrics metrics;
+	
 	// off screen rendering
 	private Graphics dbg;
 	private Image dbImage = null;
@@ -53,9 +55,10 @@ public class MainPanel extends JPanel implements Runnable
 	{
 		this.period = period;
 		
-		update = new Update();
-		render = new Render();
-		setup = new Setup();
+		GameState state = new GameState();
+		setup = new Setup(state);
+		update = new Update(state);
+		render = new Render(state, this);
 		
 		setBackground(Color.white);
 		setPreferredSize(new Dimension(PWIDTH, PHEIGHT));
@@ -78,10 +81,6 @@ public class MainPanel extends JPanel implements Runnable
 		});
 
 		readyForTermination();
-
-		// set up message font
-		font = new Font("SansSerif", Font.BOLD, 24);
-		metrics = this.getFontMetrics(font);
 		
 		// Setup game elements
 		setup.gameSetup();

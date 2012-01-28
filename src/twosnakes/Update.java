@@ -12,7 +12,11 @@ import java.awt.event.KeyEvent;
  */
 public class Update
 {
-
+	public Update(GameState state)
+	{
+		this.state = state;
+	}
+	
 	void processKeyPress(KeyEvent e)
 	{
 		throw new UnsupportedOperationException("Not yet implemented");
@@ -28,4 +32,5 @@ public class Update
 		throw new UnsupportedOperationException("Not yet implemented");
 	}
 	
+	private GameState state;
 }
