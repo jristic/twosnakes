@@ -11,8 +11,9 @@ public class Mouse implements Item {
 	private double speed;
 	private final double acceleration = 1.1;
 	private double[] direction;
-	
+	private boolean visible;
 	Random r = new Random();
+	Sound s = new SoundPlayer(filename); //TODO filename must be substituted for proper audio filename
 	
 	public Mouse(double val, double x, double y){
 		value = val;
@@ -20,6 +21,7 @@ public class Mouse implements Item {
 		position[1] = y;
 		speed = 0.0;
 		direction = new double[2];
+		visible = true;
 	}
 	
 	@Override
@@ -76,5 +78,26 @@ public class Mouse implements Item {
 	public void move(){
 		position[0] += direction[0];
 		position[1] += direction[1];
+	}
+
+	@Override
+	public void collision() {
+		// TODO Auto-generated method stub
+		strike();
+		sound();
+		visible = false;
+	}
+
+	@Override
+	public void strike() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void sound() {
+		// TODO Auto-generated method stub
+		s.playSound();
+		
 	}
 }

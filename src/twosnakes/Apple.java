@@ -4,11 +4,14 @@ public class Apple implements Item {
 	
 	private double value;
 	private double[] position;
+	private boolean visible;
+	Sound s = new SoundPlayer(filename); //TODO filename must be substituted for proper audio filename
 	
 	public Apple(double val, double x, double y){
 		value = val;
 		position[0] = x;
 		position[1] = y;
+		visible = true;
 	}
 
 	@Override
@@ -31,6 +34,26 @@ public class Apple implements Item {
 	public double getValue() {
 		return this.value;
 
+	}
+
+	@Override
+	/**
+	 * delete the item when collision happens.
+	 */
+	public void collision() {
+		strike();
+		sound();
+		visible = false;
+	}
+
+	@Override
+	public void strike() {
+		
+	}
+
+	@Override
+	public void sound() {
+		s.playSound();
 	}
 
 }
