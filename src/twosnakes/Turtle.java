@@ -12,7 +12,7 @@ public class Turtle implements Item {
 	private double acceleration = 1.0;
 	private boolean visible;
 	Random r = new Random();
-	Sound s = new SoundPlayer(filename); //TODO filename must be substituted for proper audio filename
+	Sound s = new SoundPlayer(""); //TODO filename must be substituted for proper audio filename
 	
 	public Turtle(double val, double x, double y){
 		value = val;
