@@ -20,8 +20,8 @@ public class Setup
 	{
 		Vector headPos = new Vector(100,100);
 		Vector facing = new Vector(1,0);
-		Vector size(50,20);
-		state.snake1 = new P1Snake(headPos, facing, null, null, null);
+		Vector size = new Vector(50,20);
+		state.snake1 = new P1Snake(headPos, facing, size, size, size);
 	}
 	
 	private GameState state;

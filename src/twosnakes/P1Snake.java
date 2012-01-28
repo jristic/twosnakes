@@ -4,8 +4,10 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import javax.imageio.ImageIO;
 
 public class P1Snake implements Snake 
 {
@@ -32,7 +34,7 @@ public class P1Snake implements Snake
 	private int girth;
 	public Vector headSize, bodySize, tailSize;
 	public Head head;
-	public List<Body> body;
+	public ArrayList<Body> bodyList;
 	public Tail tail;
 	
 	public P1Snake(Vector headPos, Vector facing, Vector headSize, Vector bodySize, Vector tailSize)
@@ -47,8 +49,8 @@ public class P1Snake implements Snake
 		Body segment = new Body();
 		segment.rPiv = new Vector(head.lPiv);
 		segment.lPiv = new Vector(segment.rPiv, facing.x * bodySize.x, facing.y * bodySize.y);
-		body = new ArrayList<Body>();
-		body.add(0, segment);
+		bodyList = new ArrayList<Body>();
+		bodyList.add(0, segment);
 		tail = new Tail();
 		tail.rPiv = new Vector(segment.lPiv);
 		tail.lPiv = new Vector(tail.rPiv, facing.x * tailSize.x, facing.y * tailSize.y);
@@ -60,9 +62,42 @@ public class P1Snake implements Snake
 	{
 		Graphics2D g2d = (Graphics2D)g;
 		AffineTransform transform = new AffineTransform();
+		BufferedImage img = new BufferedImage(10, 10, BufferedImage.TYPE_INT_ARGB);
+		
 		// Draw head
-		BufferedImage img = new BufferedImage((int)headSize.x, (int)headSize.y, BufferedImage.TYPE_INT_ARGB);
+		try
+		{
+			img = ImageIO.read( new File("images/s01_head_closed.png") );
+		}
+		catch (Exception e)
+		{
+		}
 		transform.translate((head.rPiv.x + head.lPiv.x)/2, (head.rPiv.y+head.lPiv.y)/2);
+		g2d.drawImage(img, transform, null);
+		
+		// Draw body
+		try
+		{
+			img = ImageIO.read( new File("images/s1_body.png") );
+		}
+		catch (Exception e)
+		{
+		}
+		for (Body body : bodyList)
+		{
+			transform.translate((body.rPiv.x + body.lPiv.x)/2, (body.rPiv.y+body.lPiv.y)/2);
+			g2d.drawImage(img, transform, null);
+		}
+		
+		// Draw tail
+		try
+		{
+			img = ImageIO.read( new File("images/s01_tail.png") );
+		}
+		catch (Exception e)
+		{
+		}
+		transform.translate((tail.rPiv.x + tail.lPiv.x)/2, (tail.rPiv.y+tail.lPiv.y)/2);
 		g2d.drawImage(img, transform, null);
 	}
 	
@@ -99,7 +134,7 @@ public class P1Snake implements Snake
 	@Override
 	public int getLength()
 	{
-		return body.size();
+		return bodyList.size();
 	}
 	
 	@Override

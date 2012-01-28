@@ -16,6 +16,7 @@ public class Render
 	public Render(GameState state, JPanel panel)
 	{
 		this.panel = panel;
+		this.state = state;
 		// set up message font
 		font = new Font("SansSerif", Font.BOLD, 24);
 		metrics = panel.getFontMetrics(font);
@@ -39,7 +40,14 @@ public class Render
 
 	void drawStartMessage(Graphics dbg)
 	{
-		throw new UnsupportedOperationException("Not yet implemented");
+		dbg.setColor(Color.white);
+		dbg.fillRect(0, 0, panel.getWidth(), panel.getHeight());
+		String msg = "TWO SNAKES ENTER ONE SNAKE LEAVES!";
+		int x = 50;
+		int y = 100;
+		dbg.setColor(Color.red);
+		dbg.setFont(font);
+		dbg.drawString(msg, x, y);
 	}
 
 	void drawGameOverMessage(Graphics dbg)
@@ -49,9 +57,12 @@ public class Render
 
 	void drawGame(Graphics dbg)
 	{
-		throw new UnsupportedOperationException("Not yet implemented");
+		dbg.setColor(Color.black);
+		dbg.fillRect(0, 0, panel.getWidth(), panel.getHeight());
+		state.snake1.draw(dbg);
 	}
 	
+	private GameState state;
 	private Font font;
 	private FontMetrics metrics;
 	private JPanel panel;
