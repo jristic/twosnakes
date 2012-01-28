@@ -13,12 +13,16 @@ public class Setup
 
 	Setup(GameState state)
 	{
-		throw new UnsupportedOperationException("Not yet implemented");
+		this.state = state;
 	}
 
 	void gameSetup()
 	{
-		throw new UnsupportedOperationException("Not yet implemented");
+		Vector headPos = new Vector(100,100);
+		Vector facing = new Vector(1,0);
+		Vector size(50,20);
+		state.snake1 = new P1Snake(headPos, facing, null, null, null);
 	}
 	
+	private GameState state;
 }

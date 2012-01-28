@@ -10,13 +10,15 @@ public class Turtle implements Item {
 	private double speed = 1.0;
 	private double[] direction;
 	private double acceleration = 1.0;
+	private boolean visible;
 	Random r = new Random();
+	Sound s = new SoundPlayer(""); //TODO filename must be substituted for proper audio filename
 	
 	public Turtle(double val, double x, double y){
 		value = val;
 		position[0] = x;
 		position[1] = y;
-		
+		visible = true;
 		direction = new double[2];
 		
 	}
@@ -73,5 +75,21 @@ public class Turtle implements Item {
 	public void move(){
 		position[0] += direction[0];
 		position[1] += direction[1];
+	}
+	@Override
+	public void collision() {
+		// TODO Auto-generated method stub
+		strike();
+		sound();
+		visible = false;
+	}
+	@Override
+	public void strike() {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void sound() {
+		s.playSound();
 	}
 }

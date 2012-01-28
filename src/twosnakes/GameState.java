@@ -10,5 +10,6 @@ package twosnakes;
  */
 public class GameState
 {
-	
+	public Snake snake1;
+	public Snake snake2;
 }
