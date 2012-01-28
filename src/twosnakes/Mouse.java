@@ -13,8 +13,7 @@ public class Mouse implements Item {
 	private double[] direction;
 	private boolean visible;
 	Random r = new Random();
-	Sound s = new SoundPlayer(filename); //TODO filename must be substituted for proper audio filename
-	
+
 	public Mouse(double val, double x, double y){
 		value = val;
 		position[0] = x;
@@ -57,8 +56,13 @@ public class Mouse implements Item {
 		return speed;
 	}
 
+	/**
+	 * put this in loop to keep accelerate.
+	 */
 	public void accelerate(){
 		speed *= acceleration;
+		direction[0] *= acceleration;
+		direction[1] *= acceleration;
 	}
 	
 	public void setDirection(){
@@ -75,29 +79,20 @@ public class Mouse implements Item {
 			direction[1] *= -1;
 	}
 	
+	/**
+	 * put this in loop to keep it moving and speeding.
+	 */
 	public void move(){
 		position[0] += direction[0];
 		position[1] += direction[1];
 	}
 
 	@Override
-	public void collision() {
+	public void eaten() {
 		// TODO Auto-generated method stub
-		strike();
-		sound();
+		Event eating = new Eating();
+		eating.playSound();
+		eating.animation();
 		visible = false;
-	}
-
-	@Override
-	public void strike() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void sound() {
-		// TODO Auto-generated method stub
-		s.playSound();
-		
 	}
 }
