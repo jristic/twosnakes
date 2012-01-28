@@ -1,6 +1,8 @@
 // Animator.java
 // Jovan Ristic, March 2009
 
+package twosnakes;
+
 import java.io.*;
 import java.awt.*;
 import java.awt.image.*;
