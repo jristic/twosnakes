@@ -1,31 +1,35 @@
 package twosnakes;
 
-import java.awt.event.KeyEvent;
-
-public class P1Snake implements Snake{
-
-	class Head{
-		
-	}
-	class Body{
-		
-	}
-	class Tail{
-		
+public class P1Snake implements Snake 
+{
+	class Head
+	{
+		private double headPicWidth = 0;
+		private double headPicLeng = 0;
+		private Vector rHeadPiv = new Vector();
+		public Vector lHeadPiv = new Vector();
 	}
 	
-	private double[] pivit;
-	private double speed = 0.0;
-	private final double move_per_click;
-	private int num_clicks;
-	private double[] vector; //this keeps track of the current angle that picit is moving to.
+	class Body
+	{
+		private double bodyPicWidth= 0;
+	    private double bodyPicLeng= 0;
+		private Vector bodyPiv = new Vector(); 
+	}
 	
-	public P1Snake(){
-		move_per_click = 1.0;
-		
-		vector = new double[1];
-		vector[0] = 0.0;
-		vector[1] = 1.0;
+	class Tail
+	{
+		// Init width and length with the picture size
+		private Vector lTailPiv = new Vector();
+		private Vector rTailPiv = new Vector();
+		private final double tailPicWidth = 0;
+		private final double tailPicLeng = 0;
+	}
+	
+	private double speed = 0;
+	
+	public P1Snake(Vector head, Vector facing)
+	{
 		
 	}
 	@Override
@@ -34,7 +38,8 @@ public class P1Snake implements Snake{
 	 * @param distance
 	 * @param left_or_right
 	 */
-	public void move(int distance, boolean left_or_right) {
+	public void move(double distance, Vector direction) 
+	{
 		// TODO Auto-generated method stub
 		
 	}
@@ -68,23 +73,17 @@ public class P1Snake implements Snake{
 	 * @param speed this overloads the set_speed from the interface
 	 */
 	public void set_speed(double speed) {
-		// TODO Auto-generated method stub
-		
+		this.speed = speed;
 	}
 
 	@Override
 	public double get_speed() {
-		// TODO Auto-generated method stub
 		return this.speed;
 	}
 	
-	public int get_click(KeyEvent ka){
-		return this.num_clicks;
-	}
 	@Override
 	public void set_speed() {
-		
-		
+		this.speed = speed;
 	}
 
 }

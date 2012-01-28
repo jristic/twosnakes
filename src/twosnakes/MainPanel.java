@@ -47,6 +47,7 @@ public class MainPanel extends JPanel implements Runnable
 	private Graphics dbg;
 	private Image dbImage = null;
 	
+	private GameState state;
 	private Update update;
 	private Render render;
 	private Setup setup;
@@ -55,7 +56,7 @@ public class MainPanel extends JPanel implements Runnable
 	{
 		this.period = period;
 		
-		GameState state = new GameState();
+		this.state = new GameState();
 		setup = new Setup(state);
 		update = new Update(state);
 		render = new Render(state, this);
