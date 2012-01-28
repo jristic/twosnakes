@@ -90,6 +90,8 @@ public class SoundPlayer implements Sound
 	public static void main(String args[])
 	{
 		SoundPlayer soundPlayer = new SoundPlayer("testsound.wav", false);
+		//soundPlayer.setSound("store_paging.wav");
+		soundPlayer.setLooping(true);
 		soundPlayer.playSound();
 	}
 	
