@@ -11,6 +11,11 @@ package twosnakes;
 public class Setup
 {
 
+	Setup(GameState state)
+	{
+		throw new UnsupportedOperationException("Not yet implemented");
+	}
+
 	void gameSetup()
 	{
 		throw new UnsupportedOperationException("Not yet implemented");

@@ -13,7 +13,7 @@ import javax.swing.JPanel;
  */
 public class Render
 {
-	public Render(JPanel panel)
+	public Render(GameState state, JPanel panel)
 	{
 		this.panel = panel;
 		// set up message font
