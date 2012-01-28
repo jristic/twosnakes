@@ -1,13 +1,12 @@
 package twosnakes;
 
 public class SnakeAI implements AI{
-	Vector head_vector = new Vector(); //need to take parameter 
-	Vector facing_vector = new Vector(); //need to take parameter
-	Snake s = new P1Snake(head_vector, facing_vector);
 	
 	@Override
-	public void moveSnake(Snake s) {
-		
+	public void moveSnake(Snake s, Snake opponent) {
+		Vector opponent_direction = opponent.getDirection();
+		int opponent_girth = opponent.getGirth();
+		int opponent_length = opponent.getLength();
 		
 	}
 
