@@ -19,17 +19,17 @@ public class Update
 	
 	void processKeyPress(KeyEvent e)
 	{
-		throw new UnsupportedOperationException("Not yet implemented");
+		
 	}
 
 	void processKeyRelease(KeyEvent e)
 	{
-		throw new UnsupportedOperationException("Not yet implemented");
+		
 	}
 
 	void gameUpdate()
 	{
-		throw new UnsupportedOperationException("Not yet implemented");
+		
 	}
 	
 	private GameState state;

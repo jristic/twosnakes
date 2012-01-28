@@ -13,17 +13,14 @@ import java.awt.Image;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.JPanel;
-import twosnakes.Render;
-import twosnakes.Setup;
-import twosnakes.Update;
 
 
 // import com.sun.j3d.utils.timer.J3DTimer;
 public class MainPanel extends JPanel implements Runnable
 {
 
-	private static final int PWIDTH = 800;   // size of panel
-	private static final int PHEIGHT = 600;
+	private static final int PWIDTH = 1280;   // size of panel
+	private static final int PHEIGHT = 720;
 	// record stats every 1 second (roughly)
 	private static final int NO_DELAYS_PER_YIELD = 16;
 	/*
