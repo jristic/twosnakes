@@ -1,6 +1,9 @@
 package twosnakes;
 
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.geom.AffineTransform;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,29 +11,29 @@ public class P1Snake implements Snake
 {
 	class Head
 	{
-		private Vector rPiv;
+		public Vector rPiv;
 		public Vector lPiv;
 	}
 	
 	class Body
 	{
-		private Vector rPiv;
+		public Vector rPiv;
 		private Vector lPiv;
 	}
 	
 	class Tail
 	{
-		private Vector rPiv;
-		private Vector lPiv;
+		public Vector rPiv;
+		public Vector lPiv;
 	}
 	
-	private double speed = 0;
+	private double speed;
 	private Vector direction;
 	private int girth;
-	private Vector headSize, bodySize, tailSize;
-	private Head head;
-	private List<Body> body;
-	private Tail tail;
+	public Vector headSize, bodySize, tailSize;
+	public Head head;
+	public List<Body> body;
+	public Tail tail;
 	
 	public P1Snake(Vector headPos, Vector facing, Vector headSize, Vector bodySize, Vector tailSize)
 	{
@@ -55,7 +58,12 @@ public class P1Snake implements Snake
 	@Override
 	public void draw(Graphics g)
 	{
-		
+		Graphics2D g2d = (Graphics2D)g;
+		AffineTransform transform = new AffineTransform();
+		// Draw head
+		BufferedImage img = new BufferedImage((int)headSize.x, (int)headSize.y, BufferedImage.TYPE_INT_ARGB);
+		transform.translate((head.rPiv.x + head.lPiv.x)/2, (head.rPiv.y+head.lPiv.y)/2);
+		g2d.drawImage(img, transform, null);
 	}
 	
 	@Override
