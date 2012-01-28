@@ -10,13 +10,17 @@ import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.JPanel;
+import twosnakes.Render;
+import twosnakes.Setup;
+import twosnakes.Update;
+
 
 // import com.sun.j3d.utils.timer.J3DTimer;
 public class MainPanel extends JPanel implements Runnable
 {
 
-	private static final int PWIDTH = 640;   // size of panel
-	private static final int PHEIGHT = 480;
+	private static final int PWIDTH = 800;   // size of panel
+	private static final int PHEIGHT = 600;
 	// record stats every 1 second (roughly)
 	private static final int NO_DELAYS_PER_YIELD = 16;
 	/*
@@ -27,7 +31,6 @@ public class MainPanel extends JPanel implements Runnable
 	// no. of frames that can be skipped in any one animation loop
 	// i.e the games state is updated but not rendered
 	private long gameStartTime;
-	private long beginTime, endTime;
 	private Thread animator;           // the thread that performs the animation
 	private volatile boolean running = false;   // used to stop the animation thread
 	private volatile boolean isPaused = false;
@@ -41,11 +44,19 @@ public class MainPanel extends JPanel implements Runnable
 	// off screen rendering
 	private Graphics dbg;
 	private Image dbImage = null;
+	
+	private Update update;
+	private Render render;
+	private Setup setup;
 
 	public MainPanel(Main main, int period)
 	{
 		this.period = period;
-
+		
+		update = new Update();
+		render = new Render();
+		setup = new Setup();
+		
 		setBackground(Color.white);
 		setPreferredSize(new Dimension(PWIDTH, PHEIGHT));
 
@@ -57,13 +68,13 @@ public class MainPanel extends JPanel implements Runnable
 		{
 			public void keyPressed(KeyEvent e)
 			{
-				processKeyPress(e);
-			} // handle key presses
+				update.processKeyPress(e);
+			}
 
 			public void keyReleased(KeyEvent e)
 			{
-				processKeyRelease(e);
-			} // handles key releases
+				update.processKeyRelease(e);
+			}
 		});
 
 		readyForTermination();
@@ -71,10 +82,10 @@ public class MainPanel extends JPanel implements Runnable
 		// set up message font
 		font = new Font("SansSerif", Font.BOLD, 24);
 		metrics = this.getFontMetrics(font);
-
-		// TODO instantiate the game elements
-
-	}  // end of BrawlerPanel()
+		
+		// Setup game elements
+		setup.gameSetup();
+	}
 
 	public static int getFrameHeight()
 	{
@@ -102,7 +113,7 @@ public class MainPanel extends JPanel implements Runnable
 				}
 			}
 		});
-	}  // end of readyForTermination()
+	}
 
 	private void readyForStart()
 	{
@@ -116,11 +127,10 @@ public class MainPanel extends JPanel implements Runnable
 				if (keyCode == KeyEvent.VK_ENTER && !gameStarted)
 				{
 					gameStarted = true;
-					beginTime = System.nanoTime();
 				}
 			}
 		});
-	}  // end of readyForStart\()
+	}
 
 	public void addNotify()
 	// wait for the JPanel to be added to the JFrame before starting
@@ -139,7 +149,7 @@ public class MainPanel extends JPanel implements Runnable
 			animator = new Thread(this);
 			animator.start();
 		}
-	} // end of startGame()
+	}
 
 	public void resumeGame()
 	// called when the JFrame is activated / deiconified
@@ -209,11 +219,13 @@ public class MainPanel extends JPanel implements Runnable
 				try
 				{
 					Thread.sleep(sleepTime);  // already in ms
-				} catch (InterruptedException ex)
+				} 
+				catch (InterruptedException ex)
 				{
 				}
 				overSleepTime = (int) ((System.currentTimeMillis() - afterTime) - sleepTime);
-			} else
+			} 
+			else
 			{    // sleepTime <= 0; the frame took longer than the period
 				excess -= sleepTime;  // store excess time value
 				overSleepTime = 0;
@@ -247,7 +259,7 @@ public class MainPanel extends JPanel implements Runnable
 	{
 		if (!isPaused && !gameOver)
 		{
-			// TODO Update code here
+			update.gameUpdate();
 		}
 	}
 
@@ -269,47 +281,23 @@ public class MainPanel extends JPanel implements Runnable
 		// draw the game elements to the buffer
 		if (gameStarted && !gameOver)
 		{
-			// TODO Render code here
+			render.drawGame(dbg);
 		}
 
 		if (!gameStarted)
 		{
-			gameStartMessage(dbg);
+			render.drawStartMessage(dbg);
+			readyForStart();
 		}
 		if (gameOver)
 		{
-			gameOverMessage(dbg);
+			render.drawGameOverMessage(dbg);
 		}
-	}  // end of gameRender()
-
-	private void gameStartMessage(Graphics g)
-	// center the game start message in the panel
-	{
-		// TODO Draw start screen here.
-	}
-
-	private void gameOverMessage(Graphics g)
-	// center the game-over message in the panel
-	{
-		// TODO Draw game over screen here.
 	}
 
 	private void paintScreen()
 	// use active rendering to put the buffered image on-screen
 	{
-		Graphics g;
-		try
-		{
-			g = this.getGraphics();
-			if ((g != null) && (dbImage != null))
-			{
-				g.drawImage(dbImage, 0, 0, null);
-			}
-			Toolkit.getDefaultToolkit().sync();  // sync the display on some systems
-			g.dispose();
-		} catch (Exception e)
-		{
-			System.out.println("Graphics error: " + e);
-		}
+		render.paintScreen(this.getGraphics(), dbImage);
 	}
 }

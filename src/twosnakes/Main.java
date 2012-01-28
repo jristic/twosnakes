@@ -12,7 +12,7 @@ public class Main extends JFrame implements WindowListener
 
 	public Main(int period)
 	{
-		super("Ninjas vs. Pirates");
+		super("Two Snakes");
 		makeGUI(period);
 		addWindowListener(this);
 		pack();
