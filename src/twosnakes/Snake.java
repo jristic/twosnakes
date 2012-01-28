@@ -12,4 +12,7 @@ public interface Snake {
 	public void get_shorter();
 	public void get_fat();
 	public void get_skinny();
+	
+	public void set_speed();
+	public double get_speed();
 }
