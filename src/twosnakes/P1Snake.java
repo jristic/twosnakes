@@ -74,7 +74,7 @@ public class P1Snake{
 		catch (Exception e)
 		{
 		}
-		//player = new SoundEffectPlayer("sound/Pain.wav");
+		player = new SoundEffectPlayer("sound/Pain.wav");
 	}
 
 	public void draw(Graphics g)
@@ -225,8 +225,8 @@ public class P1Snake{
 		
 		bodyList.remove(lastSegInd);
 		
-		//player.playerInitialize();
-//		player.play();
+		player = new SoundEffectPlayer("sound/Pain.wav");
+		player.play();
 		
 		
 	}
