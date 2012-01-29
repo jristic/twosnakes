@@ -17,9 +17,13 @@ import java.util.Random;
 public class Update
 {
 	static final int timeBetweenPivotsMs = 60;
+	static final int maxTimeCharged = 10000;
+	static final int lungeTimeStep = 1000;
 
 	List<Event> events;
 	boolean snake1Left, snake1Right, snake2Left, snake2Right;
+	boolean snake1Charging, snake2Charging;
+	long snake1ChargeTime, snake2ChargeTime;
 	long lastSnake1PivotTime, lastSnake2PivotTime;
 	Random r = new Random();
 	private GameState state;
@@ -34,6 +38,7 @@ public class Update
 		this.state = state;
 		events.add(0,new Collision(this.state));
 		events.add(1,new SnakeCollision(this.state));
+		snake1ChargeTime = snake2ChargeTime = 0;
 	}
 
 	void processKeyPress(KeyEvent e)
@@ -45,6 +50,10 @@ public class Update
 		else if (e.getKeyCode() == KeyEvent.VK_RIGHT)
 		{
 			snake1Right = true;
+		}
+		if (e.getKeyCode() == KeyEvent.VK_DOWN);
+		{
+			snake1Charging = true;
 		}
 
 		if(e.getKeyCode() == KeyEvent.VK_A)
@@ -67,6 +76,10 @@ public class Update
 		{
 			snake1Right = false;
 		}
+		if (e.getKeyCode() == KeyEvent.VK_DOWN);
+		{
+			snake1Charging = false;
+		}
 
 		if(e.getKeyCode() == KeyEvent.VK_A)
 		{
@@ -80,7 +93,8 @@ public class Update
 
 	void gameUpdate(long timePassed)
 	{
-		//TODO
+		System.out.println(timePassed);
+		
 		if(state.snake1 != null && state.snake2 != null){
 			if( state.snake1.bodyList.isEmpty() )
 			{
@@ -128,7 +142,7 @@ public class Update
 				System.out.println("ASDA");
 			}
 		}
-
+		
 		for (int i = 0 ; i < state.objects.size() ; i++)
 		{
 			Item item = state.objects.get(i);
@@ -179,7 +193,27 @@ public class Update
 
 		if (state.snake1 != null)
 		{
-			state.snake1.move(timePassed);
+			if (snake1Charging)
+			{
+				snake1ChargeTime += timePassed;
+				if (snake1ChargeTime > maxTimeCharged)
+					snake1ChargeTime = maxTimeCharged;
+			}
+			else
+			{
+				if (snake1ChargeTime > 0)
+				{
+					state.snake1.move(lungeTimeStep);
+					snake1ChargeTime -= lungeTimeStep;
+					if (snake1ChargeTime < 0)
+						snake1ChargeTime = 0;
+				}
+				else
+				{
+					state.snake1.move(timePassed);
+				}
+			}
+			
 			
 			double xDir = state.snake1.getDirection().x;
 			double yDir = state.snake1.getDirection().y;
