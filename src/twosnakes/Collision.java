@@ -3,7 +3,7 @@ package twosnakes;
 public class Collision implements Event{
 
 	private double collision_distance;
-	Sound collision = new SoundPlayer(" ");
+//	Sound collision = new SoundPlayer(" ");
 	private GameState state;
 	private boolean col_status;
 	
