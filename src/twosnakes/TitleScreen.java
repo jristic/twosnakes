@@ -34,14 +34,14 @@ public class TitleScreen {
 		for (int i = 0; i < filenames.length; i++)
         {
         	try {
-				images[i] = ImageIO.read(new File("Images\\" + filenames[i] + ".png"));
+				images[i] = ImageIO.read(new File("images/" + filenames[i] + ".png"));
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
         }
 		
 		try {
-			backgroundImage = ImageIO.read(new File("Images\\T_background.png"));
+			backgroundImage = ImageIO.read(new File("images/T_background.png"));
 		} catch (IOException e2) {
 			e2.printStackTrace();
 			backgroundImage = null;
