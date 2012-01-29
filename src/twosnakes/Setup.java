@@ -41,6 +41,7 @@ public class Setup
 		
 		state.objects.add( new Apple(5, Math.floor((r.nextDouble()*1280)),  Math.floor((r.nextDouble()*720))));
 		state.objects.add( new Mouse(1, 100, 100) );
+		state.objects.add( new Turtle(1, 100, 600) );
 	}
 	
 	private GameState state;

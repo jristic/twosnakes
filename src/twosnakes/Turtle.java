@@ -1,32 +1,42 @@
 package twosnakes;
 
-import java.util.Random;
 import java.awt.Graphics;
-import java.lang.Math;
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.util.Random;
 
 public class Turtle implements Item {
 	
+	static final float pixelsPerMs = 0.05f;
+	
 	private double value;
 	private double[] position;
-	private double speed = 1.0;
-	private double[] direction;
-	private double acceleration = 1.0;
-	private boolean visible;
+	private double speed;
+	Vector target;
+	boolean walking;
+	long timeToNextWalk;
+	BufferedImage image;
+	Animator anim;
 	Random r = new Random();
 
 	public Turtle(double val, double x, double y){
 		value = val;
+		position = new double[2];
 		position[0] = x;
 		position[1] = y;
-		visible = true;
-		direction = new double[2];
-		
+		speed = 1;
+
+		timeToNextWalk = r.nextInt(2000);
+		walking = false;
+		anim = new Animator();
+		anim.startAnimation("images/turtle.png", 10, 3, false);
 	}
+	
 	@Override
 	public void setPosition(double newX, double newY) {
 		position[0] = newX;
 		position[1] = newY;
-
+		
 	}
 
 	@Override
@@ -37,63 +47,85 @@ public class Turtle implements Item {
 
 	@Override
 	public double[] getPosition() {
+		// TODO Auto-generated method stub
 		return this.position;
-
 	}
 
 	@Override
 	public double getValue() {
+		// TODO Auto-generated method stub
 		return this.value;
-
 	}
+	
 	public void setSpeed(double newSpeed){
-		speed = Math.hypot(direction[0], direction[1]);
+		speed = newSpeed;
 	}
 	
 	public double getSpeed(){
 		return speed;
 	}
 
+	/**
+	 * put this in loop to keep accelerate.
+	 */
 	public void accelerate(){
-		speed *= acceleration;
 	}
 	
 	public void setDirection(){
-		int x = r.nextInt() % 2;
-		int y = r.nextInt() % 2;
-		
-		direction[0] = r.nextDouble();
-		direction[1] = r.nextDouble();
-		
-		//change the direction if the value of x is negative
-		if(x == 1)
-			direction[0] *= -1;
-		if(y == 1)
-			direction[1] *= -1;
 	}
 	
+	/**
+	 * put this in loop to keep it moving and speeding.
+	 */
 	public void move(){
-		position[0] += direction[0];
-		position[1] += direction[1];
 	}
+
 	@Override
 	public void eaten() {
-		// TODO Auto-generated method stub
-		Eating e = new Eating();
-		e.playSound();
-		e.animation();
-		visible = false;
+//		Event eating = new Eating();
+//		eating.playSound();
+//		eating.animation();
 	}
-	
+
 	@Override
 	public void update(long gameTime)
 	{
-		
+		if (walking)
+		{
+			Vector toDir = new Vector(target.x - position[0], target.y - position[1]);
+			toDir.normalize();
+			position[0] += toDir.x * speed * pixelsPerMs * gameTime;
+			position[1] += toDir.y * speed * pixelsPerMs * gameTime;
+			if (toDir.x >= 0 && target.x - position[0] <= 0)
+			{
+				walking = false;
+				timeToNextWalk = r.nextInt(2000);
+			}
+			else if (toDir.x < 0 && target.x - position[0] > 0)
+			{
+				walking = false;
+				timeToNextWalk = r.nextInt(2000);
+			}
+		}
+		else
+		{
+			if (timeToNextWalk > 0)
+			{
+				timeToNextWalk -= gameTime;
+			}
+			else
+			{
+				walking = true;
+				target = new Vector(r.nextInt(1000)+50, r.nextInt(650)+10);
+			}
+		}
 	}
-		
+	
 	@Override
-	public void draw(Graphics g) {
-		// TODO Auto-generated method stub
-		
+	public void draw(Graphics g) 
+	{
+		Graphics2D g2d = (Graphics2D)g;
+		image = anim.getFrame(0);
+		g2d.drawImage(image, (int)position[0] - image.getWidth()/2, (int)position[1] - image.getHeight()/2, null);
 	}
 }
