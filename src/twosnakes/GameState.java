@@ -4,6 +4,8 @@
  */
 package twosnakes;
 
+import java.util.List;
+
 /**
  *
  * @author jovan
@@ -19,5 +21,5 @@ public class GameState
 	public Snake snake1;
 	public Snake snake2;
 	
-	public Apple ap1;
+	public List<Item> objects;
 }
