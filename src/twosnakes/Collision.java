@@ -68,7 +68,7 @@ public class Collision implements Event{
 		boolean result = false;
 		Vector s_vector = snake1.head.rPiv;
 		double x1 = s_vector.x;
-		if (x1>=1280||x1<=0)
+		if (x1>=1300||x1<=-20)
 			result = true;
 		return result;
 		}
@@ -78,7 +78,7 @@ public class Collision implements Event{
 	boolean result = false;
 	Vector s_vector = s.head.rPiv;
 	double y1 = s_vector.y;
-	if(y1>=720||y1<=0)
+	if(y1>=740||y1<=-20)
 		result = true;
 	return result;
 	}
