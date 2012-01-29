@@ -85,13 +85,13 @@ public class Update
 			if( state.snake1.bodyList.size() == 0 )
 			{
 				System.out.println("GAME OVER");
-				state.winner = "Player 2";
+				state.winner = "Player 1";
 				gameOverCallback.run();
 			}
 			if (state.snake2.bodyList.size() == 0)
 			{
 				System.out.println("GAME OVER");
-				state.winner = "Player 1";
+				state.winner = "Player 2";
 				gameOverCallback.run();
 			}
 			
