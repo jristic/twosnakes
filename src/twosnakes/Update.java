@@ -93,7 +93,7 @@ public class Update
 					state.objects.add(new Apple(5, Math.floor((r.nextDouble()*1280)),  Math.floor((r.nextDouble()*720))));
 				}
 				else if(item_val == 1){ //add mouse
-
+					state.objects.add(new Mouse(1, 100, 100));
 				}
 				else if(item_val == 2){ //add turtle
 

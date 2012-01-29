@@ -82,9 +82,9 @@ public class Mouse implements Item {
 
 	@Override
 	public void eaten() {
-		Event eating = new Eating();
-		eating.playSound();
-		eating.animation();
+//		Event eating = new Eating();
+//		eating.playSound();
+//		eating.animation();
 	}
 
 	@Override

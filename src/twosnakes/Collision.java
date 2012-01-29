@@ -49,7 +49,7 @@ public class Collision implements Event{
 				collision_distance = 3.0;
 			}
 			else if(item.getClass() == Mouse.class){
-				collision_distance = 2.0;
+				collision_distance = 30.0;
 			}
 			else{
 				collision_distance = 0.0;
