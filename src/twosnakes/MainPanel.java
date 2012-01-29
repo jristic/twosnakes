@@ -207,18 +207,18 @@ public class MainPanel extends JPanel implements Runnable
 			gameRender();   // render the game to a buffer
 			
 			paintScreen();  // draw the buffer on-screen
-			/*
+			
 			for(int i =0; i < state.objects.size(); i++){
 				for(int j = 0; j < removings.size(); j++){
 					if(state.objects.get(i).equals(removings.get(j))){
 						if(state.objects.get(i).getClass().equals(Apple.class)){
-							Delay.sleep(0);
+							Delay.sleep(20);
 						}
 						else if(state.objects.get(i).getClass().equals(Mouse.class)){
-							Delay.sleep(0);
+							Delay.sleep(50);
 						}
 						else if(state.objects.get(i).getClass().equals(Turtle.class)){
-							Delay.sleep(0);
+							Delay.sleep(50);
 						}
 						state.objects.remove(i);
 						state.snake1.head_back();
@@ -227,13 +227,13 @@ public class MainPanel extends JPanel implements Runnable
 				}
 			}
 			if(state.snake1 != null && ( state.snake1.get_visible() == 1 || state.snake1.get_visible() == 2) ){
-				Delay.sleep(50);
+				Delay.sleep(10);
 				state.snake1.head_back();
 			}
 			if(state.snake2 != null && ( state.snake2.get_visible() == 1 || state.snake2.get_visible() == 2)){
-				Delay.sleep(50);
+				Delay.sleep(10);
 				state.snake2.head_back();
-			}*/
+			}
 			
 			afterTime = System.currentTimeMillis();
 			timeDiff = afterTime - beforeTime;
