@@ -7,6 +7,7 @@ package twosnakes;
 import java.awt.event.KeyEvent;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  *
@@ -19,6 +20,7 @@ public class Update
 	List<Event> events;
 	boolean snake1Left, snake1Right, snake2Left, snake2Right;
 	long lastSnake1PivotTime, lastSnake2PivotTime;
+	Random r = new Random();
 
 	public Update(GameState state)
 	{
@@ -89,9 +91,36 @@ public class Update
 				//TODO
 				if(state.snake1 != null && state.snake2 != null){
 					
-					events.get(i).isCollide(state.snake1);
-					events.get(i).isCollide(state.snake2);
-					
+					if( events.get(i).isCollide(state.snake1) ){
+						int item_val = r.nextInt(4);
+						if(item_val == 0){ //add apple
+							state.objects.add(new Apple(5, Math.floor((r.nextDouble()*1280)),  Math.floor((r.nextDouble()*720))));
+						}
+						else if(item_val == 1){ //add mouse
+							
+						}
+						else if(item_val == 2){ //add turtle
+							
+						}
+						else if(item_val == 3){ //add apple
+							state.objects.add(new Apple(5, Math.floor((r.nextDouble()*1280)),  Math.floor((r.nextDouble()*720))));
+						}
+					}
+					if( events.get(i).isCollide(state.snake2) ){
+						int item_val = r.nextInt(4);
+						if(item_val == 0){ //add apple
+							state.objects.add(new Apple(5, Math.floor((r.nextDouble()*1280)),  Math.floor((r.nextDouble()*720))));
+						}
+						else if(item_val == 1){ //add mouse
+							
+						}
+						else if(item_val == 2){ //add turtle
+							
+						}
+						else if(item_val == 3){ //add apple
+							state.objects.add(new Apple(5, Math.floor((r.nextDouble()*1280)),  Math.floor((r.nextDouble()*720))));
+						}
+					}
 				}
 			}
 			else if(events.get(i).getClass() == SnakeCollision.class){
