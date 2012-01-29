@@ -2,10 +2,10 @@ package twosnakes;
 
 public class Eating implements Event{
 
-	Sound eaten_sound = new SoundPlayer(" "); //audio file name need to be inserted.
+//	Sound eaten_sound = new SoundPlayer(" "); //audio file name need to be inserted.
 	@Override
 	public void playSound() {
-		eaten_sound.playSound();
+//		eaten_sound.playSound();
 	}
 
 	@Override
