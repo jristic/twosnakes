@@ -6,6 +6,7 @@ import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 import javax.imageio.ImageIO;
 
 public class P1Snake implements Snake 
@@ -68,7 +69,7 @@ public class P1Snake implements Snake
 		AffineTransform transform = new AffineTransform();
 		BufferedImage img = new BufferedImage(10, 10, BufferedImage.TYPE_INT_ARGB);
 		Vector right = new Vector(1,0);
-		
+
 		// Draw head
 		try
 		{
@@ -83,7 +84,7 @@ public class P1Snake implements Snake
 		double value = Math.atan2(dir.x, dir.y);
 		transform.rotate(-(value - Math.PI/2), 0, headSize.y/2);
 		g2d.drawImage(img, transform, null);
-		
+
 		// Draw body
 		transform = new AffineTransform();
 		try
@@ -101,7 +102,7 @@ public class P1Snake implements Snake
 			transform.rotate(-(value - Math.PI/2), 0, bodySize.y/2);
 			g2d.drawImage(img, transform, null);
 		}
-		
+
 		// Draw tail
 		transform = new AffineTransform();
 		try
@@ -117,7 +118,7 @@ public class P1Snake implements Snake
 		transform.rotate(-(value - Math.PI/2), 0, tailSize.y/2);
 		g2d.drawImage(img, transform, null);
 	}
-	
+
 	@Override
 	public void move(double timePassed) 
 	{
@@ -156,6 +157,7 @@ public class P1Snake implements Snake
 		avg.scale(bodySize.x);
 		tail.lPiv = tail.rPiv.copy();
 		tail.lPiv.translate(-1 * avg.x, -1 * avg.y);
+		
 	}
 	
 	@Override
@@ -194,7 +196,35 @@ public class P1Snake implements Snake
 	@Override
 	public void addSegments(int num)
 	{
+		Body newSeg = new Body();
+		newSeg.rPiv = new Vector(tail.rPiv);
+		newSeg.lPiv = new Vector();
+		double tailVecX = tail.lPiv.x - tail.rPiv.x;
+		double tailVecY = tail.lPiv.y - tail.rPiv.y;
+		newSeg.lPiv.x = newSeg.rPiv.x + ((tailVecX) * (bodySize.x/tailSize.x));
+		newSeg.lPiv.y = newSeg.rPiv.y + ((tailVecY) * (bodySize.y/tailSize.y));
+		tail.rPiv = newSeg.lPiv;
+		tail.lPiv.x = tail.rPiv.x - (newSeg.rPiv.x-newSeg.lPiv.x) ;
+		tail.lPiv.y = tail.rPiv.y + (newSeg.rPiv.y-newSeg.lPiv.y);
+		bodyList.add(newSeg);
+	}
+	@Override
+	public void removeSegments(int num)
+	{
+		int secondLastInd = bodyList.size()-3; 
+		Body secondLast = bodyList.get(secondLastInd);
+		int lastSegInd = bodyList.size()-2; 
+		Body lastSeg = bodyList.get(lastSegInd);
+		lastSeg.rPiv = new Vector(secondLast.lPiv);
+		lastSeg.lPiv = new Vector(tail.lPiv);
 		
+		bodyList.remove(bodyList.size()-1);
+	}
+	
+	// for debug
+	@Override
+	public int getBodyLeng(){
+		return this.bodyList.size();
 	}
 	
 	@Override
