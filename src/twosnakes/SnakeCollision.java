@@ -105,6 +105,7 @@ public class SnakeCollision implements Event{
 				s2.set_speed(s2.get_speed()*0.9);
 				s1.set_speed(s1.get_speed()*1.11);
 			}
+			
 			status2 = true;
 		}
 		return status2;

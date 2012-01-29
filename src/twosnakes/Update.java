@@ -82,6 +82,10 @@ public class Update
 	{
 		//TODO
 		if(state.snake1 != null && state.snake2 != null){
+			if( state.snake1.bodyList.size() == 0 || state.snake2.bodyList.size() == 0){
+				System.out.println("GAME OVER");
+				gameOverCallback.run();
+			}
 			
 			if( events.get(0).isCollide(state.snake1) ){
 				int item_val = r.nextInt(10);
