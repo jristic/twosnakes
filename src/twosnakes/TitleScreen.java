@@ -19,9 +19,9 @@ import java.awt.geom.AffineTransform;
 
 public class TitleScreen {
 	
-	public final int SPACING = 65;
-	public final int XSTEP = 8;
-	public final String filenames[] = {"s", "n", "a", "K", "e", "s", "space", "o", "n", "space", "a", "space", "s", "c", "r", "e", "e", "n"};
+	public final int SPACING = 90;
+	public final int XSTEP = 7;
+	public final String filenames[] = {"txt_e", "txt_a", "txt_t", "space", "txt_s", "txt_o", "txt_m", "txt_e", "space", "txt_t", "txt_a", "txt_i", "txt_l"};
 	private int x[];
 	private int actualX[];
 	private int y[];
@@ -66,11 +66,11 @@ public class TitleScreen {
 		for (int i = 0; i < filenames.length; i++)
     	{
     		x[i] += XSTEP;
-    		if (actualX[filenames.length / 2] < 1270 / 2)
+    		if (actualX[filenames.length / 2] < 1200 / 2)
     		{
     			actualX[i] += XSTEP;
     		}
-    		y[i] = (int)(Math.sin((double)x[i] / (double)60) * 33) + 108;
+    		y[i] = (int)(Math.sin((double)x[i] / (double)100) * 33) + 108;
     	}
 	}
 	
@@ -85,7 +85,7 @@ public class TitleScreen {
     	{
     		AffineTransform trans = new AffineTransform();
     		trans.translate(actualX[i], y[i]);
-    		trans.rotate(Math.cos((double)x[i] / (double)60) / 1.75, images[i].getWidth() / 2, images[i].getHeight() / 2);
+    		trans.rotate(Math.cos((double)x[i] / (double)100) / 1.75, images[i].getWidth() / 2, images[i].getHeight() / 2);
 	        g2d.drawImage(images[i], trans, null);
     	}
 		
