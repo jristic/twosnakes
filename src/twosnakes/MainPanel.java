@@ -72,7 +72,6 @@ public class MainPanel extends JPanel implements Runnable
 		setup = new Setup(state);
 		update = new Update(state, gameOverCallback);
 		render = new Render(state, this);
-		
 		setBackground(Color.white);
 		setPreferredSize(new Dimension(PWIDTH, PHEIGHT));
 
@@ -227,11 +226,11 @@ public class MainPanel extends JPanel implements Runnable
 					}
 				}
 			}
-			if(state.snake1 != null && state.snake1.get_visible() == 1){
+			if(state.snake1 != null && ( state.snake1.get_visible() == 1 || state.snake1.get_visible() == 2) ){
 				Delay.sleep(50);
 				state.snake1.head_back();
 			}
-			if(state.snake2 != null && state.snake2.get_visible() == 1){
+			if(state.snake2 != null && ( state.snake2.get_visible() == 1 || state.snake2.get_visible() == 2)){
 				Delay.sleep(50);
 				state.snake2.head_back();
 			}

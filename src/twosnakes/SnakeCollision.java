@@ -64,6 +64,7 @@ public class SnakeCollision implements Event{
 				if(s1.bodyList.size() >= 1 && s2.bodyList.size() >= 1){
 					s1.change_head();
 					s1.addSegments(1);
+					s2.set_visible(2);
 					s2.removeSegments(1);
 					s1.set_speed(s1.get_speed()*0.9);
 					s2.set_speed(s2.get_speed()*1.11);
@@ -105,6 +106,7 @@ public class SnakeCollision implements Event{
 			if(s1.bodyList.size() >= 1 && s2.bodyList.size() >= 1){
 				s2.change_head();
 				s2.addSegments(1);
+				s1.set_visible(2);
 				s1.removeSegments(1);
 				s2.set_speed(s2.get_speed()*0.9);
 				s1.set_speed(s1.get_speed()*1.11);
