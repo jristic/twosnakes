@@ -43,7 +43,7 @@ public class Update
 	{
 		if (state.snake1 == null)
 			return;
-		//state.snake1.move(timePassed);
+		state.snake1.move(timePassed);
 	}
 
 	private GameState state;

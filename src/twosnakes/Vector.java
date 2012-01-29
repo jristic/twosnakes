@@ -45,6 +45,22 @@ public class Vector
 		return this.x * vec.x + this.y * vec.y;
 	}
 	
+	public void translate(Vector offset)
+	{
+		this.x += offset.x;
+		this.y += offset.y;
+	}
+	
+	public void translate(double xoffset, double yoffset)
+	{
+		this.x += xoffset;
+		this.y += yoffset;
+	}
+	
+	public Vector copy()
+	{
+		return new Vector(this.x, this.y);
+	}
 	
 	public double x, y;
 }

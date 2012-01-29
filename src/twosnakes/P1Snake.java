@@ -11,6 +11,9 @@ import javax.imageio.ImageIO;
 
 public class P1Snake implements Snake 
 {
+	static final float pixelsPerMs = 0.03f;
+	static final float maxUpdateLength = 30;
+	
 	class Head
 	{
 		public Vector rPiv;
@@ -65,6 +68,7 @@ public class P1Snake implements Snake
 		Graphics2D g2d = (Graphics2D)g;
 		AffineTransform transform = new AffineTransform();
 		BufferedImage img = new BufferedImage(10, 10, BufferedImage.TYPE_INT_ARGB);
+		Vector right = new Vector(1,0);
 		
 		// Draw head
 		try
@@ -74,7 +78,11 @@ public class P1Snake implements Snake
 		catch (Exception e)
 		{
 		}
-		transform.translate((head.rPiv.x + head.lPiv.x)/2, (head.rPiv.y+head.lPiv.y)/2);
+		transform.translate(head.lPiv.x, head.lPiv.y - headSize.y/2);
+		Vector dir = new Vector(head.rPiv.x - head.lPiv.x, head.rPiv.y - head.lPiv.y);
+		dir.normalize();
+		double value = Math.atan2(dir.x, dir.y);
+		transform.rotate(-(value - Math.PI/2), 0, headSize.y/2);
 		g2d.drawImage(img, transform, null);
 		
 		// Draw body
@@ -88,7 +96,10 @@ public class P1Snake implements Snake
 		}
 		for (Body body : bodyList)
 		{
-			transform.translate((body.rPiv.x + body.lPiv.x)/2, (body.rPiv.y+body.lPiv.y)/2);
+			transform.translate(body.lPiv.x, body.lPiv.y - bodySize.y/2);
+			dir = new Vector(body.rPiv.x - body.lPiv.x, body.rPiv.y - body.lPiv.y);
+			value = Math.atan2(dir.x, dir.y);
+			transform.rotate(-(value - Math.PI/2), 0, bodySize.y/2);
 			g2d.drawImage(img, transform, null);
 		}
 		
@@ -101,44 +112,46 @@ public class P1Snake implements Snake
 		catch (Exception e)
 		{
 		}
-		transform.translate((tail.rPiv.x + tail.lPiv.x)/2, (tail.rPiv.y+tail.lPiv.y)/2);
+		transform.translate(tail.lPiv.x, tail.lPiv.y - tailSize.y/2);
+		dir = new Vector(tail.rPiv.x - tail.lPiv.x, tail.rPiv.y - tail.lPiv.y);
+		value = Math.atan2(dir.x, dir.y);
+		transform.rotate(-(value - Math.PI/2), 0, tailSize.y/2);
 		g2d.drawImage(img, transform, null);
 	}
 	
 	@Override
 	public void move(double timePassed) 
 	{
-		double nextLSpotX = head.lPiv.x;
-		double nextLSpotY = head.lPiv.y;
-		double nextRSpotX = head.rPiv.x;
-		double nextRSpotY = head.rPiv.y;
-		int bodyListLength = bodyList.size();
-		head.rPiv.x += speed * timePassed * direction.x;
-		head.rPiv.y += speed * timePassed * direction.y;
-		head.lPiv.x += speed * timePassed * direction.x;
-		head.lPiv.y += speed * timePassed * direction.y;
-		
-//		for (int i=0; i<bodyListLength;i++){
-//			Body currBody = bodyList.get(i);
-//			double temp = currBody.rPiv.x;
-//			// This is for the right pivot
-//			currBody.rPiv.x = nextRSpotX;
-//			nextRSpotX = temp;
-//			temp = currBody.rPiv.y;
-//			currBody.rPiv.y = nextRSpotY;
-//			nextRSpotY = temp;
-//			// this is for the left pivot
-//			currBody.lPiv.x = nextLSpotX;
-//			nextLSpotX = temp;
-//			temp = currBody.lPiv.y;
-//			currBody.lPiv.y = nextLSpotY;
-//			nextLSpotY = temp;
-//		}
-//		tail.rPiv.x = nextRSpotX;
-//		tail.rPiv.y = nextRSpotY;
-//		tail.lPiv.x = nextLSpotX;
-//		tail.lPiv.y = nextLSpotY;
-		
+		if (timePassed > maxUpdateLength)
+			timePassed = maxUpdateLength;
+		// Move the head forward.
+		Vector prevRLoc = new Vector(head.rPiv);
+		Vector prevLLoc = new Vector(head.lPiv);
+		head.rPiv.translate(direction.x * speed * timePassed * pixelsPerMs, direction.y * speed * timePassed * pixelsPerMs);
+		head.lPiv.translate(direction.x * speed * timePassed * pixelsPerMs, direction.y * speed * timePassed * pixelsPerMs);
+		for (Body body : bodyList)
+		{
+			Vector prevBodyRLoc = body.rPiv.copy();
+			Vector prevBodyLLoc = body.lPiv.copy();
+			// Translate the body here based on prev locs.
+			Vector moved = new Vector(prevLLoc.x -  body.rPiv.x, prevLLoc.y - body.rPiv.y);
+			body.rPiv.translate(moved);
+			body.lPiv.translate(moved);
+			Vector bodyVec = new Vector(body.rPiv.x - body.lPiv.x, body.rPiv.y - body.lPiv.y);
+			Vector prevVec = new Vector(prevRLoc.x - prevLLoc.x, prevRLoc.y - prevLLoc.y);
+			Vector diff = new Vector(bodyVec.x - prevVec.x, bodyVec.y - prevVec.y);
+			body.lPiv.translate(diff);
+			// Update prev locs
+			prevRLoc = prevBodyRLoc;
+			prevLLoc = prevBodyLLoc;
+		}
+		Vector moved = new Vector(prevLLoc.x -  tail.rPiv.x, prevLLoc.y - tail.rPiv.y);
+		tail.rPiv.translate(moved);
+		tail.lPiv.translate(moved);
+		Vector tailVec = new Vector(tail.rPiv.x - tail.lPiv.x, tail.rPiv.y - tail.lPiv.y);
+		Vector prevVec = new Vector(prevRLoc.x - prevLLoc.x, prevRLoc.y - prevLLoc.y);
+		Vector diff = new Vector(tailVec.x - prevVec.x, tailVec.y - prevVec.y);
+		tail.lPiv.translate(diff);
 	}
 	
 	@Override
