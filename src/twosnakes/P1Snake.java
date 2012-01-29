@@ -121,6 +121,9 @@ public class P1Snake{
 		visible = 0;
 	}
 
+	public int get_visible(){
+		return visible;
+	}
 	public void move(double timePassed) 
 	{
 		// Move the head forward.
