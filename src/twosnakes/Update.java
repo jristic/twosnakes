@@ -23,7 +23,12 @@ public class Update
 		Vector currentDirection = state.snake1.getDirection();
 		double x = currentDirection.x;
 		double y = currentDirection.y;
+<<<<<<< HEAD
 		if(e.equals(KeyEvent.VK_LEFT)){
+=======
+		Vector delta;
+		if(e.getKeyCode() == KeyEvent.VK_LEFT){
+>>>>>>> origin/master
 			if(x >= 0.0 && y >= 0.0){
 				x = x - y/10.0;
 				y = y + x/10.0;
@@ -41,7 +46,7 @@ public class Update
 				y = y + x/10.0;
 			}
 		}
-		else if (e.equals(KeyEvent.VK_RIGHT)){
+		else if (e.getKeyCode() == KeyEvent.VK_RIGHT){
 			
 			if(x >= 0.0 && y >= 0.0){
 				x = x + y/10.0;
