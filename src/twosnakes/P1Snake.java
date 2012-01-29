@@ -86,7 +86,6 @@ public class P1Snake implements Snake
 		g2d.drawImage(img, transform, null);
 
 		// Draw body
-		transform = new AffineTransform();
 		try
 		{
 			img = ImageIO.read( new File("images/s1_body.png") );
@@ -96,6 +95,7 @@ public class P1Snake implements Snake
 		}
 		for (Body body : bodyList)
 		{
+			transform = new AffineTransform();
 			transform.translate(body.lPiv.x, body.lPiv.y - bodySize.y/2);
 			dir = new Vector(body.rPiv.x - body.lPiv.x, body.rPiv.y - body.lPiv.y);
 			value = Math.atan2(dir.x, dir.y);
@@ -196,29 +196,32 @@ public class P1Snake implements Snake
 	@Override
 	public void addSegments(int num)
 	{
+		int lastSegInd = bodyList.size()-1; 
+		Body lastSeg = bodyList.get(lastSegInd);
 		Body newSeg = new Body();
-		newSeg.rPiv = new Vector(tail.rPiv);
+		newSeg.rPiv = new Vector(lastSeg.lPiv);
 		newSeg.lPiv = new Vector();
 		double tailVecX = tail.lPiv.x - tail.rPiv.x;
 		double tailVecY = tail.lPiv.y - tail.rPiv.y;
 		newSeg.lPiv.x = newSeg.rPiv.x + ((tailVecX) * (bodySize.x/tailSize.x));
 		newSeg.lPiv.y = newSeg.rPiv.y + ((tailVecY) * (bodySize.y/tailSize.y));
 		tail.rPiv = newSeg.lPiv;
-		tail.lPiv.x = tail.rPiv.x - (newSeg.rPiv.x-newSeg.lPiv.x) ;
-		tail.lPiv.y = tail.rPiv.y + (newSeg.rPiv.y-newSeg.lPiv.y);
+		tail.lPiv.x = tail.rPiv.x + (newSeg.lPiv.x-newSeg.rPiv.x) ;
+		tail.lPiv.y = tail.rPiv.y + (newSeg.lPiv.y-newSeg.rPiv.y);
 		bodyList.add(newSeg);
 	}
 	@Override
 	public void removeSegments(int num)
 	{
-		int secondLastInd = bodyList.size()-3; 
-		Body secondLast = bodyList.get(secondLastInd);
-		int lastSegInd = bodyList.size()-2; 
+		int lastSegInd = bodyList.size()-1; 
 		Body lastSeg = bodyList.get(lastSegInd);
-		lastSeg.rPiv = new Vector(secondLast.lPiv);
-		lastSeg.lPiv = new Vector(tail.lPiv);
+		tail.rPiv = lastSeg.rPiv;
+		double lastVecX = lastSeg.lPiv.x - lastSeg.rPiv.x;
+		double lastVecY = lastSeg.lPiv.y - lastSeg.rPiv.y;
+		tail.lPiv.x = tail.rPiv.x + ((lastVecX) * (tailSize.x/bodySize.x));
+		tail.lPiv.y = tail.rPiv.y + ((lastVecY) * (tailSize.y/bodySize.y));
 		
-		bodyList.remove(bodyList.size()-1);
+		bodyList.remove(lastSegInd);
 	}
 	
 	// for debug

@@ -31,7 +31,19 @@ public class Setup
 		Vector bodySize = new Vector(60,38);
 		Vector tailSize = new Vector(84,38);
 		state.snake1 = new P1Snake(headPos, facing, headSize, bodySize, tailSize);
+<<<<<<< HEAD
 		state.objects.add( new Apple(5, Math.floor((r.nextDouble()*1280)),  Math.floor((r.nextDouble()*720))));
+=======
+		
+		headPos = new Vector(800,500);
+		facing = new Vector(-1,0);
+		headSize = new Vector(83,70);
+		bodySize = new Vector(60,38);
+		tailSize = new Vector(84,38);
+		state.snake2 = new P1Snake(headPos, facing, headSize, bodySize, tailSize);
+		
+		state.ap1 = new Apple(5, Math.floor((r.nextDouble()*1280)),  Math.floor((r.nextDouble()*720)));
+>>>>>>> origin/master
 	}
 	
 	private GameState state;
