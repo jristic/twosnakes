@@ -70,7 +70,13 @@ public class Update
 
 	void gameUpdate(long timePassed)
 	{
+<<<<<<< HEAD
 		//state.snake1.move(timePassed);
+=======
+		if (state.snake1 == null)
+			return;
+		state.snake1.move(timePassed);
+>>>>>>> origin/master
 	}
 
 	private GameState state;
