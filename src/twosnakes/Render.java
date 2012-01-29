@@ -108,7 +108,7 @@ public class Render
 		if (state.snake2 != null)
 			state.snake2.draw(dbg);
 		
-		if (System.currentTimeMillis() > musicLoopTimer + 19170)
+		if (System.currentTimeMillis() > musicLoopTimer + 19140)
 		{
 			player2.playerInitialize();
 			player2.play();
