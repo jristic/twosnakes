@@ -30,4 +30,9 @@ public class SoundEffectPlayer {
 		AudioPlayer.player.start(as);
 	}
 	
+	public void stop()
+	{
+		AudioPlayer.player.stop(as);
+	}
+	
 }
