@@ -56,6 +56,7 @@ public class Collision implements Event{
 			
 			if(distance <= collision_distance){
 				state.objects.remove(i);
+				s.addSegments(1);
 				col_status = true;
 			}
 		}
