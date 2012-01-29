@@ -20,6 +20,8 @@ public class Mouse implements Item {
 	Random r = new Random();
 	SoundEffectPlayer player;
 
+	int visible = 0;
+	
 	public Mouse(double val, double x, double y){
 		value = val;
 		position = new double[2];
@@ -88,6 +90,10 @@ public class Mouse implements Item {
 //		eating.playSound();
 //		eating.animation();
 		//player.playerInitialize();
+
+		//player.play();
+		visible = 2;
+
 		player.play();
 	}
 
@@ -130,7 +136,7 @@ public class Mouse implements Item {
 	public void draw(Graphics g) 
 	{
 		Graphics2D g2d = (Graphics2D)g;
-		image = anim.getFrame(0);
+		image = anim.getFrame(visible);
 		g2d.drawImage(image, (int)position[0] - image.getWidth()/2, (int)position[1] - image.getHeight()/2 , null);
 	}
 }
