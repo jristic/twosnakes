@@ -86,7 +86,7 @@ public class Update
 	{
 		//TODO
 		if(state.snake1 != null && state.snake2 != null){
-
+			
 			if( events.get(0).isCollide(state.snake1) ){
 				int item_val = r.nextInt(4);
 				if(item_val == 0){ //add apple
@@ -120,6 +120,10 @@ public class Update
 
 			if( events.get(1).s1_eat_s2(state.snake1, state.snake2) ){
 				System.out.println("adaf");
+			}
+			
+			if( events.get(1).s2_eat_s1(state.snake1, state.snake2)){
+				System.out.println("ASDA");
 			}
 		}
 

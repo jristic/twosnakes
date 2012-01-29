@@ -4,14 +4,12 @@ import java.lang.Math;
 
 public class SnakeCollision implements Event{
 
-	private boolean col_status;
 	private P1Snake s1, s2;
 	private double collide_distance;
 //	private GameState state;
 
 	public SnakeCollision(GameState state){
 //		this.state = state;
-		col_status = false;
 		collide_distance = 25.0;
 //		this.s1 = state.snake1;
 //		this.s2 = state.snake2;
@@ -36,7 +34,7 @@ public class SnakeCollision implements Event{
 	}
 
 	public boolean s1_eat_s2(P1Snake s1, P1Snake s2){
-		col_status = false;
+		boolean status1 = false;
 		if(s1 != null && s2 != null){
 			double s1_x = s1.head.rPiv.x;
 			double s1_y = s1.head.rPiv.y;
@@ -59,21 +57,23 @@ public class SnakeCollision implements Event{
 			double s2_tail_x = ( s2.tail.lPiv.x + s2.tail.rPiv.x)/2.0;
 			double s2_tail_y = (s2.tail.lPiv.y + s2.tail.rPiv.y)/2.0;
 			distance = Math.sqrt((s2_tail_x - s1_x)*(s2_tail_x - s1_x) + (s2_tail_y - s1_y)*(s2_tail_y - s1_y));
+			if( s2.bodyList.size() < 1)
+				distance = 10000.0;
 			if(distance <= collide_distance){
 				s1.addSegments(1);
 				if(s2.bodyList.size() >= 1)
 					s2.removeSegments(1);
-				col_status = true;
+				status1 = true;
 			}
 		}
-		return col_status;
+		return status1;
 	}
 
 	public boolean s2_eat_s1(P1Snake s1, P1Snake s2){
 		double s2_x = s2.head.rPiv.x;
 		double s2_y = s2.head.rPiv.y;
 		double distance;
-
+		boolean status2 = false;
 		/*
 		for(int i = 0; i < s1.getBodyLeng(); i++){
 			double s1_body_x = s1.bodyList.get(i).rPiv.x;
@@ -92,11 +92,16 @@ public class SnakeCollision implements Event{
 		double s1_tail_x = s1.tail.lPiv.x;
 		double s1_tail_y = s1.tail.lPiv.y;
 		distance = Math.sqrt((s1_tail_x - s2_x)*(s1_tail_x - s2_x) + (s1_tail_y - s2_y)*(s1_tail_y - s2_y));
+		if(s1.bodyList.size() < 1)
+			distance = 10000.0;
+		
 		if(distance <= collide_distance){
 			s2.addSegments(1);
-			s1.removeSegments(1);
+			if(s1.bodyList.size() >= 1)
+				s1.removeSegments(1);
+			status2 = true;
 		}
-		return col_status;
+		return status2;
 	}
 
 	@Override
