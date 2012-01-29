@@ -6,22 +6,28 @@ import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 
 public class Mouse implements Item {
-
+	
+	static final float pixelsPerMs = 0.10f;
+	
 	private double value;
 	private double[] position;
 	private double speed;
 	private final double acceleration = 1.1;
-	private double[] direction;
 	private boolean visible;
+	Vector target;
+	boolean walking;
+	long timeToNextWalk;
 	Random r = new Random();
 
 	public Mouse(double val, double x, double y){
 		value = val;
+		position = new double[2];
 		position[0] = x;
 		position[1] = y;
-		speed = 0.0;
-		direction = new double[2];
+		speed = 1;
 		visible = true;
+		timeToNextWalk = r.nextInt(2000);
+		walking = false;
 	}
 	
 	@Override
@@ -50,7 +56,7 @@ public class Mouse implements Item {
 	}
 	
 	public void setSpeed(double newSpeed){
-		speed = Math.hypot(direction[0], direction[1]);
+		speed = newSpeed;
 	}
 	
 	public double getSpeed(){
@@ -62,30 +68,17 @@ public class Mouse implements Item {
 	 */
 	public void accelerate(){
 		speed *= acceleration;
-		direction[0] *= acceleration;
-		direction[1] *= acceleration;
 	}
 	
 	public void setDirection(){
 		int x = r.nextInt() % 2;
 		int y = r.nextInt() % 2;
-		
-		direction[0] = r.nextDouble();
-		direction[1] = r.nextDouble();
-		
-		//change the direction if the value of x is negative
-		if(x == 1)
-			direction[0] *= -1;
-		if(y == 1)
-			direction[1] *= -1;
 	}
 	
 	/**
 	 * put this in loop to keep it moving and speeding.
 	 */
 	public void move(){
-		position[0] += direction[0];
-		position[1] += direction[1];
 	}
 
 	@Override
@@ -99,7 +92,22 @@ public class Mouse implements Item {
 	@Override
 	public void update(long gameTime)
 	{
-		
+		if (walking)
+		{
+			Vector toDir = new Vector(target.x - position[0], target.y - position[0]);
+		}
+		else
+		{
+			if (timeToNextWalk > 0)
+			{
+				timeToNextWalk -= gameTime;
+			}
+			else
+			{
+				walking = true;
+				target = new Vector(r.nextInt(1000)+50, r.nextInt(650)+10);
+			}
+		}
 	}
 	
 	@Override
