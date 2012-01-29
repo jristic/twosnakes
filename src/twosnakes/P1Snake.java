@@ -243,6 +243,10 @@ public class P1Snake{
 	
 
 	public void set_speed(double speed) {
+		if( speed >= 4)
+			speed = 4;
+		else if(speed < 0.5)
+			speed = 0.5;
 		this.speed = speed;
 	}
 
