@@ -228,7 +228,6 @@ public class MainPanel extends JPanel implements Runnable
 					}
 				}
 			}
-			removings.clear();
 			if(state.snake1 != null && state.snake1.get_visible() == 1){
 				Delay.sleep(50);
 				state.snake1.head_back();
