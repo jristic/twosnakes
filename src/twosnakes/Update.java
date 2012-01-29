@@ -16,21 +16,39 @@ public class Update
 	{
 		this.state = state;
 	}
-	
+
 	void processKeyPress(KeyEvent e)
 	{
-		
+		//get the new direction vector based on which key (left or right) is pressed.
+		Vector currentDirection = state.snake1.getDirection();
+		double x = currentDirection.x;
+		double y = currentDirection.y;
+		if(e.getKeyCode() == KeyEvent.VK_LEFT){
+			x = x + y/10.0;
+			y = y - x/10.0;
+		}
+		else if (e.getKeyCode() == KeyEvent.VK_RIGHT){
+			x = x - y/10.0;
+			y = y + x/10.0;
+		}
+		state.snake1.setDirection(new Vector(x,y));
 	}
 
 	void processKeyRelease(KeyEvent e)
 	{
-		
+
 	}
 
-	void gameUpdate()
+	void gameUpdate(long timePassed)
 	{
-		
+
+		//state.snake1.move(timePassed);
+
+		if (state.snake1 == null)
+			return;
+		//state.snake1.move(timePassed);
+
 	}
-	
+
 	private GameState state;
 }

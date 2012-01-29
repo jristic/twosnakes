@@ -101,11 +101,11 @@ public class Animator
 	{
 		JFrame f = new JFrame("Load Image Sample");
 		        
-		        f.addWindowListener(new WindowAdapter(){
-		                public void windowClosing(WindowEvent e) {
-		                    System.exit(0);
-		                }
-		            });
+        f.addWindowListener(new WindowAdapter(){
+                public void windowClosing(WindowEvent e) {
+                    System.exit(0);
+                }
+            });
 		        
 	    Animator animator = new Animator();
 	    animator.startAnimation("spritesheet.png", 700, 70, true);
