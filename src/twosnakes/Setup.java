@@ -4,7 +4,9 @@
  */
 package twosnakes;
 
+import java.util.List;
 import java.util.Random;
+import java.util.ArrayList;
 
 /**
  *
@@ -13,9 +15,11 @@ import java.util.Random;
 public class Setup
 {
 
-	Random r = new Random();
-	Setup(GameState state)
+	private Random r;
+	public Setup(GameState state)
 	{
+		r = new Random();
+		state.objects = new ArrayList<Item>();
 		this.state = state;
 	}
 
@@ -27,7 +31,7 @@ public class Setup
 		Vector bodySize = new Vector(60,38);
 		Vector tailSize = new Vector(84,38);
 		state.snake1 = new P1Snake(headPos, facing, headSize, bodySize, tailSize);
-		state.ap1 = new Apple(5, Math.floor((r.nextDouble()*1280)),  Math.floor((r.nextDouble()*720)));
+		state.objects.add( new Apple(5, Math.floor((r.nextDouble()*1280)),  Math.floor((r.nextDouble()*720))));
 	}
 	
 	private GameState state;

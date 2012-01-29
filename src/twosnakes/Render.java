@@ -67,9 +67,11 @@ public class Render
 		dbg.setColor(Color.black);
 		dbg.fillRect(0, 0, panel.getWidth(), panel.getHeight());
 		state.snake1.draw(dbg);
-		if (state.ap1 == null)
-			return;
-		state.ap1.draw(dbg);
+		for(int i =0; i < state.objects.size(); i++){
+			if(state.objects.get(i) == null)
+				return;
+			state.objects.get(i).draw(dbg);
+		}
 	}
 	
 	private GameState state;

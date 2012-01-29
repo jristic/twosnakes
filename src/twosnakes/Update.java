@@ -5,6 +5,8 @@
 package twosnakes;
 
 import java.awt.event.KeyEvent;
+import java.util.List;
+import java.util.ArrayList;
 
 /**
  *
@@ -12,9 +14,13 @@ import java.awt.event.KeyEvent;
  */
 public class Update
 {
+	List<Event> events;
+	
 	public Update(GameState state)
 	{
+		events = new ArrayList<Event>();
 		this.state = state;
+		events.add(new Collision(this.state));
 	}
 
 	void processKeyPress(KeyEvent e)
