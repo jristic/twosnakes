@@ -84,6 +84,13 @@ public class Turtle implements Item {
 		e.animation();
 		visible = false;
 	}
+	
+	@Override
+	public void update(long gameTime)
+	{
+		
+	}
+		
 	@Override
 	public void draw(Graphics g) {
 		// TODO Auto-generated method stub

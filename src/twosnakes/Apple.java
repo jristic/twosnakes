@@ -60,6 +60,12 @@ public class Apple implements Item {
 //		e.animation();
 		visible = 1;
 	}
+	
+	@Override
+	public void update(long gameTime)
+	{
+		
+	}
 
 	@Override
 	public void draw(Graphics g) {
