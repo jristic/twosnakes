@@ -1,6 +1,8 @@
 package twosnakes;
 
 import java.awt.Graphics;
+import java.util.ArrayList;
+import java.util.List;
 
 public interface Snake {
 	
@@ -18,7 +20,9 @@ public interface Snake {
 	public int getLength();
 	public void addSegments(int num);
 	public void removeSegments(int num);
-
+	public Vector getHeadVector();
+	public ArrayList<Object> getBodyList();
+	public Vector getTailVector();
 	
 	public void set_speed(double speed);
 	public double get_speed();

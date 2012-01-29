@@ -18,8 +18,8 @@ public class GameState
 	}
 	
 	public TitleScreen titleScreen;
-	public Snake snake1;
-	public Snake snake2;
+	public P1Snake snake1;
+	public P1Snake snake2;
 	
 	public List<Item> objects;
 }

@@ -26,6 +26,7 @@ public class Update
 		events = new ArrayList<Event>();
 		this.state = state;
 		events.add(new Collision(this.state));
+		events.add(new SnakeCollision(this.state.snake1, this.state.snake2));
 	}
 
 	void processKeyPress(KeyEvent e)
@@ -83,6 +84,15 @@ public class Update
 
 	void gameUpdate(long timePassed)
 	{
+		for(int i =0; i < events.size(); i++){
+			if(events.get(i).getClass() == Collision.class){
+				
+			}
+			else if(events.get(i).getClass() == SnakeCollision.class){
+				
+			}
+		}
+		
 		if (state.snake1 != null)
 		{
 			// get the new direction vector based on which key (left or right) is pressed.

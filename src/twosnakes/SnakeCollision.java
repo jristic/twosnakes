@@ -37,7 +37,7 @@ public class SnakeCollision implements Event{
 		double s1_x = s1.head.rPiv.x;
 		double s1_y = s1.head.rPiv.y;
 		double distance;
-		
+		/*
 		for(int i = 0; i < s2.getBodyLeng(); i++){
 			double s2_body_x = s2.bodyList.get(i).rPiv.x;
 			double s2_body_y = s2.bodyList.get(i).rPiv.y;
@@ -51,7 +51,7 @@ public class SnakeCollision implements Event{
 				return col_status;
 			}
 		}
-		
+		*/
 		double s2_tail_x = s2.tail.lPiv.x;
 		double s2_tail_y = s2.tail.lPiv.y;
 		distance = Math.sqrt((s2_tail_x - s1_x)*(s2_tail_x - s1_x) + (s2_tail_y - s1_y)*(s2_tail_y - s1_y));
@@ -68,6 +68,7 @@ public class SnakeCollision implements Event{
 		double s2_y = s2.head.rPiv.y;
 		double distance;
 		
+		/*
 		for(int i = 0; i < s1.getBodyLeng(); i++){
 			double s1_body_x = s1.bodyList.get(i).rPiv.x;
 			double s1_body_y = s1.bodyList.get(i).rPiv.y;
@@ -80,6 +81,7 @@ public class SnakeCollision implements Event{
 				col_status = true;
 			}
 		}
+		*/
 		
 		double s1_tail_x = s1.tail.lPiv.x;
 		double s1_tail_y = s1.tail.lPiv.y;

@@ -9,8 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.imageio.ImageIO;
 
-public class P1Snake implements Snake 
-{
+public class P1Snake{
 	static final float pixelsPerMs = 0.10f;
 	static final float maxUpdateLength = 30;
 	
@@ -63,7 +62,6 @@ public class P1Snake implements Snake
 		this.speed = 1;
 	}
 
-	@Override
 	public void draw(Graphics g)
 	{
 		Graphics2D g2d = (Graphics2D)g;
@@ -120,7 +118,7 @@ public class P1Snake implements Snake
 		g2d.drawImage(img, transform, null);
 	}
 
-	@Override
+
 	public void move(double timePassed) 
 	{
 		if (timePassed > maxUpdateLength)
@@ -161,7 +159,7 @@ public class P1Snake implements Snake
 		
 	}
 	
-	@Override
+
 	public void setDirection(Vector direction)
 	{
 		this.direction = new Vector(direction);
@@ -170,31 +168,31 @@ public class P1Snake implements Snake
 		head.rPiv = new Vector(head.lPiv, direction.x * headSize.x, direction.y * headSize.y);
 	}
 
-	@Override
+
 	public Vector getDirection()
 	{
 		return direction;
 	}
 
-	@Override
+
 	public int getGirth()
 	{
 		return girth;
 	}
 
-	@Override
+	
 	public void setGirth(int girth)
 	{
 		this.girth = girth;
 	}
 	
-	@Override
+
 	public int getLength()
 	{
 		return bodyList.size();
 	}
 	
-	@Override
+
 	public void addSegments(int num)
 	{
 		int lastSegInd = bodyList.size()-1; 
@@ -211,7 +209,7 @@ public class P1Snake implements Snake
 		tail.lPiv.y = tail.rPiv.y + (newSeg.lPiv.y-newSeg.rPiv.y);
 		bodyList.add(newSeg);
 	}
-	@Override
+
 	public void removeSegments(int num)
 	{
 		int lastSegInd = bodyList.size()-1; 
@@ -226,17 +224,17 @@ public class P1Snake implements Snake
 	}
 	
 	// for debug
-	@Override
+
 	public int getBodyLeng(){
 		return this.bodyList.size();
 	}
 	
-	@Override
+
 	public void set_speed(double speed) {
 		this.speed = speed;
 	}
 
-	@Override
+
 	public double get_speed() {
 		return this.speed;
 	}
