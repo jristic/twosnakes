@@ -69,7 +69,7 @@ public class P1Snake implements Snake
 		AffineTransform transform = new AffineTransform();
 		BufferedImage img = new BufferedImage(10, 10, BufferedImage.TYPE_INT_ARGB);
 		Vector right = new Vector(1,0);
-		
+
 		// Draw head
 		try
 		{
@@ -84,8 +84,9 @@ public class P1Snake implements Snake
 		double value = Math.atan2(dir.x, dir.y);
 		transform.rotate(-(value - Math.PI/2), 0, headSize.y/2);
 		g2d.drawImage(img, transform, null);
-		
+
 		// Draw body
+		transform = new AffineTransform();
 		try
 		{
 			img = ImageIO.read( new File("images/s1_body.png") );
@@ -95,11 +96,13 @@ public class P1Snake implements Snake
 		}
 		for (Body body : bodyList)
 		{
-			transform = new AffineTransform();
-			transform.translate((body.rPiv.x + body.lPiv.x)/2, (body.rPiv.y+body.lPiv.y)/2);
+			transform.translate(body.lPiv.x, body.lPiv.y - bodySize.y/2);
+			dir = new Vector(body.rPiv.x - body.lPiv.x, body.rPiv.y - body.lPiv.y);
+			value = Math.atan2(dir.x, dir.y);
+			transform.rotate(-(value - Math.PI/2), 0, bodySize.y/2);
 			g2d.drawImage(img, transform, null);
 		}
-		
+
 		// Draw tail
 		transform = new AffineTransform();
 		try
@@ -109,10 +112,13 @@ public class P1Snake implements Snake
 		catch (Exception e)
 		{
 		}
-		transform.translate((tail.rPiv.x + tail.lPiv.x)/2, (tail.rPiv.y+tail.lPiv.y)/2);
+		transform.translate(tail.lPiv.x, tail.lPiv.y - tailSize.y/2);
+		dir = new Vector(tail.rPiv.x - tail.lPiv.x, tail.rPiv.y - tail.lPiv.y);
+		value = Math.atan2(dir.x, dir.y);
+		transform.rotate(-(value - Math.PI/2), 0, tailSize.y/2);
 		g2d.drawImage(img, transform, null);
 	}
-	
+
 	@Override
 	public void move(double timePassed) 
 	{
