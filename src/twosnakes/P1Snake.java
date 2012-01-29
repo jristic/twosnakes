@@ -72,7 +72,7 @@ public class P1Snake{
 		catch (Exception e)
 		{
 		}
-		player = new SoundEffectPlayer("sound/Pain.wav");
+		//player = new SoundEffectPlayer("sound/Pain.wav");
 	}
 
 	public void draw(Graphics g)
