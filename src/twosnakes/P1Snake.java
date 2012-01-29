@@ -113,31 +113,31 @@ public class P1Snake implements Snake
 		double nextRSpotX = head.rPiv.x;
 		double nextRSpotY = head.rPiv.y;
 		int bodyListLength = bodyList.size();
-		head.rPiv.x = speed * timePassed * direction.x;
-		head.rPiv.y = speed * timePassed * direction.y;
-		head.lPiv.x = speed * timePassed * direction.x;
-		head.lPiv.y = speed * timePassed * direction.y;
+		head.rPiv.x += speed * timePassed * direction.x;
+		head.rPiv.y += speed * timePassed * direction.y;
+		head.lPiv.x += speed * timePassed * direction.x;
+		head.lPiv.y += speed * timePassed * direction.y;
 		
-		for (int i=0; i<bodyListLength;i++){
-			Body currBody = bodyList.get(i);
-			double temp = currBody.rPiv.x;
-			// This is for the right pivot
-			currBody.rPiv.x = nextRSpotX;
-			nextRSpotX = temp;
-			temp = currBody.rPiv.y;
-			currBody.rPiv.y = nextRSpotY;
-			nextRSpotY = temp;
-			// this is for the left pivot
-			currBody.lPiv.x = nextLSpotX;
-			nextLSpotX = temp;
-			temp = currBody.lPiv.y;
-			currBody.lPiv.y = nextLSpotY;
-			nextLSpotY = temp;
-		}
-		tail.rPiv.x = nextRSpotX;
-		tail.rPiv.y = nextRSpotY;
-		tail.lPiv.x = nextLSpotX;
-		tail.lPiv.y = nextLSpotY;
+//		for (int i=0; i<bodyListLength;i++){
+//			Body currBody = bodyList.get(i);
+//			double temp = currBody.rPiv.x;
+//			// This is for the right pivot
+//			currBody.rPiv.x = nextRSpotX;
+//			nextRSpotX = temp;
+//			temp = currBody.rPiv.y;
+//			currBody.rPiv.y = nextRSpotY;
+//			nextRSpotY = temp;
+//			// this is for the left pivot
+//			currBody.lPiv.x = nextLSpotX;
+//			nextLSpotX = temp;
+//			temp = currBody.lPiv.y;
+//			currBody.lPiv.y = nextLSpotY;
+//			nextLSpotY = temp;
+//		}
+//		tail.rPiv.x = nextRSpotX;
+//		tail.rPiv.y = nextRSpotY;
+//		tail.lPiv.x = nextLSpotX;
+//		tail.lPiv.y = nextLSpotY;
 		
 	}
 	
