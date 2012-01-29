@@ -209,8 +209,8 @@ public class MainPanel extends JPanel implements Runnable
 			gameRender();   // render the game to a buffer
 			
 			paintScreen();  // draw the buffer on-screen
-			
 			for(int i =0; i < state.objects.size(); i++){
+				
 				for(int j = 0; j < removings.size(); j++){
 					if(state.objects.get(i).equals(removings.get(j))){
 						if(state.objects.get(i).getClass().equals(Apple.class)){

@@ -69,7 +69,7 @@ public class Render
 		state.titleScreen.draw(dbg);
 		
 		
-		if (!titleMusicStarted || System.currentTimeMillis() > musicLoopTimer + 10920)
+		if (!titleMusicStarted || System.currentTimeMillis() > musicLoopTimer + 10860)
 		{
 			player = new SoundEffectPlayer("sound/music01mono.wav");
 			player.play();

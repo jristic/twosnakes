@@ -142,4 +142,17 @@ public class Turtle implements Item {
 		image = anim.getFrame(visible);
 		g2d.drawImage(image, (int)position[0] - image.getWidth()/2, (int)position[1] - image.getHeight()/2, null);
 	}
+
+	@Override
+	public void walk1() {
+		// TODO Auto-generated method stub
+		visible = 1;
+		
+	}
+
+	@Override
+	public void walk2() {
+		// TODO Auto-generated method stub
+		visible = 0;
+	}
 }
