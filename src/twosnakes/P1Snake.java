@@ -108,7 +108,25 @@ public class P1Snake implements Snake
 	@Override
 	public void move(double timePassed) 
 	{
-		// Code to move all the segments here
+		double nextSpotX = head.lPiv.x;
+		double nextSpotY = head.lPiv.y;
+		int bodyListLength = bodyList.size();
+		head.rPiv.x = speed * timePassed * direction.x;
+		head.rPiv.y = speed * timePassed * direction.y;
+		head.lPiv.x = speed * timePassed * direction.x;
+		head.lPiv.y = speed * timePassed * direction.y;
+		for (int i=0; i<bodyListLength;i++){
+			Body currBody = bodyList.get(i);
+			double temp = currBody.rPiv.x;
+			currBody.rPiv.x = nextSpotX;
+			nextSpotX = temp;
+			temp = currBody.rPiv.y;
+			currBody.rPiv.y = nextSpotY;
+			nextSpotY = temp;
+		}
+		tail.rPiv.x = nextSpotX;
+		tail.rPiv.y = nextSpotY;
+		
 	}
 	
 	@Override
