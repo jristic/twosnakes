@@ -87,7 +87,6 @@ public class Update
 		{
 			snake1Charging = false;
 		}
-
 		if(e.getKeyCode() == KeyEvent.VK_A)
 		{
 			snake2Left = false;
