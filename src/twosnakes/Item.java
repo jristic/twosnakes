@@ -8,5 +8,6 @@ public interface Item {
 	public double[] getPosition();
 	public double getValue();
 	public void eaten();
+	public void update(long gameTime);
 	public void draw(Graphics g);
 }

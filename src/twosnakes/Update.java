@@ -124,6 +124,11 @@ public class Update
 				//TODO 
 			}
 		}
+		
+		for (Item item : state.objects)
+		{
+			item.update(timePassed);
+		}
 
 		if (state.snake1 != null)
 		{
