@@ -86,7 +86,6 @@ public class P1Snake implements Snake
 		g2d.drawImage(img, transform, null);
 
 		// Draw body
-		
 		try
 		{
 			img = ImageIO.read( new File("images/s1_body.png") );

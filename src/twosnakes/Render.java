@@ -62,14 +62,20 @@ public class Render
 
 	void drawGame(Graphics dbg)
 	{
-		if (state.snake1 == null)
-			return;
 		dbg.setColor(Color.black);
 		dbg.fillRect(0, 0, panel.getWidth(), panel.getHeight());
-		state.snake1.draw(dbg);
-		if (state.ap1 == null)
-			return;
-		state.ap1.draw(dbg);
+		if (state.snake1 != null)
+		{
+			state.snake1.draw(dbg);
+		}
+		if (state.snake2 != null)
+		{
+			state.snake2.draw(dbg);
+		}
+		if (state.ap1 != null)
+		{
+			state.ap1.draw(dbg);
+		}
 	}
 	
 	private GameState state;
