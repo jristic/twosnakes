@@ -19,7 +19,7 @@ public class Mouse implements Item {
 	Animator anim;
 	Random r = new Random();
 	SoundEffectPlayer player;
-
+	int count = 0;
 	
 	private int visible = 0;
 	
@@ -136,9 +136,18 @@ public class Mouse implements Item {
 	@Override
 	public void draw(Graphics g) 
 	{
+		if(visible != 2){
+			if(count % 100 < 50){
+				walk1();
+			}
+			else{
+				walk2();
+			}
+		}
 		Graphics2D g2d = (Graphics2D)g;
 		image = anim.getFrame(visible);
 		g2d.drawImage(image, (int)position[0] - image.getWidth()/2, (int)position[1] - image.getHeight()/2 , null);
+		count++;
 	}
 	
 	public void walk1(){
