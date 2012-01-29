@@ -59,7 +59,7 @@ public class MainPanel extends JPanel implements Runnable
 			@Override
 			public void run()
 			{
-				gameOver = false;
+				gameOver = true;
 			}
 		};
 		
