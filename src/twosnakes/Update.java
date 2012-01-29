@@ -28,8 +28,8 @@ public class Update
 		snake1Left = snake1Right = snake2Left = snake2Right = false;
 		events = new ArrayList<Event>();
 		this.state = state;
-		events.add(new Collision(this.state));
-		events.add(new SnakeCollision(this.state.snake1, this.state.snake2));
+		events.add(0,new Collision(this.state));
+		events.add(1,new SnakeCollision(this.state));
 	}
 
 	void processKeyPress(KeyEvent e)
@@ -83,45 +83,42 @@ public class Update
 
 	void gameUpdate(long timePassed)
 	{
-		for(int i =0; i < events.size(); i++){
-			if(events.get(i).getClass() == Collision.class){
-				//TODO
-				if(state.snake1 != null && state.snake2 != null){
-					
-					if( events.get(i).isCollide(state.snake1) ){
-						int item_val = r.nextInt(4);
-						if(item_val == 0){ //add apple
-							state.objects.add(new Apple(5, Math.floor((r.nextDouble()*1280)),  Math.floor((r.nextDouble()*720))));
-						}
-						else if(item_val == 1){ //add mouse
-							
-						}
-						else if(item_val == 2){ //add turtle
-							
-						}
-						else if(item_val == 3){ //add apple
-							state.objects.add(new Apple(5, Math.floor((r.nextDouble()*1280)),  Math.floor((r.nextDouble()*720))));
-						}
-					}
-					if( events.get(i).isCollide(state.snake2) ){
-						int item_val = r.nextInt(4);
-						if(item_val == 0){ //add apple
-							state.objects.add(new Apple(5, Math.floor((r.nextDouble()*1280)),  Math.floor((r.nextDouble()*720))));
-						}
-						else if(item_val == 1){ //add mouse
-							
-						}
-						else if(item_val == 2){ //add turtle
-							
-						}
-						else if(item_val == 3){ //add apple
-							state.objects.add(new Apple(5, Math.floor((r.nextDouble()*1280)),  Math.floor((r.nextDouble()*720))));
-						}
-					}
+		//TODO
+		if(state.snake1 != null && state.snake2 != null){
+
+			if( events.get(0).isCollide(state.snake1) ){
+				int item_val = r.nextInt(4);
+				if(item_val == 0){ //add apple
+					state.objects.add(new Apple(5, Math.floor((r.nextDouble()*1280)),  Math.floor((r.nextDouble()*720))));
+				}
+				else if(item_val == 1){ //add mouse
+
+				}
+				else if(item_val == 2){ //add turtle
+
+				}
+				else if(item_val == 3){ //add apple
+					state.objects.add(new Apple(5, Math.floor((r.nextDouble()*1280)),  Math.floor((r.nextDouble()*720))));
 				}
 			}
-			else if(events.get(i).getClass() == SnakeCollision.class){
-				//TODO 
+			if( events.get(0).isCollide(state.snake2) ){
+				int item_val = r.nextInt(4);
+				if(item_val == 0){ //add apple
+					state.objects.add(new Apple(5, Math.floor((r.nextDouble()*1280)),  Math.floor((r.nextDouble()*720))));
+				}
+				else if(item_val == 1){ //add mouse
+
+				}
+				else if(item_val == 2){ //add turtle
+
+				}
+				else if(item_val == 3){ //add apple
+					state.objects.add(new Apple(5, Math.floor((r.nextDouble()*1280)),  Math.floor((r.nextDouble()*720))));
+				}
+			}
+			
+			if( events.get(1).s1_eat_s2() ){
+				System.out.println("adaf");
 			}
 		}
 
@@ -171,9 +168,9 @@ public class Update
 		{
 			state.snake1.move(timePassed);
 			//if(Collision.isOutOfBoundX((P1Snake)state.snake1)
-					
-				
-				
+
+
+
 		}
 		if (state.snake2 != null)
 		{

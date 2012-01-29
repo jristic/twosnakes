@@ -3,26 +3,26 @@ package twosnakes;
 public class Collision implements Event{
 
 	private double collision_distance;
-//	Sound collision = new SoundPlayer(" ");
+	//	Sound collision = new SoundPlayer(" ");
 	private GameState state;
 	private boolean col_status;
-	
+
 	public Collision(GameState state){
 		collision_distance = 5.0;
 		this.state = state;
 		col_status = false;
 	}
-	
+
 	@Override
 	public void playSound() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void animation() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -30,13 +30,13 @@ public class Collision implements Event{
 		// TODO Auto-generated method stub
 		s.move(timePassed);
 	}
-	
+
 	public boolean isCollide(P1Snake s){
 		Vector s_vector = s.head.rPiv;
 		double x1 = s_vector.x;
 		double y1 = s_vector.y;
 		col_status = false;
-		
+
 		for(int i =0; i <state.objects.size(); i++){
 			Item item = state.objects.get(i);
 			double x2 = item.getPosition()[0];
@@ -54,7 +54,7 @@ public class Collision implements Event{
 			else{
 				collision_distance = 0.0;
 			}
-			
+
 			if(distance <= collision_distance){
 				state.objects.get(i).eaten();
 				s.addSegments(1);
@@ -64,24 +64,36 @@ public class Collision implements Event{
 		}
 		return col_status;
 	}
-	
+
 	public static boolean isOutOfBoundX(P1Snake snake1)
-	    {
+	{
 		boolean result = false;
 		Vector s_vector = snake1.head.rPiv;
 		double x1 = s_vector.x;
 		if (x1>=1280||x1<=0)
 			result = true;
 		return result;
-		}
-	
+	}
+
 	public static boolean isOutOfBoundY(P1Snake s)
-    {
-	boolean result = false;
-	Vector s_vector = s.head.rPiv;
-	double y1 = s_vector.y;
-	if(y1>=720||y1<=0)
-		result = true;
-	return result;
+	{
+		boolean result = false;
+		Vector s_vector = s.head.rPiv;
+		double y1 = s_vector.y;
+		if(y1>=720||y1<=0)
+			result = true;
+		return result;
+	}
+
+	@Override
+	public boolean s1_eat_s2() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean s2_eat_s1() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }
