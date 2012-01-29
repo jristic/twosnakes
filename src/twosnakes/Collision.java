@@ -1,5 +1,8 @@
 package twosnakes;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Collision implements Event{
 
 	private double collision_distance;
@@ -31,14 +34,14 @@ public class Collision implements Event{
 		s.move(timePassed);
 	}
 
-	public boolean isCollide(P1Snake s){
+	public boolean isCollide(P1Snake s, List<Item> objects, List<Item> removings){
 		Vector s_vector = s.head.rPiv;
 		double x1 = s_vector.x;
 		double y1 = s_vector.y;
 		col_status = false;
 
-		for(int i =0; i <state.objects.size(); i++){
-			Item item = state.objects.get(i);
+		for(int i =0; i <objects.size(); i++){
+			Item item = objects.get(i);
 			double x2 = item.getPosition()[0];
 			double y2 = item.getPosition()[1];
 			double distance = Math.sqrt((x2-x1)*(x2-x1) + (y2 - y1)*(y2 - y1));
@@ -47,32 +50,35 @@ public class Collision implements Event{
 				collision_distance = 30.0;
 				
 				if(distance <= collision_distance){
-					state.objects.get(i).eaten();
+					objects.get(i).eaten();
 					if(s.bodyList.size() > 0)
 						s.addSegments(1);
 					s.set_speed(s.get_speed()*0.9);
 					col_status = true;
-					state.objects.remove(i);
+					//state.objects.remove(i);
+					removings.add(objects.get(i));
 				}
 			}
 			else if(item.getClass() == Turtle.class){
 				collision_distance = 30.0;
 				
 				if(distance <= collision_distance){
-					state.objects.get(i).eaten();
+					objects.get(i).eaten();
 					s.set_speed(s.get_speed()*0.75);
 					col_status = true;
-					state.objects.remove(i);
+					//state.objects.remove(i);
+					removings.add(objects.get(i));
 				}
 			}
 			else if(item.getClass() == Mouse.class){
 				collision_distance = 30.0;
 				
 				if(distance <= collision_distance){
-					state.objects.get(i).eaten();
+					objects.get(i).eaten();
 					s.set_speed(s.get_speed()*1.333);
 					col_status = true;
-					state.objects.remove(i);
+					//state.objects.remove(i);
+					removings.add(objects.get(i));
 				}
 			}
 			else{

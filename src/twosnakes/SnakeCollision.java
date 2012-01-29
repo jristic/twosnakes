@@ -1,6 +1,7 @@
 package twosnakes;
 
 import java.lang.Math;
+import java.util.List;
 
 public class SnakeCollision implements Event{
 
@@ -112,7 +113,7 @@ public class SnakeCollision implements Event{
 	}
 
 	@Override
-	public boolean isCollide(P1Snake s) {
+	public boolean isCollide(P1Snake s, List<Item> objects, List<Item> removings) {
 		// TODO Auto-generated method stub
 		return false;
 	}

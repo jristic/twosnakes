@@ -12,6 +12,9 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.JPanel;
 
 
@@ -49,6 +52,7 @@ public class MainPanel extends JPanel implements Runnable
 	private Update update;
 	private Render render;
 	private Setup setup;
+	List<Item> removings = new ArrayList<Item>();
 
 	public MainPanel(Main main, int period)
 	{
@@ -203,8 +207,26 @@ public class MainPanel extends JPanel implements Runnable
 		{
 			gameUpdate();
 			gameRender();   // render the game to a buffer
+			
 			paintScreen();  // draw the buffer on-screen
-
+			
+			for(int i =0; i < state.objects.size(); i++){
+				for(int j = 0; j < removings.size(); j++){
+					if(state.objects.get(i).equals(removings.get(j))){
+						if(state.objects.get(i).getClass().equals(Apple.class)){
+							Delay.sleep(50);
+						}
+						else if(state.objects.get(i).getClass().equals(Mouse.class)){
+							Delay.sleep(110);
+						}
+						else if(state.objects.get(i).getClass().equals(Turtle.class)){
+							Delay.sleep(100);
+						}
+						state.objects.remove(i);
+						removings.clear();
+					}
+				}
+			}
 			afterTime = System.currentTimeMillis();
 			timeDiff = afterTime - beforeTime;
 			sleepTime = (period - timeDiff) - overSleepTime;
@@ -255,7 +277,9 @@ public class MainPanel extends JPanel implements Runnable
 		if (gameStarted && !isPaused && !gameOver)
 		{
 			long timePassed = System.currentTimeMillis() - lastUpdateTime;
-			update.gameUpdate(timePassed);
+			update.gameUpdate(timePassed, state.objects, removings);
+			
+			
 			lastUpdateTime = System.currentTimeMillis();
 		}
 	}
