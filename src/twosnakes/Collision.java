@@ -76,12 +76,11 @@ public class Collision implements Event{
 	}
 
 	public static boolean isOutOfBoundY(P1Snake s)
-<<<<<<< HEAD
 	{
 		boolean result = false;
 		Vector s_vector = s.head.rPiv;
 		double y1 = s_vector.y;
-		if(y1>=720||y1<=0)
+		if(y1>=740||y1<=-20)
 			result = true;
 		return result;
 	}
@@ -96,14 +95,5 @@ public class Collision implements Event{
 	public boolean s2_eat_s1() {
 		// TODO Auto-generated method stub
 		return false;
-=======
-    {
-	boolean result = false;
-	Vector s_vector = s.head.rPiv;
-	double y1 = s_vector.y;
-	if(y1>=740||y1<=-20)
-		result = true;
-	return result;
->>>>>>> origin/master
 	}
 }
