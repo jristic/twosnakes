@@ -23,7 +23,6 @@ public class Update
 		Vector currentDirection = state.snake1.getDirection();
 		double x = currentDirection.x;
 		double y = currentDirection.y;
-		Vector delta;
 		if(e.equals(KeyEvent.VK_LEFT)){
 			if(x >= 0.0 && y >= 0.0){
 				x = x - y/10.0;
