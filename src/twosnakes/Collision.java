@@ -54,11 +54,12 @@ public class Collision implements Event{
 					if(s.bodyList.size() > 0){
 						s.addSegments(1);
 						s.change_head();
+						s.set_speed(s.get_speed()*0.9);
+						col_status = true;
+						state.objects.remove(i);
+						//removings.add(objects.get(i));
+						//break;
 					}
-					s.set_speed(s.get_speed()*0.9);
-					col_status = true;
-					//state.objects.remove(i);
-					removings.add(objects.get(i));
 				}
 			}
 			else if(item.getClass() == Turtle.class){
@@ -69,8 +70,9 @@ public class Collision implements Event{
 					s.change_head();
 					s.set_speed(s.get_speed()*0.75);
 					col_status = true;
-					//state.objects.remove(i);
-					removings.add(objects.get(i));
+					state.objects.remove(i);
+					//removings.add(objects.get(i));
+					//break;
 				}
 			}
 			else if(item.getClass() == Mouse.class){
@@ -81,8 +83,9 @@ public class Collision implements Event{
 					s.change_head();
 					s.set_speed(s.get_speed()*1.333);
 					col_status = true;
-					//state.objects.remove(i);
-					removings.add(objects.get(i));
+					state.objects.remove(i);
+					//removings.add(objects.get(i));
+					//break;
 				}
 			}
 			else{

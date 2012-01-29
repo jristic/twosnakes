@@ -26,10 +26,10 @@ public class Update
 	long lastSnake1PivotTime, lastSnake2PivotTime;
 	Random r = new Random();
 	private GameState state;
-//	List<Item> removings = new ArrayList<Item>();
-	
+	//	List<Item> removings = new ArrayList<Item>();
+
 	Runnable gameOverCallback;
-	
+
 	boolean s1_collide = false;
 	boolean s2_collide = false;
 
@@ -104,45 +104,51 @@ public class Update
 	void gameUpdate(long timePassed, List<Item> objects, List<Item> removings)
 	{
 		System.out.println(timePassed);
-		
+
 		if(state.snake1 != null && state.snake2 != null){
 			if( state.snake1.bodyList.isEmpty() )
 			{
+				Delay.sleep(500);
 				System.out.println("GAME OVER");
 				state.winner = "Player 1";
 				gameOverCallback.run();
 			}
 			if ( state.snake2.bodyList.isEmpty() )
 			{
+				Delay.sleep(500);
 				System.out.println("GAME OVER");
 				state.winner = "Player 2";
 				gameOverCallback.run();
 			}
+			
+			
 			s1_collide = events.get(0).isCollide(state.snake1, objects, removings);
 			s2_collide = events.get(0).isCollide(state.snake2, objects, removings);
-			
+
 			if(s1_collide || s2_collide ){
-				int item_val = r.nextInt(9);
-				if(item_val == 0 || item_val == 3 || item_val == 4 || item_val == 7){ //add apple
-					objects.add(new Apple(5, Math.floor((r.nextDouble()*1280)),  Math.floor((r.nextDouble()*720))));
-				}
-				else if(item_val == 1 || item_val == 5){ //add mouse
-					objects.add(new Mouse(5, Math.floor((r.nextDouble()*1280)),  Math.floor((r.nextDouble()*720))));
-				}
-				else if(item_val == 2 || item_val == 6 || item_val == 8){ //add turtle
-					objects.add(new Turtle(5, Math.floor((r.nextDouble()*1280)),  Math.floor((r.nextDouble()*720))));
+				if(objects.size() < 4){
+					int item_val = r.nextInt(10);
+					if(item_val == 0 || item_val == 3 || item_val == 4 || item_val == 6){ //add apple
+						objects.add(new Apple(5, Math.floor((r.nextDouble()*1280)),  Math.floor((r.nextDouble()*720))));
+					}
+					else if(item_val == 1 || item_val == 7 || item_val == 8){ //add mouse
+						objects.add(new Mouse(5, Math.floor((r.nextDouble()*1280)),  Math.floor((r.nextDouble()*720))));
+					}
+					else if(item_val == 2 || item_val == 5 || item_val == 9){ //add turtle
+						objects.add(new Turtle(5, Math.floor((r.nextDouble()*1280)),  Math.floor((r.nextDouble()*720))));
+					}
 				}
 			}
 
 			if( events.get(1).s1_eat_s2(state.snake1, state.snake2) ){
 				System.out.println("adaf");
 			}
-			
+
 			if( events.get(1).s2_eat_s1(state.snake1, state.snake2)){
 				System.out.println("ASDA");
 			}
 		}
-		
+
 		for (int i = 0 ; i < state.objects.size() ; i++)
 		{
 			Item item = state.objects.get(i);
@@ -219,8 +225,8 @@ public class Update
 					state.snake1.move(timePassed);
 				}
 			}
-			
-			
+
+
 			double xDir = state.snake1.getDirection().x;
 			double yDir = state.snake1.getDirection().y;
 			if(Collision.isOutOfBoundX(state.snake1))
@@ -277,7 +283,7 @@ public class Update
 					state.snake2.move(timePassed);
 				}
 			}
-			
+
 			double xDir = state.snake2.getDirection().x;
 			double yDir = state.snake2.getDirection().y;
 
