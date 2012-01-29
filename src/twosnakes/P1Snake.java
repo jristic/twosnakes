@@ -39,7 +39,7 @@ public class P1Snake{
 	public ArrayList<Body> bodyList;
 	public Tail tail;
 	BufferedImage imgHead, imgBody, imgTail;
-	//SoundPlayer player;
+	SoundEffectPlayer player;
 	
 	public P1Snake(Vector headPos, Vector facing, Vector headSize, Vector bodySize, Vector tailSize)
 	{
@@ -72,7 +72,7 @@ public class P1Snake{
 		catch (Exception e)
 		{
 		}
-		//player = new SoundPlayer("sound/pain.mp3");
+		player = new SoundEffectPlayer("sound/Pain.wav");
 	}
 
 	public void draw(Graphics g)
@@ -214,7 +214,7 @@ public class P1Snake{
 		bodyList.remove(lastSegInd);
 		
 		//player.playerInitialize();
-		//player.play();
+		player.play();
 		
 		
 	}

@@ -18,7 +18,7 @@ public class Mouse implements Item {
 	BufferedImage image;
 	Animator anim;
 	Random r = new Random();
-	//SoundPlayer player;
+	SoundEffectPlayer player;
 
 	int visible = 0;
 	
@@ -33,7 +33,7 @@ public class Mouse implements Item {
 		walking = false;
 		anim = new Animator();
 		anim.startAnimation("images/mouse.png", 10, 3, false);
-		//player = new SoundPlayer("sound/Mouse Eaten.mp3");
+		player = new SoundEffectPlayer("sound/Mouse Eaten.wav");
 	}
 	
 	@Override
@@ -90,8 +90,12 @@ public class Mouse implements Item {
 //		eating.playSound();
 //		eating.animation();
 		//player.playerInitialize();
+<<<<<<< HEAD
 		//player.play();
 		visible = 2;
+=======
+		player.play();
+>>>>>>> origin/master
 	}
 
 	@Override

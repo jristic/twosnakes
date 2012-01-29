@@ -20,7 +20,7 @@ public class Apple implements Item {
 	private double[] position;
 	private int visible;
 	
-	//private SoundPlayer player;
+	private SoundEffectPlayer player;
 	
 	public Apple(double val, double x, double y){
 		value = val;
@@ -28,7 +28,7 @@ public class Apple implements Item {
 		position[0] = x;
 		position[1] = y;
 		visible = 0; //0:regular apple. 1:eaten apple
-		//player = new SoundPlayer("sound/Crunch.mp3") ;
+		player = new SoundEffectPlayer("sound/Crunch.wav") ;
 	}
 
 	@Override
@@ -64,7 +64,7 @@ public class Apple implements Item {
 		visible = 1;
 		//SoundPlayer player = new SoundPlayer("sound/Crunch.mp3");
 		//player.playerInitialize();
-		//player.play();
+		player.play();
 	}
 	
 	@Override
