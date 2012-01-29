@@ -1,6 +1,7 @@
 package twosnakes;
 
 import java.util.Random;
+import java.awt.Graphics;
 import java.lang.Math;
 
 public class Turtle implements Item {
@@ -82,5 +83,10 @@ public class Turtle implements Item {
 		e.playSound();
 		e.animation();
 		visible = false;
+	}
+	@Override
+	public void draw(Graphics g) {
+		// TODO Auto-generated method stub
+		
 	}
 }

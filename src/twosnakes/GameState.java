@@ -18,4 +18,6 @@ public class GameState
 	public TitleScreen titleScreen;
 	public Snake snake1;
 	public Snake snake2;
+	
+	public Apple ap1;
 }
