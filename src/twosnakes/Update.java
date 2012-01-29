@@ -82,8 +82,16 @@ public class Update
 	{
 		//TODO
 		if(state.snake1 != null && state.snake2 != null){
-			if( state.snake1.bodyList.size() == 0 || state.snake2.bodyList.size() == 0){
+			if( state.snake1.bodyList.isEmpty() )
+			{
 				System.out.println("GAME OVER");
+				state.winner = "Player 1";
+				gameOverCallback.run();
+			}
+			if ( state.snake2.bodyList.isEmpty() )
+			{
+				System.out.println("GAME OVER");
+				state.winner = "Player 2";
 				gameOverCallback.run();
 			}
 			
@@ -121,8 +129,9 @@ public class Update
 			}
 		}
 
-		for (Item item : state.objects)
+		for (int i = 0 ; i < state.objects.size() ; i++)
 		{
+			Item item = state.objects.get(i);
 			item.update(timePassed);
 		}
 

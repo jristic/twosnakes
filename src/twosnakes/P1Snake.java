@@ -22,7 +22,7 @@ public class P1Snake{
 	class Body
 	{
 		public Vector rPiv;
-		private Vector lPiv;
+		public Vector lPiv;
 	}
 	
 	class Tail
@@ -38,6 +38,7 @@ public class P1Snake{
 	public Head head;
 	public ArrayList<Body> bodyList;
 	public Tail tail;
+	BufferedImage imgHead, imgBody, imgTail;
 	
 	public P1Snake(Vector headPos, Vector facing, Vector headSize, Vector bodySize, Vector tailSize)
 	{
@@ -60,38 +61,33 @@ public class P1Snake{
 		tail.lPiv = new Vector(tail.rPiv, back.x * tailSize.x, back.y * tailSize.y);
 		addSegments(0); addSegments(0); addSegments(0); addSegments(0); addSegments(0);
 		this.speed = 1.5;
+		imgHead = imgBody = imgTail = null;
+		try
+		{
+			imgHead = ImageIO.read( new File("images/s01_head_closed.png") );
+			imgBody = ImageIO.read( new File("images/s1_body.png") );
+			imgTail = ImageIO.read( new File("images/s01_tail.png") );
+		}
+		catch (Exception e)
+		{
+		}
 	}
 
 	public void draw(Graphics g)
 	{
 		Graphics2D g2d = (Graphics2D)g;
 		AffineTransform transform = new AffineTransform();
-		BufferedImage img = new BufferedImage(10, 10, BufferedImage.TYPE_INT_ARGB);
 		Vector right = new Vector(1,0);
 
 		// Draw head
-		try
-		{
-			img = ImageIO.read( new File("images/s01_head_closed.png") );
-		}
-		catch (Exception e)
-		{
-		}
 		transform.translate(head.lPiv.x, head.lPiv.y - headSize.y/2);
 		Vector dir = new Vector(head.rPiv.x - head.lPiv.x, head.rPiv.y - head.lPiv.y);
 		dir.normalize();
 		double value = Math.atan2(dir.x, dir.y);
 		transform.rotate(-(value - Math.PI/2), 0, headSize.y/2);
-		g2d.drawImage(img, transform, null);
+		g2d.drawImage(imgHead, transform, null);
 
 		// Draw body
-		try
-		{
-			img = ImageIO.read( new File("images/s1_body.png") );
-		}
-		catch (Exception e)
-		{
-		}
 		for (Body body : bodyList)
 		{
 			transform = new AffineTransform();
@@ -99,23 +95,16 @@ public class P1Snake{
 			dir = new Vector(body.rPiv.x - body.lPiv.x, body.rPiv.y - body.lPiv.y);
 			value = Math.atan2(dir.x, dir.y);
 			transform.rotate(-(value - Math.PI/2), 0, bodySize.y/2);
-			g2d.drawImage(img, transform, null);
+			g2d.drawImage(imgBody, transform, null);
 		}
 
 		// Draw tail
 		transform = new AffineTransform();
-		try
-		{
-			img = ImageIO.read( new File("images/s01_tail.png") );
-		}
-		catch (Exception e)
-		{
-		}
 		transform.translate(tail.lPiv.x, tail.lPiv.y - tailSize.y/2);
 		dir = new Vector(tail.rPiv.x - tail.lPiv.x, tail.rPiv.y - tail.lPiv.y);
 		value = Math.atan2(dir.x, dir.y);
 		transform.rotate(-(value - Math.PI/2), 0, tailSize.y/2);
-		g2d.drawImage(img, transform, null);
+		g2d.drawImage(imgTail, transform, null);
 	}
 
 
