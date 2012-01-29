@@ -69,9 +69,9 @@ public class Update
 		
 	}
 
-	void gameUpdate()
+	void gameUpdate(long timePassed)
 	{
-		
+		state.snake1.move(timePassed);
 	}
 	
 	private GameState state;

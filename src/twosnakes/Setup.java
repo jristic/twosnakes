@@ -18,10 +18,12 @@ public class Setup
 
 	void gameSetup()
 	{
-		Vector headPos = new Vector(100,100);
+		Vector headPos = new Vector(600,300);
 		Vector facing = new Vector(1,0);
-		Vector size = new Vector(50,20);
-		state.snake1 = new P1Snake(headPos, facing, size, size, size);
+		Vector headSize = new Vector(83,37);
+		Vector bodySize = new Vector(60,38);
+		Vector tailSize = new Vector(84,38);
+		state.snake1 = new P1Snake(headPos, facing, headSize, bodySize, tailSize);
 	}
 	
 	private GameState state;
