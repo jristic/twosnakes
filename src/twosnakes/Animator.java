@@ -29,6 +29,8 @@ public class Animator
 	private BufferedImage currentFrame, fullImage;
 	// used to transcribe one image to the other
 	private Graphics2D g2d;
+	
+	private int rangeStart, rangeEnd;
 
 	
 	// -------------- constructors -----------
@@ -60,6 +62,33 @@ public class Animator
 		height = fullImage.getHeight();
 		width = (fullImage.getWidth() - (frames - 1))/frames;
 		currentFrame = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+		rangeStart = 0;
+		rangeEnd = frames;
+	}
+	
+	public void startAnimation(String filename, int duration, int frames, boolean looping, int rangeStart, int rangeEnd)
+	{
+		//Load the image
+		BufferedImage image;
+		try {
+	           image = ImageIO.read(new File(filename));
+	       } catch (IOException e) {
+	    	   image = null;
+	    	   System.out.println("Image failed to load.");
+	       }
+		
+		
+		startTime = System.nanoTime();
+		this.duration = duration;
+		this.frames = frames;
+		this.looping = looping;
+		this.rangeStart = rangeStart;
+		this.rangeEnd = rangeEnd;
+		period = (int)(duration/frames);
+		fullImage = image;
+		height = fullImage.getHeight();
+		width = (fullImage.getWidth() - (frames - 1))/frames;
+		currentFrame = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
 	}
 	
 	public void stopAnimation() // stop the current animation
@@ -84,14 +113,14 @@ public class Animator
 			else
 				stopAnimation();
 		}
-		for (int i = 0 ; i < frames ; i++)
+		for (int i = 0 ; i < rangeEnd; i++)
 		{
 			if (timePassed >= (i+1)*period)
 				frame++;
 			else
 				break;
 		}
-		int x = -(width+1)*frame;
+		int x = (-(width+1)*frame) + (rangeStart * (width + 1));
 		g2d.drawImage(fullImage, x, 0, null);
 		g2d.dispose();
 		return currentFrame;

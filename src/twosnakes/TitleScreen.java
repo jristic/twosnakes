@@ -27,6 +27,7 @@ public class TitleScreen {
 	private int y[];
 	BufferedImage[] images;
 	BufferedImage backgroundImage;
+	long musicLoopTimer;
 	
 	public TitleScreen()
 	{
@@ -57,6 +58,7 @@ public class TitleScreen {
         	actualX[i] = (i * SPACING) - (filenames.length * SPACING);
         }
         int[] y = new int[filenames.length];
+       
 	}
 	
 	public void step()
@@ -86,6 +88,7 @@ public class TitleScreen {
     		trans.rotate(Math.cos((double)x[i] / (double)60) / 1.75, images[i].getWidth() / 2, images[i].getHeight() / 2);
 	        g2d.drawImage(images[i], trans, null);
     	}
+		
 	}
 	
 }

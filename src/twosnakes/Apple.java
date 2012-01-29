@@ -59,6 +59,8 @@ public class Apple implements Item {
 //		e.playSound();
 //		e.animation();
 		visible = 1;
+		SoundPlayer player = new SoundPlayer("sound/Crunch.mp3");
+		player.play();
 	}
 	
 	@Override

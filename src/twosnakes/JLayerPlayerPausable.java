@@ -361,12 +361,13 @@ class SoundPlayer extends JLayerPlayerPausable.PlaybackListener implements Runna
 
 	public void playbackStarted(JLayerPlayerPausable.PlaybackEvent playbackEvent)
 	{
-		System.out.println("Boop");
+		
 	}
 
 	public void playbackFinished(JLayerPlayerPausable.PlaybackEvent playbackEvent)
 	{
-		System.out.println("We stopped playing!");
+		this.playerInitialize();
+		this.play();
 	}	
 
 	// IRunnable members

@@ -85,6 +85,8 @@ public class Turtle implements Item {
 //		Event eating = new Eating();
 //		eating.playSound();
 //		eating.animation();
+		SoundPlayer player = new SoundPlayer("sound/Turtle Eaten.mp3");
+		player.play();
 	}
 
 	@Override
