@@ -223,10 +223,13 @@ public class MainPanel extends JPanel implements Runnable
 							Delay.sleep(100);
 						}
 						state.objects.remove(i);
-						removings.clear();
+						state.snake1.head_back();
+						state.snake2.head_back();
 					}
 				}
 			}
+			removings.clear();
+			
 			afterTime = System.currentTimeMillis();
 			timeDiff = afterTime - beforeTime;
 			sleepTime = (period - timeDiff) - overSleepTime;
