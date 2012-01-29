@@ -140,8 +140,25 @@ public class P1Snake implements Snake
 	@Override
 	public void addSegments(int num)
 	{
-		
+		Body newSeg = new Body();
+		int lastSegInd = bodyList.size()-1;
+		Body lastSeg = bodyList.get(lastSegInd);
+		newSeg.rPiv = new Vector(lastSeg.lPiv);
+		newSeg.lPiv = new Vector(tail.rPiv);
+		bodyList.add(bodyList.size(), newSeg);
 	}
+	
+	public void removeSegments(int num)
+	{
+		int secondLastInd = bodyList.size()-3; 
+		Body secondLast = bodyList.get(secondLastInd);
+		int lastSegInd = bodyList.size()-2; 
+		Body lastSeg = bodyList.get(lastSegInd);
+		lastSeg.rPiv = new Vector(secondLast.lPiv);
+		lastSeg.lPiv = new Vector(tail.rPiv);
+		bodyList.remove(bodyList.size()-1);
+	}
+	
 	
 	@Override
 	public void set_speed(double speed) {
