@@ -76,7 +76,7 @@ public class Update
 		{
 			snake1Right = false;
 		}
-		if (e.getKeyCode() == KeyEvent.VK_DOWN);
+		if (e.getKeyCode() == KeyEvent.VK_DOWN)
 		{
 			snake1Charging = false;
 		}
