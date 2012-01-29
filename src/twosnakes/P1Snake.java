@@ -45,15 +45,17 @@ public class P1Snake implements Snake
 		head = new Head();
 		head.rPiv = new Vector(headPos);
 		facing.normalize();
-		head.lPiv = new Vector(headPos, facing.x * headSize.x, facing.y * headSize.y);
+		direction = new Vector(facing);
+		Vector back = new Vector(facing.x * -1, facing.y * -1);
+		head.lPiv = new Vector(headPos, back.x * headSize.x, back.y * headSize.y);
 		Body segment = new Body();
 		segment.rPiv = new Vector(head.lPiv);
-		segment.lPiv = new Vector(segment.rPiv, facing.x * bodySize.x, facing.y * bodySize.y);
+		segment.lPiv = new Vector(segment.rPiv, back.x * bodySize.x, back.y * bodySize.y);
 		bodyList = new ArrayList<Body>();
 		bodyList.add(0, segment);
 		tail = new Tail();
 		tail.rPiv = new Vector(segment.lPiv);
-		tail.lPiv = new Vector(tail.rPiv, facing.x * tailSize.x, facing.y * tailSize.y);
+		tail.lPiv = new Vector(tail.rPiv, back.x * tailSize.x, back.y * tailSize.y);
 		this.speed = 1;
 	}
 
@@ -76,6 +78,7 @@ public class P1Snake implements Snake
 		g2d.drawImage(img, transform, null);
 		
 		// Draw body
+		transform = new AffineTransform();
 		try
 		{
 			img = ImageIO.read( new File("images/s1_body.png") );
@@ -90,6 +93,7 @@ public class P1Snake implements Snake
 		}
 		
 		// Draw tail
+		transform = new AffineTransform();
 		try
 		{
 			img = ImageIO.read( new File("images/s01_tail.png") );

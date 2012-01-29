@@ -79,9 +79,6 @@ public class MainPanel extends JPanel implements Runnable
 		});
 
 		readyForTermination();
-		
-		// Setup game elements
-		setup.gameSetup();
 	}
 
 	public static int getFrameHeight()
@@ -123,7 +120,9 @@ public class MainPanel extends JPanel implements Runnable
 				int keyCode = e.getKeyCode();
 				if (keyCode == KeyEvent.VK_ENTER && !gameStarted)
 				{
-					gameStarted = true;
+					gameStarted = true;		
+					// Setup game elements
+					setup.gameSetup();
 				}
 			}
 		});
