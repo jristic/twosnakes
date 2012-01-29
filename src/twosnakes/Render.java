@@ -22,8 +22,8 @@ public class Render
 	double musicLoopTimer;
 	boolean titleMusicStarted;
 	
-	SoundPlayer player;
-	SoundPlayer player2;
+	//SoundPlayer player;
+	//SoundPlayer player2;
 	
 	public Render(GameState state, JPanel panel)
 	{
@@ -41,8 +41,8 @@ public class Render
 		{}
 		titleMusicStarted = false;
 		
-		player = new SoundPlayer("sound/music01.mp3");
-		player2 = new SoundPlayer("sound/music1.mp3");
+		//player = new SoundPlayer("sound/music01.mp3");
+		//player2 = new SoundPlayer("sound/music1.mp3");
 	}
 
 	void paintScreen(Graphics g, Image dbImage)
@@ -66,6 +66,7 @@ public class Render
 		state.titleScreen.step();
 		state.titleScreen.draw(dbg);
 		
+		/*
 		if (!titleMusicStarted || System.currentTimeMillis() > musicLoopTimer + 15150)
 		{
 			player.playerInitialize();
@@ -73,6 +74,7 @@ public class Render
 			musicLoopTimer = System.currentTimeMillis();
 			titleMusicStarted = true;
 		}
+		*/
 	}
 
 	void drawGameOverMessage(Graphics dbg)
@@ -89,6 +91,7 @@ public class Render
 
 	void drawGame(Graphics dbg)
 	{
+		/*
 		if (titleMusicStarted)
 		{
 			player.pause();
@@ -96,6 +99,7 @@ public class Render
 			musicLoopTimer = System.currentTimeMillis();
 			player2.play();
 		}
+		*/
 		dbg.drawImage(bkg, 0, 0, null);
 		
 		for(int i = 0; i < state.objects.size(); i++){
@@ -107,13 +111,14 @@ public class Render
 			state.snake1.draw(dbg);
 		if (state.snake2 != null)
 			state.snake2.draw(dbg);
-		
+		/*
 		if (System.currentTimeMillis() > musicLoopTimer + 19140)
 		{
 			player2.playerInitialize();
 			player2.play();
 			musicLoopTimer = System.currentTimeMillis();
 		}
+		*/
 
 	}
 
