@@ -88,33 +88,27 @@ public class Update
 		if(state.snake1 != null && state.snake2 != null){
 			
 			if( events.get(0).isCollide(state.snake1) ){
-				int item_val = r.nextInt(4);
-				if(item_val == 0){ //add apple
+				int item_val = r.nextInt(10);
+				if(item_val == 0 || item_val == 3 || item_val == 4 || item_val == 8){ //add apple
 					state.objects.add(new Apple(5, Math.floor((r.nextDouble()*1280)),  Math.floor((r.nextDouble()*720))));
 				}
-				else if(item_val == 1){ //add mouse
+				else if(item_val == 1 || item_val == 5){ //add mouse
 					state.objects.add(new Mouse(1, 100, 100));
 				}
-				else if(item_val == 2){ //add turtle
-
-				}
-				else if(item_val == 3){ //add apple
-					state.objects.add(new Apple(5, Math.floor((r.nextDouble()*1280)),  Math.floor((r.nextDouble()*720))));
+				else if(item_val == 2 || item_val == 6 || item_val == 7 || item_val == 9){ //add turtle
+					state.objects.add(new Turtle(1, 100, 600));
 				}
 			}
 			if( events.get(0).isCollide(state.snake2) ){
-				int item_val = r.nextInt(4);
-				if(item_val == 0){ //add apple
+				int item_val = r.nextInt(10);
+				if(item_val == 0 || item_val == 3 || item_val == 4 || item_val == 8){ //add apple
 					state.objects.add(new Apple(5, Math.floor((r.nextDouble()*1280)),  Math.floor((r.nextDouble()*720))));
 				}
-				else if(item_val == 1){ //add mouse
-
+				else if(item_val == 1 || item_val == 5){ //add mouse
+					state.objects.add(new Mouse(1, 100, 100));
 				}
-				else if(item_val == 2){ //add turtle
-
-				}
-				else if(item_val == 3){ //add apple
-					state.objects.add(new Apple(5, Math.floor((r.nextDouble()*1280)),  Math.floor((r.nextDouble()*720))));
+				else if(item_val == 2 || item_val == 6 || item_val == 7 || item_val == 9){ //add turtle
+					state.objects.add(new Turtle(1, 100, 600));
 				}
 			}
 

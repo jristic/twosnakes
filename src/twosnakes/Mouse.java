@@ -127,6 +127,6 @@ public class Mouse implements Item {
 	{
 		Graphics2D g2d = (Graphics2D)g;
 		image = anim.getFrame(0);
-		g2d.drawImage(image, (int)position[0], (int)position[1], null);
+		g2d.drawImage(image, (int)position[0] - image.getWidth()/2, (int)position[1] - image.getHeight()/2 , null);
 	}
 }
