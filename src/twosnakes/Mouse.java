@@ -7,7 +7,7 @@ import java.util.Random;
 
 public class Mouse implements Item {
 	
-	static final float pixelsPerMs = 0.10f;
+	static final float pixelsPerMs = 0.20f;
 	
 	private double value;
 	private double[] position;
@@ -92,7 +92,7 @@ public class Mouse implements Item {
 	{
 		if (walking)
 		{
-			Vector toDir = new Vector(target.x - position[0], target.y - position[0]);
+			Vector toDir = new Vector(target.x - position[0], target.y - position[1]);
 			toDir.normalize();
 			position[0] += toDir.x * speed * pixelsPerMs * gameTime;
 			position[1] += toDir.y * speed * pixelsPerMs * gameTime;
