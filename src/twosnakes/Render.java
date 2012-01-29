@@ -5,6 +5,10 @@
 package twosnakes;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 /**
@@ -13,6 +17,8 @@ import javax.swing.JPanel;
  */
 public class Render
 {
+	BufferedImage bkg = null;
+	
 	public Render(GameState state, JPanel panel)
 	{
 		this.panel = panel;
@@ -20,6 +26,13 @@ public class Render
 		// set up message font
 		font = new Font("SansSerif", Font.BOLD, 24);
 		metrics = panel.getFontMetrics(font);
+		
+		try 
+		{
+			bkg = ImageIO.read( new File("images/G_background.png") );
+		}
+		catch (IOException e)
+		{}
 	}
 
 	void paintScreen(Graphics g, Image dbImage)
@@ -42,29 +55,24 @@ public class Render
 	{
 		state.titleScreen.step();
 		state.titleScreen.draw(dbg);
-		/*
-		dbg.setColor(Color.white);
-		dbg.fillRect(0, 0, panel.getWidth(), panel.getHeight());
-		String msg = "TWO SNAKES ENTER ONE SNAKE LEAVES!";
-		int x = 50;
-		int y = 100;
-		dbg.setColor(Color.red);
-		dbg.setFont(font);
-		dbg.drawString(msg, x, y);
-		 */
-
 	}
 
 	void drawGameOverMessage(Graphics dbg)
 	{
-		throw new UnsupportedOperationException("Not yet implemented");
+		dbg.setColor(Color.white);
+		dbg.fillRect(0, 0, panel.getWidth(), panel.getHeight());
+		String msg = "GAME OVER!";
+		int x = 50;
+		int y = 100;
+		dbg.setColor(Color.black);
+		dbg.setFont(font);
+		dbg.drawString(msg, x, y);
 	}
 
 	void drawGame(Graphics dbg)
 	{
-		dbg.setColor(Color.black);
-		dbg.fillRect(0, 0, panel.getWidth(), panel.getHeight());
-
+		dbg.drawImage(bkg, 0, 0, null);
+		
 		for(int i =0; i < state.objects.size(); i++){
 			if(state.objects.get(i) == null)
 				break;
