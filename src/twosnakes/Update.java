@@ -8,6 +8,7 @@ import java.awt.event.KeyEvent;
 import java.util.List;
 import java.util.ArrayList;
 
+
 /**
  *
  * @author jovan
@@ -49,14 +50,10 @@ public class Update
 		}
 		
 		if(e.getKeyCode() == KeyEvent.VK_Z){
-			System.out.println("Hi");
 			state.snake1.addSegments(1);
-			System.out.println(state.snake1.getBodyLeng());
 		}
 		if(e.getKeyCode() == KeyEvent.VK_X){
-			System.out.println("Yo");
 			state.snake1.removeSegments(1);
-			System.out.println(state.snake1.getBodyLeng());
 		}
 	}
 
@@ -128,11 +125,16 @@ public class Update
 		if (state.snake1 != null)
 		{
 			state.snake1.move(timePassed);
+			//if(Collision.isOutOfBoundX((P1Snake)state.snake1)
+					
+				
+				
 		}
 		if (state.snake2 != null)
 		{
 			state.snake2.move(timePassed);
 		}
+		
 		
 	}
 

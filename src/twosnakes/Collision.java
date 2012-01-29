@@ -57,4 +57,24 @@ public class Collision implements Event{
 		}
 		return col_status;
 	}
+	
+	public static boolean isOutOfBoundX(P1Snake snake1)
+	    {
+		boolean result = false;
+		Vector s_vector = snake1.head.rPiv;
+		double x1 = s_vector.x;
+		if (x1>=1280||x1<=0)
+			result = true;
+		return result;
+		}
+	
+	public static boolean isOutOfBoundY(P1Snake s)
+    {
+	boolean result = false;
+	Vector s_vector = s.head.rPiv;
+	double y1 = s_vector.y;
+	if(y1>=720||y1<=0)
+		result = true;
+	return result;
+	}
 }

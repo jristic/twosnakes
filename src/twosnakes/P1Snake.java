@@ -224,12 +224,7 @@ public class P1Snake implements Snake
 		
 		bodyList.remove(lastSegInd);
 	}
-	
-	// for debug
-	@Override
-	public int getBodyLeng(){
-		return this.bodyList.size();
-	}
+
 	
 	@Override
 	public void set_speed(double speed) {
@@ -244,5 +239,11 @@ public class P1Snake implements Snake
 	private Vector vectorLerp(float weight, Vector vec1, Vector vec2)
 	{
 		return new Vector( weight*vec1.x + (1-weight)*vec2.x, weight*vec1.y + (1-weight)*vec2.y);
+	}
+
+	@Override
+	public int getBodyLeng() {
+		// TODO Auto-generated method stub
+		return bodyList.size();
 	}
 }
