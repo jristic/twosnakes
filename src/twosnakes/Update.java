@@ -18,7 +18,7 @@ public class Update
 {
 	static final int timeBetweenPivotsMs = 60;
 	static final int maxTimeCharged = 10000;
-	static final int lungeTimeStep = 1000;
+	static final int lungeTimeStep = 100;
 
 	List<Event> events;
 	boolean snake1Left, snake1Right, snake2Left, snake2Right;
@@ -55,7 +55,7 @@ public class Update
 		{
 			snake1Right = true;
 		}
-		if (e.getKeyCode() == KeyEvent.VK_DOWN);
+		if (e.getKeyCode() == KeyEvent.VK_DOWN)
 		{
 			snake1Charging = true;
 		}

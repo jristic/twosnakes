@@ -75,7 +75,7 @@ public class P1Snake{
 		catch (Exception e)
 		{
 		}
-		player = new SoundEffectPlayer("sound/Pain.wav");
+		//player = new SoundEffectPlayer("sound/Pain.wav");
 	}
 
 	public void draw(Graphics g)
@@ -115,8 +115,6 @@ public class P1Snake{
 
 	public void move(double timePassed) 
 	{
-		if (timePassed > maxUpdateLength)
-			timePassed = maxUpdateLength;
 		// Move the head forward.
 		Vector prevRLoc = new Vector(head.rPiv);
 		Vector prevLLoc = new Vector(head.lPiv);
