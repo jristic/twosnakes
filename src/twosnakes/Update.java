@@ -23,9 +23,12 @@ public class Update
 	long lastSnake1PivotTime, lastSnake2PivotTime;
 	Random r = new Random();
 	private GameState state;
+	
+	Runnable gameOverCallback;
 
-	public Update(GameState state)
+	public Update(GameState state, Runnable gameOverCallback)
 	{
+		this.gameOverCallback = gameOverCallback;
 		snake1Left = snake1Right = snake2Left = snake2Right = false;
 		events = new ArrayList<Event>();
 		this.state = state;

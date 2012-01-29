@@ -54,9 +54,18 @@ public class MainPanel extends JPanel implements Runnable
 	{
 		this.period = period;
 		
+		Runnable gameOverCallback = new Runnable()
+		{
+			@Override
+			public void run()
+			{
+				gameOver = false;
+			}
+		};
+		
 		this.state = new GameState();
 		setup = new Setup(state);
-		update = new Update(state);
+		update = new Update(state, gameOverCallback);
 		render = new Render(state, this);
 		
 		setBackground(Color.white);
