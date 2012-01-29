@@ -70,12 +70,18 @@ public class MainPanel extends JPanel implements Runnable
 		{
 			public void keyPressed(KeyEvent e)
 			{
-				update.processKeyPress(e);
+				if (gameStarted && !isPaused && !gameOver)
+				{
+					update.processKeyPress(e);
+				}
 			}
 
 			public void keyReleased(KeyEvent e)
 			{
-				update.processKeyRelease(e);
+				if (gameStarted && !isPaused && !gameOver)
+				{
+					update.processKeyRelease(e);
+				}
 			}
 		});
 

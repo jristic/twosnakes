@@ -114,7 +114,10 @@ public class P1Snake implements Snake
 	@Override
 	public void setDirection(Vector direction)
 	{
-		this.direction = direction;
+		this.direction = new Vector(direction);
+		direction.normalize();
+		// Update the head based on the new direction
+		head.rPiv = new Vector(head.lPiv, direction.x * headSize.x, direction.y * headSize.y);
 	}
 
 	@Override
