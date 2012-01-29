@@ -5,6 +5,7 @@
 package twosnakes;
 
 import java.awt.*;
+import java.awt.List;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;

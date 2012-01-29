@@ -23,8 +23,12 @@ public class Update
 	long lastSnake1PivotTime, lastSnake2PivotTime;
 	Random r = new Random();
 	private GameState state;
+//	List<Item> removings = new ArrayList<Item>();
 	
 	Runnable gameOverCallback;
+	
+	boolean s1_collide = false;
+	boolean s2_collide = false;
 
 	public Update(GameState state, Runnable gameOverCallback)
 	{
@@ -78,7 +82,7 @@ public class Update
 		}
 	}
 
-	void gameUpdate(long timePassed)
+	void gameUpdate(long timePassed, List<Item> objects, List<Item> removings)
 	{
 		//TODO
 		if(state.snake1 != null && state.snake2 != null){
@@ -95,28 +99,29 @@ public class Update
 				gameOverCallback.run();
 			}
 			
-			if( events.get(0).isCollide(state.snake1) ){
+			if( s1_collide = events.get(0).isCollide(state.snake1, objects, removings) ){
 				int item_val = r.nextInt(10);
 				if(item_val == 0 || item_val == 3 || item_val == 4 || item_val == 8){ //add apple
-					state.objects.add(new Apple(5, Math.floor((r.nextDouble()*1280)),  Math.floor((r.nextDouble()*720))));
+					objects.add(new Apple(5, Math.floor((r.nextDouble()*1280)),  Math.floor((r.nextDouble()*720))));
 				}
 				else if(item_val == 1 || item_val == 5 || item_val == 9){ //add mouse
-					state.objects.add(new Mouse(1, 100, 100));
+					objects.add(new Mouse(1, 100, 100));
 				}
 				else if(item_val == 2 || item_val == 6 || item_val == 7 ){ //add turtle
-					state.objects.add(new Turtle(1, 100, 600));
+					objects.add(new Turtle(1, 100, 600));
 				}
 			}
-			if( events.get(0).isCollide(state.snake2) ){
+			if( s1_collide = events.get(0).isCollide(state.snake2, objects, removings) ){
+				
 				int item_val = r.nextInt(10);
 				if(item_val == 0 || item_val == 3 || item_val == 4 || item_val == 8){ //add apple
-					state.objects.add(new Apple(5, Math.floor((r.nextDouble()*1280)),  Math.floor((r.nextDouble()*720))));
+					objects.add(new Apple(5, Math.floor((r.nextDouble()*1280)),  Math.floor((r.nextDouble()*720))));
 				}
 				else if(item_val == 1 || item_val == 5 || item_val == 7){ //add mouse
-					state.objects.add(new Mouse(1, 100, 100));
+					objects.add(new Mouse(1, 100, 100));
 				}
 				else if(item_val == 2 || item_val == 6 || item_val == 9){ //add turtle
-					state.objects.add(new Turtle(1, 100, 600));
+					objects.add(new Turtle(1, 100, 600));
 				}
 			}
 
@@ -129,9 +134,9 @@ public class Update
 			}
 		}
 
-		for (int i = 0 ; i < state.objects.size() ; i++)
+		for (int i = 0 ; i < objects.size() ; i++)
 		{
-			Item item = state.objects.get(i);
+			Item item = objects.get(i);
 			item.update(timePassed);
 		}
 

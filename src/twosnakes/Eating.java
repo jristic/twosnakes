@@ -1,5 +1,7 @@
 package twosnakes;
 
+import java.util.List;
+
 public class Eating implements Event{
 
 	//Sound eaten_sound = new SoundPlayer(" "); //audio file name need to be inserted.
@@ -20,11 +22,6 @@ public class Eating implements Event{
 		s.move(passedTime);
 	}
 
-	@Override
-	public boolean isCollide(P1Snake s) {
-		// TODO Auto-generated method stub
-		return false;
-	}
 
 	@Override
 	public boolean s1_eat_s2(P1Snake s1, P1Snake s2) {
@@ -34,6 +31,12 @@ public class Eating implements Event{
 
 	@Override
 	public boolean s2_eat_s1(P1Snake s1, P1Snake s2) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isCollide(P1Snake s, List<Item> objects, List<Item> removings) {
 		// TODO Auto-generated method stub
 		return false;
 	}

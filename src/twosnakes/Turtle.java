@@ -18,6 +18,7 @@ public class Turtle implements Item {
 	BufferedImage image;
 	Animator anim;
 	Random r = new Random();
+	private int visible = 0;
 	//SoundPlayer player;
 
 	public Turtle(double val, double x, double y){
@@ -89,6 +90,7 @@ public class Turtle implements Item {
 //		eating.animation();
 		//player.playerInitialize();
 		//player.play();
+		visible = 2;
 	}
 
 	@Override
@@ -129,7 +131,7 @@ public class Turtle implements Item {
 	public void draw(Graphics g) 
 	{
 		Graphics2D g2d = (Graphics2D)g;
-		image = anim.getFrame(0);
+		image = anim.getFrame(visible);
 		g2d.drawImage(image, (int)position[0] - image.getWidth()/2, (int)position[1] - image.getHeight()/2, null);
 	}
 }
