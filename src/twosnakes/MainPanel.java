@@ -31,6 +31,7 @@ public class MainPanel extends JPanel implements Runnable
 	// no. of frames that can be skipped in any one animation loop
 	// i.e the games state is updated but not rendered
 	private long gameStartTime;
+	private long lastUpdateTime;
 	private Thread animator;           // the thread that performs the animation
 	private volatile boolean running = false;   // used to stop the animation thread
 	private volatile boolean isPaused = false;
@@ -165,24 +166,6 @@ public class MainPanel extends JPanel implements Runnable
 		running = false;
 	}
 
-	// ----------------------------------------------
-	/*
-	 * handling functions for key presses and releases
-	 */
-	public void processKeyPress(KeyEvent e)
-	{
-		int keyCode = e.getKeyCode();
-		// TODO change state based on key down.
-
-	}
-
-	public void processKeyRelease(KeyEvent e)
-	{
-		int keyCode = e.getKeyCode();
-		// TODO change state based on key down.
-
-	}
-
 	//------------------------------------------------
 	public void run()
 	/*
@@ -196,6 +179,7 @@ public class MainPanel extends JPanel implements Runnable
 		Graphics g;
 
 		gameStartTime = System.currentTimeMillis();
+		lastUpdateTime = gameStartTime;
 		beforeTime = gameStartTime;
 
 		running = true;
@@ -255,7 +239,9 @@ public class MainPanel extends JPanel implements Runnable
 	{
 		if (!isPaused && !gameOver)
 		{
-			update.gameUpdate();
+			long timePassed = System.currentTimeMillis() - lastUpdateTime;
+			update.gameUpdate(timePassed);
+			lastUpdateTime = System.currentTimeMillis();
 		}
 	}
 
