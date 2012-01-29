@@ -42,24 +42,41 @@ public class Collision implements Event{
 			double x2 = item.getPosition()[0];
 			double y2 = item.getPosition()[1];
 			double distance = Math.sqrt((x2-x1)*(x2-x1) + (y2 - y1)*(y2 - y1));
+			
 			if(item.getClass() == Apple.class){
 				collision_distance = 30.0;
+				
+				if(distance <= collision_distance){
+					state.objects.get(i).eaten();
+					if(s.bodyList.size() > 0)
+						s.addSegments(1);
+					s.set_speed(s.get_speed()*0.8);
+					col_status = true;
+					state.objects.remove(i);
+				}
 			}
 			else if(item.getClass() == Turtle.class){
-				collision_distance = 3.0;
+				collision_distance = 30.0;
+				
+				if(distance <= collision_distance){
+					state.objects.get(i).eaten();
+					s.set_speed(s.get_speed()*0.6);
+					col_status = true;
+					state.objects.remove(i);
+				}
 			}
 			else if(item.getClass() == Mouse.class){
 				collision_distance = 30.0;
+				
+				if(distance <= collision_distance){
+					state.objects.get(i).eaten();
+					s.set_speed(s.get_speed()*2);
+					col_status = true;
+					state.objects.remove(i);
+				}
 			}
 			else{
 				collision_distance = 0.0;
-			}
-
-			if(distance <= collision_distance){
-				state.objects.get(i).eaten();
-				s.addSegments(1);
-				col_status = true;
-				state.objects.remove(i);
 			}
 		}
 		return col_status;

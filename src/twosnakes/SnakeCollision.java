@@ -60,9 +60,12 @@ public class SnakeCollision implements Event{
 			if( s2.bodyList.size() < 1)
 				distance = 10000.0;
 			if(distance <= collide_distance){
-				s1.addSegments(1);
-				if(s2.bodyList.size() >= 1)
+				if(s2.bodyList.size() >= 1){
+					s1.addSegments(1);
 					s2.removeSegments(1);
+					s1.set_speed(s1.get_speed()*0.9);
+					s2.set_speed(s2.get_speed()*1.1);
+				}
 				status1 = true;
 			}
 		}
@@ -96,9 +99,12 @@ public class SnakeCollision implements Event{
 			distance = 10000.0;
 		
 		if(distance <= collide_distance){
-			s2.addSegments(1);
-			if(s1.bodyList.size() >= 1)
+			if(s1.bodyList.size() >= 1){
+				s2.addSegments(1);
 				s1.removeSegments(1);
+				s2.set_speed(s2.get_speed()*0.9);
+				s1.set_speed(s1.get_speed()*1.1);
+			}
 			status2 = true;
 		}
 		return status2;
