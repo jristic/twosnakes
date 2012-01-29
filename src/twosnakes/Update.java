@@ -88,13 +88,6 @@ public class Update
 		{
 			snake1Charging = false;
 		}
-		//-------------------For testing End Screen---------------------------
-		if(e.getKeyCode() == KeyEvent.VK_M);
-		{
-			state.winner = "HI";
-			this.gameOverCallback.run();
-		}
-		//-------------------For testing End Screen---------------------------
 		if(e.getKeyCode() == KeyEvent.VK_A)
 		{
 			snake2Left = false;
