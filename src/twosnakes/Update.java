@@ -62,6 +62,17 @@ public class Update
 			}
 		}
 		state.snake1.setDirection(new Vector(x,y));
+		
+		if(e.getKeyCode() == KeyEvent.VK_A){
+			System.out.println("Hi");
+			state.snake1.addSegments(1);
+			System.out.println(state.snake1.getBodyLeng());
+		}
+		if(e.getKeyCode() == KeyEvent.VK_S){
+			System.out.println("Yo");
+			state.snake1.removeSegments(1);
+			System.out.println(state.snake1.getBodyLeng());
+		}
 	}
 
 	void processKeyRelease(KeyEvent e)
@@ -73,7 +84,7 @@ public class Update
 	{
 		if (state.snake1 == null)
 			return;
-		state.snake1.move(timePassed);
+		//state.snake1.move(timePassed);
 	}
 	
 	private GameState state;

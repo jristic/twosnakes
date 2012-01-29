@@ -17,8 +17,11 @@ public interface Snake {
 	public void setGirth(int girth);
 	public int getLength();
 	public void addSegments(int num);
+	public void removeSegments(int num);
 
 	
 	public void set_speed(double speed);
 	public double get_speed();
+	// for debuggin
+	public int getBodyLeng();
 }
