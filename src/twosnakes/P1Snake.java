@@ -221,6 +221,11 @@ public class P1Snake{
 		tail.lPiv.y = tail.rPiv.y + ((lastVecY) * (tailSize.y/bodySize.y));
 		
 		bodyList.remove(lastSegInd);
+		
+		SoundPlayer player = new SoundPlayer("sound/pain.mp3");
+		player.play();
+		
+		
 	}
 	
 	// for debug
