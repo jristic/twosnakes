@@ -68,7 +68,6 @@ public class P1Snake{
 		an.startAnimation(head_filename, 0, 3, false);
 		try
 		{
-			imgHead = an.getFrame(0);
 			imgBody = ImageIO.read( new File(body_filename) );
 			imgTail = ImageIO.read( new File(tail_filename) );
 		}
@@ -80,6 +79,7 @@ public class P1Snake{
 
 	public void draw(Graphics g)
 	{
+		
 		Graphics2D g2d = (Graphics2D)g;
 		AffineTransform transform = new AffineTransform();
 		Vector right = new Vector(1,0);
@@ -90,6 +90,7 @@ public class P1Snake{
 		dir.normalize();
 		double value = Math.atan2(dir.x, dir.y);
 		transform.rotate(-(value - Math.PI/2), 0, headSize.y/2);
+		imgHead = an.getFrame(visible);
 		g2d.drawImage(imgHead, transform, null);
 
 		// Draw body
@@ -112,7 +113,17 @@ public class P1Snake{
 		g2d.drawImage(imgTail, transform, null);
 	}
 
+	public void change_head(){
+		visible = 1;
+	}
+	
+	public void head_back(){
+		visible = 0;
+	}
 
+	public int get_visible(){
+		return visible;
+	}
 	public void move(double timePassed) 
 	{
 		// Move the head forward.
@@ -215,7 +226,7 @@ public class P1Snake{
 		bodyList.remove(lastSegInd);
 		
 		//player.playerInitialize();
-		player.play();
+//		player.play();
 		
 		
 	}

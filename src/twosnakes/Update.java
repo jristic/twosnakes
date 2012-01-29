@@ -68,6 +68,10 @@ public class Update
 		{
 			snake2Right = true;
 		}
+		if (e.getKeyCode() == KeyEvent.VK_S)
+		{
+			snake2Charging = true;
+		}
 	}
 
 	void processKeyRelease(KeyEvent e)
@@ -98,6 +102,10 @@ public class Update
 		else if (e.getKeyCode() == KeyEvent.VK_D) 
 		{
 			snake2Right = false;
+		}
+		if (e.getKeyCode() == KeyEvent.VK_S)
+		{
+			snake2Charging = false;
 		}
 	}
 
@@ -256,10 +264,30 @@ public class Update
 		}
 
 		if (state.snake2 != null)
-		{	
+		{
+			if (snake2Charging)
+			{
+				snake2ChargeTime += timePassed;
+				if (snake2ChargeTime > maxTimeCharged)
+					snake2ChargeTime = maxTimeCharged;
+			}
+			else
+			{
+				if (snake2ChargeTime > 0)
+				{
+					state.snake2.move(lungeTimeStep);
+					snake2ChargeTime -= lungeTimeStep;
+					if (snake2ChargeTime < 0)
+						snake2ChargeTime = 0;
+				}
+				else
+				{
+					state.snake2.move(timePassed);
+				}
+			}
+			
 			double xDir = state.snake2.getDirection().x;
 			double yDir = state.snake2.getDirection().y;
-			state.snake2.move(timePassed);
 
 			if(Collision.isOutOfBoundX(state.snake2))
 			{
