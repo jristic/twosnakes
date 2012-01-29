@@ -99,7 +99,7 @@ public class Render
 				e1.printStackTrace();
 			}
 		
-		dbg.drawImage(goBgd, 0, 0, null);
+		dbg.drawImage(goBgd, 0, 75, null);
 //		dbg.setColor(Color.white);
 //		dbg.fillRect(0, 0, panel.getWidth(), panel.getHeight());
 //		String msg = "GAME OVER! Winner is: " + state.winner;
