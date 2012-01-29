@@ -86,7 +86,6 @@ public class P1Snake implements Snake
 		g2d.drawImage(img, transform, null);
 
 		// Draw body
-		transform = new AffineTransform();
 		try
 		{
 			img = ImageIO.read( new File("images/s1_body.png") );
@@ -96,6 +95,7 @@ public class P1Snake implements Snake
 		}
 		for (Body body : bodyList)
 		{
+			transform = new AffineTransform();
 			transform.translate(body.lPiv.x, body.lPiv.y - bodySize.y/2);
 			dir = new Vector(body.rPiv.x - body.lPiv.x, body.rPiv.y - body.lPiv.y);
 			value = Math.atan2(dir.x, dir.y);
