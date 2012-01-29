@@ -42,6 +42,7 @@ public class MainPanel extends JPanel implements Runnable
 	
 	// used at game termination
 	private volatile boolean gameOver = false;
+	private volatile boolean gameIntro = false;
 	private volatile boolean gameStarted = false;
 	
 	// off screen rendering
@@ -138,9 +139,9 @@ public class MainPanel extends JPanel implements Runnable
 			public void keyPressed(KeyEvent e)
 			{
 				int keyCode = e.getKeyCode();
-				if (keyCode == KeyEvent.VK_ENTER && !gameStarted)
+				if (!gameIntro)
 				{
-					gameStarted = true;		
+					gameIntro = true;
 					// Setup game elements
 					setup.gameSetup();
 				}
@@ -318,9 +319,16 @@ public class MainPanel extends JPanel implements Runnable
 
 		if (!gameStarted)
 		{
-			render.drawStartMessage(dbg);
-			readyForStart();
+			if (gameIntro)
+			{
+				render.drawIntroMessage(dbg);
+			}
+			{
+				render.drawStartMessage(dbg);
+				readyForStart();
+			}
 		}
+		
 		if (gameOver)
 		{
 			render.drawGameOverMessage(dbg);
