@@ -40,8 +40,10 @@ public class P1Snake{
 	public Tail tail;
 	BufferedImage imgHead, imgBody, imgTail;
 	SoundEffectPlayer player;
+	private int visible = 0;
+	Animator an = new Animator();
 	
-	public P1Snake(Vector headPos, Vector facing, Vector headSize, Vector bodySize, Vector tailSize)
+	public P1Snake(Vector headPos, Vector facing, Vector headSize, Vector bodySize, Vector tailSize, String head_filename, String body_filename, String tail_filename)
 	{
 		this.headSize = headSize;
 		this.bodySize = bodySize;
@@ -63,11 +65,12 @@ public class P1Snake{
 		addSegments(0); addSegments(0); addSegments(0); addSegments(0); addSegments(0);
 		this.speed = 1.5;
 		imgHead = imgBody = imgTail = null;
+		an.startAnimation(head_filename, 0, 3, false);
 		try
 		{
-			imgHead = ImageIO.read( new File("images/s01_head_closed.png") );
-			imgBody = ImageIO.read( new File("images/s1_body.png") );
-			imgTail = ImageIO.read( new File("images/s01_tail.png") );
+			imgHead = an.getFrame(0);
+			imgBody = ImageIO.read( new File(body_filename) );
+			imgTail = ImageIO.read( new File(tail_filename) );
 		}
 		catch (Exception e)
 		{
