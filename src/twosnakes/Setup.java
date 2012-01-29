@@ -27,15 +27,15 @@ public class Setup
 	{
 		Vector headPos = new Vector(800,500);
 		Vector facing = new Vector(-1,0);
-		Vector headSize = new Vector(83,70);
-		Vector bodySize = new Vector(60,38);
+		Vector headSize = new Vector(70,70);
+		Vector bodySize = new Vector(50,38);
 		Vector tailSize = new Vector(84,38);
 		state.snake1 = new P1Snake(headPos, facing, headSize, bodySize, tailSize);
 		
 		headPos = new Vector(600,300);
 		facing = new Vector(1,0);
-		headSize = new Vector(83,70);
-		bodySize = new Vector(60,38);
+		headSize = new Vector(70,70);
+		bodySize = new Vector(50,38);
 		tailSize = new Vector(84,38);
 		state.snake2 = new P1Snake(headPos, facing, headSize, bodySize, tailSize);
 		

@@ -26,6 +26,5 @@ public interface Snake {
 	
 	public void set_speed(double speed);
 	public double get_speed();
-	// for debuggin
 	public int getBodyLeng();
 }
