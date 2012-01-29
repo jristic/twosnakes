@@ -210,7 +210,7 @@ public class MainPanel extends JPanel implements Runnable
 			
 			paintScreen();  // draw the buffer on-screen
 			for(int i =0; i < state.objects.size(); i++){
-				//state.objects.get(i).walk2();
+				
 				for(int j = 0; j < removings.size(); j++){
 					if(state.objects.get(i).equals(removings.get(j))){
 						if(state.objects.get(i).getClass().equals(Apple.class)){

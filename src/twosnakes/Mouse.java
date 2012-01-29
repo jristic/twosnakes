@@ -33,7 +33,7 @@ public class Mouse implements Item {
 		timeToNextWalk = r.nextInt(2000);
 		walking = false;
 		anim = new Animator();
-		anim.startAnimation("images/mouse.png", 10, 3, false);
+		anim.startAnimation("images/mouse.png", 0, 3, false);
 		player = new SoundEffectPlayer("sound/Mouse Eaten.wav");
 	}
 	
