@@ -16,8 +16,8 @@ import java.util.Random;
 public class Update
 {
 	static final int timeBetweenPivotsMs = 60;
-	static final int maxTimeCharged = 10000;
-	static final int lungeTimeStep = 100;
+	static final int maxTimeCharged = 500;
+	static final int lungeTimeStep = 50;
 
 	List<Event> events;
 	boolean snake1Left, snake1Right, snake2Left, snake2Right;
@@ -207,17 +207,21 @@ public class Update
 			if (snake1Charging)
 			{
 				state.snake1.set_visible(1);
-				
-				snake1ChargeTime += timePassed;
-				if (snake1ChargeTime > maxTimeCharged)
-					snake1ChargeTime = maxTimeCharged;
+				int len = state.snake1.getLength() / 2;
+				snake1ChargeTime += len * timePassed;
+				if (snake1ChargeTime > len * maxTimeCharged)
+					snake1ChargeTime = len * maxTimeCharged;
 			}
 			else
 			{
 				if (snake1ChargeTime > 0)
 				{
-					state.snake1.move(lungeTimeStep);
-					snake1ChargeTime -= lungeTimeStep;
+					double speed = state.snake1.get_speed();
+					state.snake1.set_speed(1);
+					int len = state.snake1.getLength() / 2;
+					state.snake1.move(len * lungeTimeStep);
+					state.snake1.set_speed(speed);
+					snake1ChargeTime -= len * lungeTimeStep;
 					if (snake1ChargeTime < 0)
 						snake1ChargeTime = 0;
 				}
@@ -262,16 +266,20 @@ public class Update
 			if (snake2Charging)
 			{
 				state.snake2.set_visible(1);
-				snake2ChargeTime += timePassed;
-				if (snake2ChargeTime > maxTimeCharged)
-					snake2ChargeTime = maxTimeCharged;
+				int len = state.snake2.getLength() / 2;
+				snake2ChargeTime +=	len * timePassed;
+				if (snake2ChargeTime > len * maxTimeCharged)
+					snake2ChargeTime = len * maxTimeCharged;
 			}
 			else
 			{
 				if (snake2ChargeTime > 0)
 				{
-					state.snake2.move(lungeTimeStep);
-					snake2ChargeTime -= lungeTimeStep;
+					double speed = state.snake2.get_speed();
+					state.snake2.set_speed(1);
+					int len = state.snake2.getLength() / 2;
+					state.snake2.move(len * lungeTimeStep);
+					snake2ChargeTime -=  len * lungeTimeStep;
 					if (snake2ChargeTime < 0)
 						snake2ChargeTime = 0;
 				}
