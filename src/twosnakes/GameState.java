@@ -20,6 +20,7 @@ public class GameState
 	public TitleScreen titleScreen;
 	public P1Snake snake1;
 	public P1Snake snake2;
+	public String winner = "";
 	
 	public List<Item> objects;
 }

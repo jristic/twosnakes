@@ -61,7 +61,7 @@ public class Render
 	{
 		dbg.setColor(Color.white);
 		dbg.fillRect(0, 0, panel.getWidth(), panel.getHeight());
-		String msg = "GAME OVER!";
+		String msg = "GAME OVER! Winner is: " + state.winner;
 		int x = 50;
 		int y = 100;
 		dbg.setColor(Color.black);
