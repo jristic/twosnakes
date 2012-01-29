@@ -206,6 +206,8 @@ public class Update
 		{
 			if (snake1Charging)
 			{
+				state.snake1.set_visible(1);
+				
 				snake1ChargeTime += timePassed;
 				if (snake1ChargeTime > maxTimeCharged)
 					snake1ChargeTime = maxTimeCharged;
@@ -259,6 +261,7 @@ public class Update
 		{
 			if (snake2Charging)
 			{
+				state.snake2.set_visible(1);
 				snake2ChargeTime += timePassed;
 				if (snake2ChargeTime > maxTimeCharged)
 					snake2ChargeTime = maxTimeCharged;

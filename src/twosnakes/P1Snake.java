@@ -231,6 +231,10 @@ public class P1Snake{
 		
 	}
 	
+	public void set_visible(int num){
+		visible = num;
+	}
+	
 	// for debug
 
 	public int getBodyLeng(){

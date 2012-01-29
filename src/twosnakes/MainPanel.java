@@ -34,7 +34,7 @@ public class MainPanel extends JPanel implements Runnable
 	// no. of frames that can be skipped in any one animation loop
 	// i.e the games state is updated but not rendered
 	private long gameStartTime;
-	private long lastUpdateTime;
+	public long lastUpdateTime;
 	private Thread animator;           // the thread that performs the animation
 	private volatile boolean running = false;   // used to stop the animation thread
 	private volatile boolean isPaused = false;
@@ -42,7 +42,8 @@ public class MainPanel extends JPanel implements Runnable
 	
 	// used at game termination
 	private volatile boolean gameOver = false;
-	private volatile boolean gameStarted = false;
+	public volatile boolean gameIntro = false;
+	public volatile boolean gameStarted = false;
 	
 	// off screen rendering
 	private Graphics dbg;
@@ -50,8 +51,8 @@ public class MainPanel extends JPanel implements Runnable
 	
 	private GameState state;
 	private Update update;
-	private Render render;
-	private Setup setup;
+	public Render render;
+	public Setup setup;
 	List<Item> removings = new ArrayList<Item>();
 
 	public MainPanel(Main main, int period)
@@ -138,11 +139,9 @@ public class MainPanel extends JPanel implements Runnable
 			public void keyPressed(KeyEvent e)
 			{
 				int keyCode = e.getKeyCode();
-				if (keyCode == KeyEvent.VK_ENTER && !gameStarted)
+				if (!gameIntro)
 				{
-					gameStarted = true;		
-					// Setup game elements
-					setup.gameSetup();
+					gameIntro = true;
 				}
 			}
 		});
@@ -317,9 +316,17 @@ public class MainPanel extends JPanel implements Runnable
 
 		if (!gameStarted)
 		{
-			render.drawStartMessage(dbg);
-			readyForStart();
+			if (gameIntro)
+			{
+				render.drawIntroMessage(dbg, this);
+			}
+			else
+			{
+				render.drawStartMessage(dbg);
+				readyForStart();
+			}
 		}
+		
 		if (gameOver)
 		{
 			render.drawGameOverMessage(dbg);

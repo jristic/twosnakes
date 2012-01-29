@@ -19,6 +19,7 @@ import javax.swing.JPanel;
 public class Render
 {
 	BufferedImage bkg = null;
+	BufferedImage line1, line2, line3;
 	BufferedImage goBgd = null;
 	
 	double musicLoopTimer;
@@ -28,6 +29,9 @@ public class Render
 	SoundEffectPlayer player;
 	SoundEffectPlayer player2;
 	SoundEffectPlayer player3;
+	boolean introStarted;
+	long introStartTime;
+	boolean sound1Played, sound2Played, sound3Played;
 	
 	public Render(GameState state, JPanel panel)
 	{
@@ -36,15 +40,18 @@ public class Render
 		// set up message font
 		font = new Font("SansSerif", Font.BOLD, 24);
 		metrics = panel.getFontMetrics(font);
-		
+		introStarted = false;
 		try 
 		{
 			bkg = ImageIO.read( new File("images/G_background.png") );
+			line1 = ImageIO.read( new File("images/txt_two_snakes_enter.png") );
+			line2 = ImageIO.read( new File("images/txt_one_snake_leaves.png") );
+			line3 = ImageIO.read( new File("images/txt_eat_some_tail.png") );
 		}
 		catch (IOException e)
 		{}
 		titleMusicStarted = false;
-		
+		sound1Played = sound2Played = sound3Played = false;
 		player = new SoundEffectPlayer("sound/music01mono.wav");
 		player2 = new SoundEffectPlayer("sound/music2mono.wav");
 	}
@@ -80,6 +87,57 @@ public class Render
 		}
 		
 	}
+
+	void drawIntroMessage(Graphics dbg, MainPanel mainPanel)
+	{
+		dbg.drawImage(bkg, 0, 0, null);
+		if (!introStarted)
+		{
+			introStarted = true;
+			introStartTime = System.currentTimeMillis();
+		}
+		
+		if (System.currentTimeMillis() - introStartTime > 1500)
+		{
+			dbg.drawImage(line1, 640 - line1.getWidth()/2, 100, null);
+			if (!sound1Played)
+			{
+				player.stop();
+				player2.stop();
+				player3 = new SoundEffectPlayer("sound/Snake_Countdown.wav");
+				player3.play();
+				sound1Played = true;
+			}
+		}
+		if (System.currentTimeMillis() - introStartTime > 3000)
+		{
+			dbg.drawImage(line2, 640 - line2.getWidth()/2, 300, null);
+			if (!sound2Played)
+			{
+				player3 = new SoundEffectPlayer("sound/Snake_Countdown.wav");
+				player3.play();
+				sound2Played = true;
+			}
+		}
+		if (System.currentTimeMillis() - introStartTime > 4500)
+		{
+			dbg.drawImage(line3, 640 - line3.getWidth()/2, 500, null);
+			if (!sound3Played)
+			{
+				player3 = new SoundEffectPlayer("sound/Snake_Go.wav");
+				player3.play();
+				sound3Played = true;
+			}
+		}
+		if (System.currentTimeMillis() - introStartTime > 6000)
+		{
+			mainPanel.gameStarted = true;
+			mainPanel.lastUpdateTime = System.currentTimeMillis();
+			// Setup game elements
+			mainPanel.setup.gameSetup();
+		}
+	}
+
 	
 
 	void drawGame(Graphics dbg)
