@@ -118,7 +118,7 @@ public class Update
 				}
 			}
 
-			if( events.get(1).s1_eat_s2() ){
+			if( events.get(1).s1_eat_s2(state.snake1, state.snake2) ){
 				System.out.println("adaf");
 			}
 		}

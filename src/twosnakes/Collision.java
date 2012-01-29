@@ -86,13 +86,13 @@ public class Collision implements Event{
 	}
 
 	@Override
-	public boolean s1_eat_s2() {
+	public boolean s1_eat_s2(P1Snake s1, P1Snake s2) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public boolean s2_eat_s1() {
+	public boolean s2_eat_s1(P1Snake s1, P1Snake s2) {
 		// TODO Auto-generated method stub
 		return false;
 	}
