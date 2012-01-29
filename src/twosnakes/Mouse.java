@@ -85,6 +85,8 @@ public class Mouse implements Item {
 //		Event eating = new Eating();
 //		eating.playSound();
 //		eating.animation();
+		SoundPlayer player = new SoundPlayer("sound/Mouse Eaten.mp3");
+		player.play();
 	}
 
 	@Override
