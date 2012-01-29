@@ -2,6 +2,7 @@ package twosnakes;
 
 import java.util.Random;
 import java.lang.Math;
+import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 
 public class Mouse implements Item {
@@ -93,5 +94,11 @@ public class Mouse implements Item {
 		eating.playSound();
 		eating.animation();
 		visible = false;
+	}
+
+	@Override
+	public void draw(Graphics g) {
+		// TODO Auto-generated method stub
+		
 	}
 }

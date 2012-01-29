@@ -40,7 +40,39 @@ public class Vector
 		y /= length;
 	}
 	
+	public double dot(Vector vec)
+	{
+		return this.x * vec.x + this.y * vec.y;
+	}
 	
+	public void translate(Vector offset)
+	{
+		this.x += offset.x;
+		this.y += offset.y;
+	}
+	
+	public void translate(double xoffset, double yoffset)
+	{
+		this.x += xoffset;
+		this.y += yoffset;
+	}
+	
+	public void scale(double s)
+	{
+		this.x *= s;
+		this.y *= s;
+	}
+	
+	public void scale(double sx, double sy)
+	{
+		this.x *= sx;
+		this.y *= sy;
+	}
+	
+	public Vector copy()
+	{
+		return new Vector(this.x, this.y);
+	}
 	
 	public double x, y;
 }

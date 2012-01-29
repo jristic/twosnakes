@@ -11,6 +11,9 @@ import javax.imageio.ImageIO;
 
 public class P1Snake implements Snake 
 {
+	static final float pixelsPerMs = 0.03f;
+	static final float maxUpdateLength = 30;
+	
 	class Head
 	{
 		public Vector rPiv;
@@ -65,6 +68,7 @@ public class P1Snake implements Snake
 		Graphics2D g2d = (Graphics2D)g;
 		AffineTransform transform = new AffineTransform();
 		BufferedImage img = new BufferedImage(10, 10, BufferedImage.TYPE_INT_ARGB);
+		Vector right = new Vector(1,0);
 		
 		// Draw head
 		try
@@ -74,7 +78,11 @@ public class P1Snake implements Snake
 		catch (Exception e)
 		{
 		}
-		transform.translate((head.rPiv.x + head.lPiv.x)/2, (head.rPiv.y+head.lPiv.y)/2);
+		transform.translate(head.lPiv.x, head.lPiv.y - headSize.y/2);
+		Vector dir = new Vector(head.rPiv.x - head.lPiv.x, head.rPiv.y - head.lPiv.y);
+		dir.normalize();
+		double value = Math.atan2(dir.x, dir.y);
+		transform.rotate(-(value - Math.PI/2), 0, headSize.y/2);
 		g2d.drawImage(img, transform, null);
 		
 		// Draw body
@@ -108,17 +116,16 @@ public class P1Snake implements Snake
 	@Override
 	public void move(double timePassed) 
 	{
-		double nextLSpotX = head.lPiv.x;
-		double nextLSpotY = head.lPiv.y;
-		double nextRSpotX = head.rPiv.x;
-		double nextRSpotY = head.rPiv.y;
-		int bodyListLength = bodyList.size();
-		head.rPiv.x = speed * timePassed * direction.x;
-		head.rPiv.y = speed * timePassed * direction.y;
-		head.lPiv.x = speed * timePassed * direction.x;
-		head.lPiv.y = speed * timePassed * direction.y;
-		
-		for (int i=0; i<bodyListLength;i++){
+		if (timePassed > maxUpdateLength)
+			timePassed = maxUpdateLength;
+		// Move the head forward.
+		Vector prevRLoc = new Vector(head.rPiv);
+		Vector prevLLoc = new Vector(head.lPiv);
+		head.rPiv.translate(direction.x * speed * timePassed * pixelsPerMs, direction.y * speed * timePassed * pixelsPerMs);
+		head.lPiv.translate(direction.x * speed * timePassed * pixelsPerMs, direction.y * speed * timePassed * pixelsPerMs);
+		for (Body body : bodyList)
+		{
+			Vector prevBodyRLoc = body.rPiv.copy();
 			Body currBody = bodyList.get(i);
 			double temp = currBody.rPiv.x;
 			// This is for the right pivot
@@ -134,6 +141,7 @@ public class P1Snake implements Snake
 			currBody.lPiv.y = nextLSpotY;
 			nextLSpotY = temp;
 		}
+		Vector moved = new Vector(prevLLoc.x -  tail.rPiv.x, prevLLoc.y - tail.rPiv.y);
 		tail.rPiv.x = nextRSpotX;
 		tail.rPiv.y = nextRSpotY;
 		tail.lPiv.x = nextLSpotX;
@@ -216,5 +224,10 @@ public class P1Snake implements Snake
 	@Override
 	public double get_speed() {
 		return this.speed;
+	}
+	
+	private Vector vectorLerp(float weight, Vector vec1, Vector vec2)
+	{
+		return new Vector( weight*vec1.x + (1-weight)*vec2.x, weight*vec1.y + (1-weight)*vec2.y);
 	}
 }

@@ -40,6 +40,9 @@ public class Render
 
 	void drawStartMessage(Graphics dbg)
 	{
+		state.titleScreen.step();
+		state.titleScreen.draw(dbg);
+		/*
 		dbg.setColor(Color.white);
 		dbg.fillRect(0, 0, panel.getWidth(), panel.getHeight());
 		String msg = "TWO SNAKES ENTER ONE SNAKE LEAVES!";
@@ -48,6 +51,8 @@ public class Render
 		dbg.setColor(Color.red);
 		dbg.setFont(font);
 		dbg.drawString(msg, x, y);
+		*/
+		
 	}
 
 	void drawGameOverMessage(Graphics dbg)
@@ -62,6 +67,9 @@ public class Render
 		dbg.setColor(Color.black);
 		dbg.fillRect(0, 0, panel.getWidth(), panel.getHeight());
 		state.snake1.draw(dbg);
+		if (state.ap1 == null)
+			return;
+		state.ap1.draw(dbg);
 	}
 	
 	private GameState state;

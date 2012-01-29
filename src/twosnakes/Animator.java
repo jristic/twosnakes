@@ -97,6 +97,16 @@ public class Animator
 		return currentFrame;
 	}
 	
+	public BufferedImage getFrame(int frame)
+	{
+		currentFrame = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+		g2d = currentFrame.createGraphics();
+		int x = -(width+1) * frame;
+		g2d.drawImage(fullImage, x, 0, null);
+		g2d.dispose();
+		return currentFrame;
+	}
+	
 	public static void main(String args[])
 	{
 		JFrame f = new JFrame("Load Image Sample");
@@ -116,7 +126,7 @@ public class Animator
 	    while(true)
 	    {
 	    	g.clearRect(0, 0, 200, 200);
-	    	g.drawImage(animator.getCurrentFrame(), 0, 30, null);
+	    	g.drawImage(animator.getFrame(20), 0, 30, null);
 	    }
 	}
 }
