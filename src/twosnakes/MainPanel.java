@@ -237,7 +237,7 @@ public class MainPanel extends JPanel implements Runnable
 
 	private void gameUpdate()
 	{
-		if (!isPaused && !gameOver)
+		if (gameStarted && !isPaused && !gameOver)
 		{
 			long timePassed = System.currentTimeMillis() - lastUpdateTime;
 			update.gameUpdate(timePassed);
