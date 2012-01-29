@@ -11,7 +11,7 @@ import javax.imageio.ImageIO;
 
 public class P1Snake implements Snake 
 {
-	static final float pixelsPerMs = 0.03f;
+	static final float pixelsPerMs = 0.10f;
 	static final float maxUpdateLength = 30;
 	
 	class Head
@@ -59,6 +59,7 @@ public class P1Snake implements Snake
 		tail = new Tail();
 		tail.rPiv = new Vector(segment.lPiv);
 		tail.lPiv = new Vector(tail.rPiv, back.x * tailSize.x, back.y * tailSize.y);
+		addSegments(0); addSegments(0); addSegments(0); addSegments(0); addSegments(0); addSegments(0);
 		this.speed = 1;
 	}
 
@@ -152,7 +153,7 @@ public class P1Snake implements Snake
 		tail.lPiv.translate(moved);
 		Vector tailVec = new Vector(tail.rPiv.x - tail.lPiv.x, tail.rPiv.y - tail.lPiv.y);
 		Vector prevVec = new Vector(prevRLoc.x - prevLLoc.x, prevRLoc.y - prevLLoc.y);
-		Vector avg = vectorLerp(0.99f, tailVec, prevVec);
+		Vector avg = vectorLerp(0.97f, tailVec, prevVec);
 		avg.normalize();
 		avg.scale(bodySize.x);
 		tail.lPiv = tail.rPiv.copy();

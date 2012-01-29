@@ -14,10 +14,15 @@ import java.util.ArrayList;
  */
 public class Update
 {
+	static final int timeBetweenPivotsMs = 60;
+	
 	List<Event> events;
+	boolean snake1Left, snake1Right, snake2Left, snake2Right;
+	long lastSnake1PivotTime, lastSnake2PivotTime;
 	
 	public Update(GameState state)
 	{
+		snake1Left = snake1Right = snake2Left = snake2Right = false;
 		events = new ArrayList<Event>();
 		this.state = state;
 		events.add(new Collision(this.state));
@@ -25,36 +30,23 @@ public class Update
 
 	void processKeyPress(KeyEvent e)
 	{
-		//get the new direction vector based on which key (left or right) is pressed.
-		Vector currentDirection = state.snake1.getDirection();
-		double x = currentDirection.x;
-		double y = currentDirection.y;
-		if(e.getKeyCode() == KeyEvent.VK_LEFT){
-			x = x + y/10.0;
-			y = y - x/10.0;
+		if(e.getKeyCode() == KeyEvent.VK_LEFT)
+		{
+			snake1Left = true;
 		}
-		else if (e.getKeyCode() == KeyEvent.VK_RIGHT){
-			x = x - y/10.0;
-			y = y + x/10.0;
+		else if (e.getKeyCode() == KeyEvent.VK_RIGHT)
+		{
+			snake1Right = true;
 		}
-		state.snake1.setDirection(new Vector(x,y));
 		
-		//get the new direction vector based on which key (left or right) is pressed.
-		currentDirection = state.snake2.getDirection();
-		x = currentDirection.x;
-		y = currentDirection.y;
 		if(e.getKeyCode() == KeyEvent.VK_A)
 		{
-			x = x + y/10.0;
-			y = y - x/10.0;
+			snake2Left = true;
 		}
 		else if (e.getKeyCode() == KeyEvent.VK_D) 
 		{
-			x = x - y/10.0;
-			y = y + x/10.0;
+			snake2Right = true;
 		}
-		state.snake2.setDirection(new Vector(x,y));
-		
 		
 		if(e.getKeyCode() == KeyEvent.VK_Z){
 			System.out.println("Hi");
@@ -70,11 +62,69 @@ public class Update
 
 	void processKeyRelease(KeyEvent e)
 	{
-
+		if(e.getKeyCode() == KeyEvent.VK_LEFT)
+		{
+			snake1Left = false;
+		}
+		else if (e.getKeyCode() == KeyEvent.VK_RIGHT)
+		{
+			snake1Right = false;
+		}
+		
+		if(e.getKeyCode() == KeyEvent.VK_A)
+		{
+			snake2Left = false;
+		}
+		else if (e.getKeyCode() == KeyEvent.VK_D) 
+		{
+			snake2Right = false;
+		}
 	}
 
 	void gameUpdate(long timePassed)
 	{
+		if (state.snake1 != null)
+		{
+			// get the new direction vector based on which key (left or right) is pressed.
+			Vector currentDirection = state.snake1.getDirection();
+			double x = currentDirection.x;
+			double y = currentDirection.y;
+			if (snake1Left && System.currentTimeMillis() - lastSnake1PivotTime > timeBetweenPivotsMs)
+			{
+				x = x + y/10.0;
+				y = y - x/10.0;
+				lastSnake1PivotTime = System.currentTimeMillis();
+			}
+			else if (snake1Right && System.currentTimeMillis() - lastSnake1PivotTime > timeBetweenPivotsMs)
+			{
+				x = x - y/10.0;
+				y = y + x/10.0;
+				lastSnake1PivotTime = System.currentTimeMillis();
+			}
+			state.snake1.setDirection(new Vector(x,y));
+		}
+		
+		if (state.snake2 != null)
+		{
+			//get the new direction vector based on which key (left or right) is pressed.
+			Vector currentDirection = state.snake2.getDirection();
+			double x = currentDirection.x;
+			double y = currentDirection.y;
+			if (snake2Left && System.currentTimeMillis() - lastSnake2PivotTime > timeBetweenPivotsMs)
+			{
+				x = x + y/10.0;
+				y = y - x/10.0;
+				lastSnake2PivotTime = System.currentTimeMillis();
+			}
+			else if (snake2Right && System.currentTimeMillis() - lastSnake2PivotTime > timeBetweenPivotsMs) 
+			{
+				x = x - y/10.0;
+				y = y + x/10.0;
+				lastSnake2PivotTime = System.currentTimeMillis();
+			}
+			state.snake2.setDirection(new Vector(x,y));
+		}
+		
 		if (state.snake1 != null)
 		{
 			state.snake1.move(timePassed);
