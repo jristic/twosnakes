@@ -58,7 +58,7 @@ public class P1Snake{
 		tail = new Tail();
 		tail.rPiv = new Vector(segment.lPiv);
 		tail.lPiv = new Vector(tail.rPiv, back.x * tailSize.x, back.y * tailSize.y);
-		addSegments(0); addSegments(0); addSegments(0); addSegments(0); addSegments(0); addSegments(0);
+		addSegments(0); addSegments(0); addSegments(0); addSegments(0); addSegments(0);
 		this.speed = 1;
 	}
 
