@@ -80,15 +80,17 @@ public class Render
 
 	void drawGameOverMessage(Graphics dbg)
 	{
-		dbg.setColor(Color.white);
-		dbg.fillRect(0, 0, panel.getWidth(), panel.getHeight());
+		dbg.drawImage(bkg, 0, 0, null);
+//		dbg.setColor(Color.white);
+//		dbg.fillRect(0, 0, panel.getWidth(), panel.getHeight());
 		String msg = "GAME OVER! Winner is: " + state.winner;
 		int x = 50;
 		int y = 100;
-		dbg.setColor(Color.black);
+		dbg.setColor(Color.white);
 		dbg.setFont(font);
 		dbg.drawString(msg, x, y);
 	}
+	
 
 	void drawGame(Graphics dbg)
 	{
