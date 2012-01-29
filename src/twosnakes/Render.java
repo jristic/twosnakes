@@ -24,12 +24,14 @@ public class Render
 	
 	double musicLoopTimer;
 	boolean titleMusicStarted;
+	boolean gameMusicStarted;
+	
+	SoundEffectPlayer player;
+	SoundEffectPlayer player2;
+	SoundEffectPlayer player3;
 	boolean introStarted;
 	long introStartTime;
 	boolean sound1Played, sound2Played, sound3Played;
-	
-	SoundEffectPlayer player;
-	SoundEffectPlayer player2, player3;
 	
 	public Render(GameState state, JPanel panel)
 	{
@@ -85,7 +87,7 @@ public class Render
 		}
 		
 	}
-	
+
 	void drawIntroMessage(Graphics dbg, MainPanel mainPanel)
 	{
 		dbg.drawImage(bkg, 0, 0, null);
@@ -136,43 +138,13 @@ public class Render
 		}
 	}
 
-	void drawGameOverMessage(Graphics dbg)
-	{
-		
-		try {
-			bkg = ImageIO.read( new File("images/E_background.png"));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		dbg.drawImage(bkg, 0, 0, null);
-			try {
-				if (state.winner == "Player 1")
-					goBgd = ImageIO.read(new File("images/txt_green_snake_wins.png"));
-				else if(state.winner == "Player 2")
-					goBgd = ImageIO.read(new File("images/txt_red_snake_wins.png"));
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-		
-		dbg.drawImage(goBgd, 0, 75, null);
-//		dbg.setColor(Color.white);
-//		dbg.fillRect(0, 0, panel.getWidth(), panel.getHeight());
-//		String msg = "GAME OVER! Winner is: " + state.winner;
-//		int x = 50;
-//		int y = 100;
-//		dbg.setColor(Color.white);
-//		dbg.setFont(font);
-//		dbg.drawString(msg, x, y);
-	}
 	
 
 	void drawGame(Graphics dbg)
 	{
-		
 		if (titleMusicStarted)
 		{
+			gameMusicStarted = true;
 			player.stop();
 			titleMusicStarted = false;
 			musicLoopTimer = System.currentTimeMillis();
@@ -200,6 +172,37 @@ public class Render
 		}
 		
 
+	}
+	
+	void drawGameOverMessage(Graphics dbg)
+	{
+		try {
+			bkg = ImageIO.read( new File("images/E_background.png"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		dbg.drawImage(bkg, 0, 0, null);
+			try {
+				if (state.winner == "Player 1")
+					goBgd = ImageIO.read(new File("images/txt_green_snake_wins.png"));
+				else if(state.winner == "Player 2")
+					goBgd = ImageIO.read(new File("images/txt_red_snake_wins.png"));
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		dbg.drawImage(goBgd, 0, 75, null);
+// ----------------------------------GOVER Music to be completed-------------------------------------------------------------
+		if (gameMusicStarted || System.currentTimeMillis() > musicLoopTimer + 10860)
+		{
+			player2.stop();
+			gameMusicStarted = false;
+			player = new SoundEffectPlayer("sound/music01mono.wav");
+			player.play(); // Need to change to Player3
+			musicLoopTimer = System.currentTimeMillis();
+		}
+// ----------------------------------GOVERMusic-------------------------------------------------------------
 	}
 
 	private GameState state;
