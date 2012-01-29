@@ -3,6 +3,7 @@ package twosnakes;
 public class Collision implements Event{
 
 	Sound collision = new SoundPlayer(" ");
+	
 	@Override
 	public void playSound() {
 		// TODO Auto-generated method stub
@@ -21,4 +22,8 @@ public class Collision implements Event{
 		s.move(timePassed);
 	}
 	
+	public boolean isCollide(Snake s){
+		//TODO 
+		return false;
+	}
 }

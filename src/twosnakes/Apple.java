@@ -68,11 +68,6 @@ public class Apple implements Item {
 		BufferedImage img = new BufferedImage(5, 5, BufferedImage.TYPE_INT_ARGB);
 		Animator an = new Animator();
 		an.startAnimation("images/apple.png", 0, 2, false);
-		try {
-			img = ImageIO.read( new File("images/apple.png") );
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 		g.drawImage(an.getFrame(visible), (int)position[0], (int)position[1], null);
 	}
 
