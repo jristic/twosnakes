@@ -92,6 +92,12 @@ public class SnakeCollision implements Event{
 		}
 		return col_status;
 	}
+
+	@Override
+	public boolean isCollide(P1Snake s) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 	
 
 }

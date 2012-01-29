@@ -20,4 +20,10 @@ public class Eating implements Event{
 		s.move(passedTime);
 	}
 
+	@Override
+	public boolean isCollide(P1Snake s) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

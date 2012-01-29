@@ -36,13 +36,13 @@ public class Collision implements Event{
 		double x1 = s_vector.x;
 		double y1 = s_vector.y;
 		
-		for(int i =0; i <state.objects.size();i++){
+		for(int i =0; i <state.objects.size(); i++){
 			Item item = state.objects.get(i);
 			double x2 = item.getPosition()[0];
 			double y2 = item.getPosition()[1];
 			double distance = Math.sqrt((x2-x1)*(x2-x1) + (y2 - y1)*(y2 - y1));
 			if(item.getClass() == Apple.class){
-				collision_distance = 1.0;
+				collision_distance = 30.0;
 			}
 			else if(item.getClass() == Turtle.class){
 				collision_distance = 3.0;
@@ -50,6 +50,10 @@ public class Collision implements Event{
 			else if(item.getClass() == Mouse.class){
 				collision_distance = 2.0;
 			}
+			else{
+				collision_distance = 0.0;
+			}
+			
 			if(distance <= collision_distance){
 				state.objects.remove(i);
 				col_status = true;
