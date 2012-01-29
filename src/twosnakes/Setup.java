@@ -40,6 +40,7 @@ public class Setup
 		state.snake2 = new P1Snake(headPos, facing, headSize, bodySize, tailSize);
 		
 		state.objects.add( new Apple(5, Math.floor((r.nextDouble()*1280)),  Math.floor((r.nextDouble()*720))));
+		state.objects.add( new Mouse(1, 100, 100) );
 	}
 	
 	private GameState state;
