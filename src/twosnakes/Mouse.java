@@ -90,12 +90,11 @@ public class Mouse implements Item {
 //		eating.playSound();
 //		eating.animation();
 		//player.playerInitialize();
-<<<<<<< HEAD
+
 		//player.play();
 		visible = 2;
-=======
+
 		player.play();
->>>>>>> origin/master
 	}
 
 	@Override

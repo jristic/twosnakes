@@ -18,12 +18,12 @@ public class Turtle implements Item {
 	BufferedImage image;
 	Animator anim;
 	Random r = new Random();
-<<<<<<< HEAD
+
 	private int visible = 0;
 	//SoundPlayer player;
-=======
+
 	SoundEffectPlayer player;
->>>>>>> origin/master
+
 
 	public Turtle(double val, double x, double y){
 		value = val;
@@ -93,12 +93,12 @@ public class Turtle implements Item {
 //		eating.playSound();
 //		eating.animation();
 		//player.playerInitialize();
-<<<<<<< HEAD
+
 		//player.play();
 		visible = 2;
-=======
+
 		player.play();
->>>>>>> origin/master
+
 	}
 
 	@Override
