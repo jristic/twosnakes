@@ -35,6 +35,7 @@ public class Collision implements Event{
 		Vector s_vector = s.head.rPiv;
 		double x1 = s_vector.x;
 		double y1 = s_vector.y;
+		col_status = false;
 		
 		for(int i =0; i <state.objects.size(); i++){
 			Item item = state.objects.get(i);
@@ -55,9 +56,10 @@ public class Collision implements Event{
 			}
 			
 			if(distance <= collision_distance){
-				state.objects.remove(i);
+				state.objects.get(i).eaten();
 				s.addSegments(1);
 				col_status = true;
+				state.objects.remove(i);
 			}
 		}
 		return col_status;

@@ -55,10 +55,16 @@ public class Apple implements Item {
 	 * delete the item when collision happens.
 	 */
 	public void eaten() {
-		Event e = new Eating();
-		e.playSound();
-		e.animation();
+//		Event e = new Eating();
+//		e.playSound();
+//		e.animation();
 		visible = 1;
+	}
+	
+	@Override
+	public void update(long gameTime)
+	{
+		
 	}
 
 	@Override
@@ -68,7 +74,6 @@ public class Apple implements Item {
 		Animator an = new Animator();
 		an.startAnimation("images/apple.png", 0, 2, false);
 		BufferedImage img = an.getFrame(visible);
-		//System.out.println(img.getWidth() + " " + img.getHeight());
 		g.drawImage(img, (int)position[0] - img.getWidth()/2, (int)position[1] - img.getHeight()/2, null);
 	}
 
