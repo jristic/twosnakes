@@ -193,17 +193,14 @@ public class Render
 				e1.printStackTrace();
 			}
 		dbg.drawImage(goBgd, 0, 75, null);
-// ----------------------------------GOVER Music to be completed-------------------------------------------------------------
-		if (gameMusicStarted || System.currentTimeMillis() > musicLoopTimer + 10860)
-		{
-			player2.stop();
-			gameMusicStarted = false;
-			player = new SoundEffectPlayer("sound/music01mono.wav");
-			player.play(); // Need to change to Player3
-			musicLoopTimer = System.currentTimeMillis();
+
+		player2.stop();
+		gameMusicStarted = false;
+		player = new SoundEffectPlayer("sound/Snakedeath.wav");
+		player.play();
+		
 		}
-// ----------------------------------GOVERMusic-------------------------------------------------------------
-	}
+
 
 	private GameState state;
 	private Font font;
