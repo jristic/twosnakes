@@ -65,10 +65,11 @@ public class Apple implements Item {
 	public void draw(Graphics g) {
 		//Graphics2D g2d = (Graphics2D)g;
 		//AffineTransform transform = new AffineTransform();
-		BufferedImage img = new BufferedImage(5, 5, BufferedImage.TYPE_INT_ARGB);
 		Animator an = new Animator();
 		an.startAnimation("images/apple.png", 0, 2, false);
-		g.drawImage(an.getFrame(visible), (int)position[0], (int)position[1], null);
+		BufferedImage img = an.getFrame(visible);
+		//System.out.println(img.getWidth() + " " + img.getHeight());
+		g.drawImage(img, (int)position[0] - img.getWidth()/2, (int)position[1] - img.getHeight()/2, null);
 	}
 
 }

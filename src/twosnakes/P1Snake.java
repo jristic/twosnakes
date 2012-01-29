@@ -9,8 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.imageio.ImageIO;
 
-public class P1Snake implements Snake 
-{
+public class P1Snake{
 	static final float pixelsPerMs = 0.10f;
 	static final float maxUpdateLength = 30;
 	
@@ -59,11 +58,10 @@ public class P1Snake implements Snake
 		tail = new Tail();
 		tail.rPiv = new Vector(segment.lPiv);
 		tail.lPiv = new Vector(tail.rPiv, back.x * tailSize.x, back.y * tailSize.y);
-		addSegments(0); addSegments(0); addSegments(0); addSegments(0); addSegments(0); addSegments(0);
+		addSegments(0); addSegments(0); addSegments(0); addSegments(0); addSegments(0);
 		this.speed = 1;
 	}
 
-	@Override
 	public void draw(Graphics g)
 	{
 		Graphics2D g2d = (Graphics2D)g;
@@ -120,7 +118,7 @@ public class P1Snake implements Snake
 		g2d.drawImage(img, transform, null);
 	}
 
-	@Override
+
 	public void move(double timePassed) 
 	{
 		if (timePassed > maxUpdateLength)
@@ -161,7 +159,7 @@ public class P1Snake implements Snake
 		
 	}
 	
-	@Override
+
 	public void setDirection(Vector direction)
 	{
 		this.direction = new Vector(direction);
@@ -170,31 +168,31 @@ public class P1Snake implements Snake
 		head.rPiv = new Vector(head.lPiv, direction.x * headSize.x, direction.y * headSize.y);
 	}
 
-	@Override
+
 	public Vector getDirection()
 	{
 		return direction;
 	}
 
-	@Override
+
 	public int getGirth()
 	{
 		return girth;
 	}
 
-	@Override
+	
 	public void setGirth(int girth)
 	{
 		this.girth = girth;
 	}
 	
-	@Override
+
 	public int getLength()
 	{
 		return bodyList.size();
 	}
 	
-	@Override
+
 	public void addSegments(int num)
 	{
 		int lastSegInd = bodyList.size()-1; 
@@ -211,7 +209,7 @@ public class P1Snake implements Snake
 		tail.lPiv.y = tail.rPiv.y + (newSeg.lPiv.y-newSeg.rPiv.y);
 		bodyList.add(newSeg);
 	}
-	@Override
+
 	public void removeSegments(int num)
 	{
 		int lastSegInd = bodyList.size()-1; 
@@ -224,14 +222,19 @@ public class P1Snake implements Snake
 		
 		bodyList.remove(lastSegInd);
 	}
-
 	
-	@Override
+	// for debug
+
+	public int getBodyLeng(){
+		return this.bodyList.size();
+	}
+	
+
 	public void set_speed(double speed) {
 		this.speed = speed;
 	}
 
-	@Override
+
 	public double get_speed() {
 		return this.speed;
 	}
@@ -239,11 +242,5 @@ public class P1Snake implements Snake
 	private Vector vectorLerp(float weight, Vector vec1, Vector vec2)
 	{
 		return new Vector( weight*vec1.x + (1-weight)*vec2.x, weight*vec1.y + (1-weight)*vec2.y);
-	}
-
-	@Override
-	public int getBodyLeng() {
-		// TODO Auto-generated method stub
-		return bodyList.size();
 	}
 }

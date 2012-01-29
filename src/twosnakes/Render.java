@@ -67,7 +67,7 @@ public class Render
 
 		for(int i =0; i < state.objects.size(); i++){
 			if(state.objects.get(i) == null)
-				return;
+				break;
 			state.objects.get(i).draw(dbg);
 		}
 		if (state.snake1 != null)
