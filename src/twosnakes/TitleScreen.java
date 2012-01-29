@@ -20,7 +20,7 @@ import java.awt.geom.AffineTransform;
 public class TitleScreen {
 	
 	public final int SPACING = 65;
-	public final int XSTEP = 15;
+	public final int XSTEP = 8;
 	public final String filenames[] = {"s", "n", "a", "K", "e", "s", "space", "o", "n", "space", "a", "space", "s", "c", "r", "e", "e", "n"};
 	private int x[];
 	private int actualX[];
@@ -66,11 +66,11 @@ public class TitleScreen {
 		for (int i = 0; i < filenames.length; i++)
     	{
     		x[i] += XSTEP;
-    		if (actualX[filenames.length / 2] < 1280 / 2)
+    		if (actualX[filenames.length / 2] < 1270 / 2)
     		{
     			actualX[i] += XSTEP;
     		}
-    		y[i] = (int)(Math.sin((double)x[i] / (double)60) * 33) + 150;
+    		y[i] = (int)(Math.sin((double)x[i] / (double)60) * 33) + 108;
     	}
 	}
 	

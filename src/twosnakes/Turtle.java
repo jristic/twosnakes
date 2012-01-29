@@ -6,9 +6,9 @@ import java.awt.image.BufferedImage;
 import java.util.Random;
 
 public class Turtle implements Item {
-	
+
 	static final float pixelsPerMs = 0.05f;
-	
+
 	private double value;
 	private double[] position;
 	private double speed;
@@ -23,6 +23,7 @@ public class Turtle implements Item {
 	//SoundPlayer player;
 
 	SoundEffectPlayer player;
+	int count = 0;
 
 
 	public Turtle(double val, double x, double y){
@@ -38,12 +39,12 @@ public class Turtle implements Item {
 		anim.startAnimation("images/turtle.png", 10, 3, false);
 		player = new SoundEffectPlayer("sound/Turtle Eaten.wav");
 	}
-	
+
 	@Override
 	public void setPosition(double newX, double newY) {
 		position[0] = newX;
 		position[1] = newY;
-		
+
 	}
 
 	@Override
@@ -63,11 +64,11 @@ public class Turtle implements Item {
 		// TODO Auto-generated method stub
 		return this.value;
 	}
-	
+
 	public void setSpeed(double newSpeed){
 		speed = newSpeed;
 	}
-	
+
 	public double getSpeed(){
 		return speed;
 	}
@@ -77,10 +78,10 @@ public class Turtle implements Item {
 	 */
 	public void accelerate(){
 	}
-	
+
 	public void setDirection(){
 	}
-	
+
 	/**
 	 * put this in loop to keep it moving and speeding.
 	 */
@@ -89,14 +90,13 @@ public class Turtle implements Item {
 
 	@Override
 	public void eaten() {
-//		Event eating = new Eating();
-//		eating.playSound();
-//		eating.animation();
+		//		Event eating = new Eating();
+		//		eating.playSound();
+		//		eating.animation();
 		//player.playerInitialize();
 
 		//player.play();
 		visible = 2;
-
 		player.play();
 
 	}
@@ -134,12 +134,34 @@ public class Turtle implements Item {
 			}
 		}
 	}
-	
+
 	@Override
 	public void draw(Graphics g) 
 	{
+		if(visible != 2){
+			if(count% 100 < 50){
+				walk1();
+			}
+			else{
+				walk2();
+			}
+		}
 		Graphics2D g2d = (Graphics2D)g;
 		image = anim.getFrame(visible);
 		g2d.drawImage(image, (int)position[0] - image.getWidth()/2, (int)position[1] - image.getHeight()/2, null);
+		count++;
+	}
+
+	@Override
+	public void walk1() {
+		// TODO Auto-generated method stub
+		visible = 1;
+
+	}
+
+	@Override
+	public void walk2() {
+		// TODO Auto-generated method stub
+		visible = 0;
 	}
 }

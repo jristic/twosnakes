@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Random;
 
-
 /**
  *
  * @author jovan
@@ -88,7 +87,6 @@ public class Update
 		{
 			snake1Charging = false;
 		}
-
 		if(e.getKeyCode() == KeyEvent.VK_A)
 		{
 			snake2Left = false;

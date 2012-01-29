@@ -83,4 +83,16 @@ public class Apple implements Item {
 		g.drawImage(img, (int)position[0] - img.getWidth()/2, (int)position[1] - img.getHeight()/2, null);
 	}
 
+	@Override
+	public void walk1() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void walk2() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

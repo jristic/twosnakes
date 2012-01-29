@@ -10,4 +10,6 @@ public interface Item {
 	public void eaten();
 	public void update(long gameTime);
 	public void draw(Graphics g);
+	public void walk1();
+	public void walk2();
 }

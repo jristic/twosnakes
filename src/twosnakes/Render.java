@@ -20,6 +20,7 @@ public class Render
 {
 	BufferedImage bkg = null;
 	BufferedImage line1, line2, line3;
+	BufferedImage goBgd = null;
 	
 	double musicLoopTimer;
 	boolean titleMusicStarted;
@@ -75,7 +76,7 @@ public class Render
 		state.titleScreen.draw(dbg);
 		
 		
-		if (!titleMusicStarted || System.currentTimeMillis() > musicLoopTimer + 10920)
+		if (!titleMusicStarted || System.currentTimeMillis() > musicLoopTimer + 10860)
 		{
 			player = new SoundEffectPlayer("sound/music01mono.wav");
 			player.play();
@@ -137,15 +138,35 @@ public class Render
 
 	void drawGameOverMessage(Graphics dbg)
 	{
-		dbg.setColor(Color.white);
-		dbg.fillRect(0, 0, panel.getWidth(), panel.getHeight());
-		String msg = "GAME OVER! Winner is: " + state.winner;
-		int x = 50;
-		int y = 100;
-		dbg.setColor(Color.black);
-		dbg.setFont(font);
-		dbg.drawString(msg, x, y);
+		
+		try {
+			bkg = ImageIO.read( new File("images/E_background.png"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		dbg.drawImage(bkg, 0, 0, null);
+			try {
+				if (state.winner == "Player 1")
+					goBgd = ImageIO.read(new File("images/txt_green_snake_wins.png"));
+				else if(state.winner == "Player 2")
+					goBgd = ImageIO.read(new File("images/txt_red_snake_wins.png"));
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		
+		dbg.drawImage(goBgd, 0, 75, null);
+//		dbg.setColor(Color.white);
+//		dbg.fillRect(0, 0, panel.getWidth(), panel.getHeight());
+//		String msg = "GAME OVER! Winner is: " + state.winner;
+//		int x = 50;
+//		int y = 100;
+//		dbg.setColor(Color.white);
+//		dbg.setFont(font);
+//		dbg.drawString(msg, x, y);
 	}
+	
 
 	void drawGame(Graphics dbg)
 	{
