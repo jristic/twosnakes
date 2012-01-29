@@ -18,14 +18,14 @@ public class Apple implements Item {
 	
 	private double value;
 	private double[] position;
-	private boolean visible;
+	private int visible;
 	
 	public Apple(double val, double x, double y){
 		value = val;
 		position = new double[2];
 		position[0] = x;
 		position[1] = y;
-		visible = true;
+		visible = 0; //0:regular apple. 1:eaten apple
 	}
 
 	@Override
@@ -58,7 +58,7 @@ public class Apple implements Item {
 		Event e = new Eating();
 		e.playSound();
 		e.animation();
-		visible = false;
+		visible = 1;
 	}
 
 	@Override
@@ -66,12 +66,14 @@ public class Apple implements Item {
 		//Graphics2D g2d = (Graphics2D)g;
 		//AffineTransform transform = new AffineTransform();
 		BufferedImage img = new BufferedImage(5, 5, BufferedImage.TYPE_INT_ARGB);
+		Animator an = new Animator();
+		an.startAnimation("images/apple.png", 0, 2, false);
 		try {
 			img = ImageIO.read( new File("images/apple.png") );
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		g.drawImage(img, (int)position[0], (int)position[1], null);
+		g.drawImage(an.getFrame(visible), (int)position[0], (int)position[1], null);
 	}
 
 }
