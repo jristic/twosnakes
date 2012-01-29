@@ -6,7 +6,6 @@ import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.ArrayList;
-import java.util.List;
 import javax.imageio.ImageIO;
 
 public class P1Snake implements Snake 
@@ -136,11 +135,13 @@ public class P1Snake implements Snake
 			// Translate the body here based on prev locs.
 			Vector moved = new Vector(prevLLoc.x -  body.rPiv.x, prevLLoc.y - body.rPiv.y);
 			body.rPiv.translate(moved);
-			body.lPiv.translate(moved);
 			Vector bodyVec = new Vector(body.rPiv.x - body.lPiv.x, body.rPiv.y - body.lPiv.y);
 			Vector prevVec = new Vector(prevRLoc.x - prevLLoc.x, prevRLoc.y - prevLLoc.y);
-			Vector diff = new Vector(bodyVec.x - prevVec.x, bodyVec.y - prevVec.y);
-			body.lPiv.translate(diff);
+			Vector avg = vectorLerp(0.99f, bodyVec, prevVec);
+			avg.normalize();
+			avg.scale(bodySize.x);
+			body.lPiv = body.rPiv.copy();
+			body.lPiv.translate(-1 * avg.x, -1 * avg.y);
 			// Update prev locs
 			prevRLoc = prevBodyRLoc;
 			prevLLoc = prevBodyLLoc;
@@ -150,8 +151,11 @@ public class P1Snake implements Snake
 		tail.lPiv.translate(moved);
 		Vector tailVec = new Vector(tail.rPiv.x - tail.lPiv.x, tail.rPiv.y - tail.lPiv.y);
 		Vector prevVec = new Vector(prevRLoc.x - prevLLoc.x, prevRLoc.y - prevLLoc.y);
-		Vector diff = new Vector(tailVec.x - prevVec.x, tailVec.y - prevVec.y);
-		tail.lPiv.translate(diff);
+		Vector avg = vectorLerp(0.99f, tailVec, prevVec);
+		avg.normalize();
+		avg.scale(bodySize.x);
+		tail.lPiv = tail.rPiv.copy();
+		tail.lPiv.translate(-1 * avg.x, -1 * avg.y);
 	}
 	
 	@Override
@@ -201,5 +205,10 @@ public class P1Snake implements Snake
 	@Override
 	public double get_speed() {
 		return this.speed;
+	}
+	
+	private Vector vectorLerp(float weight, Vector vec1, Vector vec2)
+	{
+		return new Vector( weight*vec1.x + (1-weight)*vec2.x, weight*vec1.y + (1-weight)*vec2.y);
 	}
 }

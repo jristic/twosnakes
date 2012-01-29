@@ -57,6 +57,18 @@ public class Vector
 		this.y += yoffset;
 	}
 	
+	public void scale(double s)
+	{
+		this.x *= s;
+		this.y *= s;
+	}
+	
+	public void scale(double sx, double sy)
+	{
+		this.x *= sx;
+		this.y *= sy;
+	}
+	
 	public Vector copy()
 	{
 		return new Vector(this.x, this.y);
