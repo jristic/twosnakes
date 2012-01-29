@@ -40,6 +40,10 @@ public class Vector
 		y /= length;
 	}
 	
+	public double dot(Vector vec)
+	{
+		return this.x * vec.x + this.y * vec.y;
+	}
 	
 	
 	public double x, y;
