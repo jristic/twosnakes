@@ -26,4 +26,16 @@ public class Eating implements Event{
 		return false;
 	}
 
+	@Override
+	public boolean s1_eat_s2() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean s2_eat_s1() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

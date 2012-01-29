@@ -22,6 +22,7 @@ public class Update
 	boolean snake1Left, snake1Right, snake2Left, snake2Right;
 	long lastSnake1PivotTime, lastSnake2PivotTime;
 	Random r = new Random();
+	private GameState state;
 
 	public Update(GameState state)
 	{
@@ -116,12 +117,12 @@ public class Update
 					state.objects.add(new Apple(5, Math.floor((r.nextDouble()*1280)),  Math.floor((r.nextDouble()*720))));
 				}
 			}
-			
+
 			if( events.get(1).s1_eat_s2() ){
 				System.out.println("adaf");
 			}
 		}
-		
+
 		for (Item item : state.objects)
 		{
 			item.update(timePassed);
@@ -174,47 +175,45 @@ public class Update
 			double xDir = state.snake1.getDirection().x;
 			double yDir = state.snake1.getDirection().y;
 			state.snake1.move(timePassed);
-<<<<<<< HEAD
 			//if(Collision.isOutOfBoundX((P1Snake)state.snake1)
 
 
 
 		}
-=======
-			if(Collision.isOutOfBoundX(state.snake1))
-			{
-				if((xDir == 1 || xDir == -1)&&yDir==0)
-				{
-					xDir *= -1;
-					yDir = 0.3;
-				}
-				else
-					xDir *=-1;
-				Vector newDir = new Vector(xDir,yDir);
-				state.snake1.setDirection(newDir);
-				
-			}
 
-			if(Collision.isOutOfBoundY(state.snake1))
+		if(Collision.isOutOfBoundX(state.snake1))
+		{
+			if((xDir == 1 || xDir == -1)&&yDir==0)
 			{
-				if((yDir == 1 || yDir== -1)&&xDir==0)
-				{
-					yDir *= -1;
-					xDir = 0.3;
-				}
-				else 
-					yDir *=-1;
-				Vector newDir = new Vector(xDir,yDir);
-				state.snake1.setDirection(newDir);
+				xDir *= -1;
+				yDir = 0.3;
 			}
+			else
+				xDir *=-1;
+			Vector newDir = new Vector(xDir,yDir);
+			state.snake1.setDirection(newDir);
+
+		}
+
+		if(Collision.isOutOfBoundY(state.snake1))
+		{
+			if((yDir == 1 || yDir== -1)&&xDir==0)
+			{
+				yDir *= -1;
+				xDir = 0.3;
 			}
-		
->>>>>>> origin/master
-		if (state.snake2 != null)
-		{	
-			double xDir = state.snake2.getDirection().x;
-			double yDir = state.snake2.getDirection().y;
-			state.snake2.move(timePassed);
+			else 
+				yDir *=-1;
+			Vector newDir = new Vector(xDir,yDir);
+			state.snake1.setDirection(newDir);
+		}
+	}
+
+	if (state.snake2 != null)
+	{	
+		double xDir = state.snake2.getDirection().x;
+		double yDir = state.snake2.getDirection().y;
+		state.snake2.move(timePassed);
 
 		if(Collision.isOutOfBoundX(state.snake2))
 		{
@@ -240,9 +239,7 @@ public class Update
 				yDir *=-1;
 			Vector newDir = new Vector(xDir,yDir);
 			state.snake2.setDirection(newDir);
-			}
 		}
 	}
-
-	private GameState state;
+}
 }
