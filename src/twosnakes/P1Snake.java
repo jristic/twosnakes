@@ -59,7 +59,7 @@ public class P1Snake{
 		tail.rPiv = new Vector(segment.lPiv);
 		tail.lPiv = new Vector(tail.rPiv, back.x * tailSize.x, back.y * tailSize.y);
 		addSegments(0); addSegments(0); addSegments(0); addSegments(0); addSegments(0);
-		this.speed = 1;
+		this.speed = 1.5;
 	}
 
 	public void draw(Graphics g)

@@ -50,7 +50,7 @@ public class Collision implements Event{
 					state.objects.get(i).eaten();
 					if(s.bodyList.size() > 0)
 						s.addSegments(1);
-					s.set_speed(s.get_speed()*0.8);
+					s.set_speed(s.get_speed()*0.9);
 					col_status = true;
 					state.objects.remove(i);
 				}
@@ -60,7 +60,7 @@ public class Collision implements Event{
 				
 				if(distance <= collision_distance){
 					state.objects.get(i).eaten();
-					s.set_speed(s.get_speed()*0.6);
+					s.set_speed(s.get_speed()*0.75);
 					col_status = true;
 					state.objects.remove(i);
 				}
@@ -70,7 +70,7 @@ public class Collision implements Event{
 				
 				if(distance <= collision_distance){
 					state.objects.get(i).eaten();
-					s.set_speed(s.get_speed()*2);
+					s.set_speed(s.get_speed()*1.333);
 					col_status = true;
 					state.objects.remove(i);
 				}

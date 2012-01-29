@@ -52,13 +52,6 @@ public class Update
 		{
 			snake2Right = true;
 		}
-
-		if(e.getKeyCode() == KeyEvent.VK_Z){
-			state.snake1.addSegments(1);
-		}
-		if(e.getKeyCode() == KeyEvent.VK_X){
-			state.snake1.removeSegments(1);
-		}
 	}
 
 	void processKeyRelease(KeyEvent e)
@@ -92,10 +85,10 @@ public class Update
 				if(item_val == 0 || item_val == 3 || item_val == 4 || item_val == 8){ //add apple
 					state.objects.add(new Apple(5, Math.floor((r.nextDouble()*1280)),  Math.floor((r.nextDouble()*720))));
 				}
-				else if(item_val == 1 || item_val == 5){ //add mouse
+				else if(item_val == 1 || item_val == 5 || item_val == 9){ //add mouse
 					state.objects.add(new Mouse(1, 100, 100));
 				}
-				else if(item_val == 2 || item_val == 6 || item_val == 7 || item_val == 9){ //add turtle
+				else if(item_val == 2 || item_val == 6 || item_val == 7 ){ //add turtle
 					state.objects.add(new Turtle(1, 100, 600));
 				}
 			}
@@ -104,10 +97,10 @@ public class Update
 				if(item_val == 0 || item_val == 3 || item_val == 4 || item_val == 8){ //add apple
 					state.objects.add(new Apple(5, Math.floor((r.nextDouble()*1280)),  Math.floor((r.nextDouble()*720))));
 				}
-				else if(item_val == 1 || item_val == 5){ //add mouse
+				else if(item_val == 1 || item_val == 5 || item_val == 7){ //add mouse
 					state.objects.add(new Mouse(1, 100, 100));
 				}
-				else if(item_val == 2 || item_val == 6 || item_val == 7 || item_val == 9){ //add turtle
+				else if(item_val == 2 || item_val == 6 || item_val == 9){ //add turtle
 					state.objects.add(new Turtle(1, 100, 600));
 				}
 			}
