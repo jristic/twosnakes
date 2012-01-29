@@ -118,30 +118,19 @@ public class Update
 				state.winner = "Player 2";
 				gameOverCallback.run();
 			}
+			s1_collide = events.get(0).isCollide(state.snake1, objects, removings);
+			s2_collide = events.get(0).isCollide(state.snake2, objects, removings);
 			
-			if( s1_collide = events.get(0).isCollide(state.snake1, objects, removings) ){
-				int item_val = r.nextInt(10);
-				if(item_val == 0 || item_val == 3 || item_val == 4 || item_val == 8){ //add apple
+			if(s1_collide || s2_collide ){
+				int item_val = r.nextInt(9);
+				if(item_val == 0 || item_val == 3 || item_val == 4 || item_val == 7){ //add apple
 					objects.add(new Apple(5, Math.floor((r.nextDouble()*1280)),  Math.floor((r.nextDouble()*720))));
 				}
-				else if(item_val == 1 || item_val == 5 || item_val == 9){ //add mouse
-					objects.add(new Mouse(1, 100, 100));
+				else if(item_val == 1 || item_val == 5){ //add mouse
+					objects.add(new Mouse(5, Math.floor((r.nextDouble()*1280)),  Math.floor((r.nextDouble()*720))));
 				}
-				else if(item_val == 2 || item_val == 6 || item_val == 7 ){ //add turtle
-					objects.add(new Turtle(1, 100, 600));
-				}
-			}
-			if( s1_collide = events.get(0).isCollide(state.snake2, objects, removings) ){
-				
-				int item_val = r.nextInt(10);
-				if(item_val == 0 || item_val == 3 || item_val == 4 || item_val == 8){ //add apple
-					objects.add(new Apple(5, Math.floor((r.nextDouble()*1280)),  Math.floor((r.nextDouble()*720))));
-				}
-				else if(item_val == 1 || item_val == 5 || item_val == 7){ //add mouse
-					objects.add(new Mouse(1, 100, 100));
-				}
-				else if(item_val == 2 || item_val == 6 || item_val == 9){ //add turtle
-					objects.add(new Turtle(1, 100, 600));
+				else if(item_val == 2 || item_val == 6 || item_val == 8){ //add turtle
+					objects.add(new Turtle(5, Math.floor((r.nextDouble()*1280)),  Math.floor((r.nextDouble()*720))));
 				}
 			}
 
